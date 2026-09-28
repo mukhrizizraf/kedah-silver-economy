@@ -127,7 +127,7 @@ kbd{font:600 11px var(--sans);padding:1px 6px;border:1px solid var(--line);borde
 .dlink small{font-size:12.5px;line-height:1.4;color:var(--muted)}
 .drawer .lang{align-self:flex-start;margin:14px 12px 0}
 
-@media (max-width:1180px){
+@media (max-width:1260px){
   .nav{display:none}
   .menubtn{display:grid}
   .brand{flex:1}
