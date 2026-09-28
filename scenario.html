@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Try a Case · Kedah Silver Economy</title>
+<meta name="description" content="Pick a person, district, need and income to see the suggested steps, the score and the main problem.">
+<script>try{var t=localStorage.getItem('kse-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Onest:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="assets/css/kse.css">
+<script src="assets/js/kse-data.js"></script>
+</head>
+<body data-page="scenario">
+<script src="assets/js/kse-shell.js"></script>
+
+<main id="main">
+  <section class="band pagehead">
+    <div class="wrap pagehead-grid">
+      <div>
+        <p class="step" data-step></p>
+        <h1 data-i18n="labTitle">Pick a person and a need. See what help they get.</h1>
+        <p class="lede" data-i18n="labSub">Change the options below. The steps, the score and the main problem change straight away.</p>
+      </div>
+      <div class="headstat"><b data-count="90">90</b><span data-i18n="labStat">cases you can try</span></div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <section class="section">
+      <div class="presets"><span class="lbl" data-i18n="presetLabel">Try</span><span id="presetList" style="display:contents"></span></div>
+
+      <div class="controls">
+        <div class="field"><label for="persona" data-i18n="personaLabel">Person</label>
+          <div class="select"><select id="persona">
+            <option value="independent" data-i18n="pIndependent">Can manage alone</option>
+            <option value="vulnerable" data-i18n="pVulnerable">Needs some help</option>
+            <option value="highneed" data-i18n="pHighneed">Needs a lot of help</option>
+          </select></div></div>
+        <div class="field"><label for="district" data-i18n="districtLabel">District</label>
+          <div class="select"><select id="district">
+            <option>Jitra</option><option selected>Kota Setar</option><option>Sungai Petani</option><option>Kulim</option><option>Baling</option><option>Langkawi</option>
+          </select></div></div>
+        <div class="field"><label for="need" data-i18n="needLabel">Main need</label>
+          <div class="select"><select id="need">
+            <option value="companion" data-i18n="nCompanion">Company or hospital escort</option>
+            <option value="transport" data-i18n="nTransport">Transport</option>
+            <option value="homecare" data-i18n="nHomecare">Home care</option>
+            <option value="welfare" data-i18n="nWelfare">Money or welfare help</option>
+            <option value="food" data-i18n="nFood">Food</option>
+          </select></div></div>
+        <div class="field"><label for="income" data-i18n="incomeLabel">Household income a month</label>
+          <div class="input-rm"><span>RM</span><input id="income" type="number" inputmode="numeric" min="0" step="100" value="3500"></div></div>
+      </div>
+
+      <div class="lab">
+        <div class="cov">
+          <div class="cov-top"><p class="label" data-i18n="coverageLabel">How well needs are covered</p><span class="demo-tag" data-i18n="demoTag">Sample data only</span></div>
+          <div class="cov-top"><span class="cov-num" id="coverage" aria-live="polite">-</span><span class="state" id="coverageState"></span></div>
+          <div>
+            <div class="meter"><span id="coverageBar" style="width:0%"></span></div>
+            <div class="mticks" aria-hidden="true"><span style="left:0">0</span><span style="left:25%">25</span><span style="left:50%">50</span><span style="left:75%">75</span><span style="left:100%">100</span></div>
+          </div>
+          <div class="cov-rows">
+            <div><span data-i18n="matchedNeeds">Needs with help available</span><b id="matched"></b></div>
+            <div><span data-i18n="steps">Number of referrals</span><b id="steps"></b></div>
+          </div>
+          <p class="cov-note" data-i18n="methodNote">The score starts from the type of person, then changes with the need, the district and income. It shows how the logic works. It is not a real estimate.</p>
+        </div>
+        <div class="card">
+          <p class="label label-paddy" data-i18n="pathLabel">Suggested steps</p>
+          <ol class="path" id="pathwayList"></ol>
+        </div>
+        <div class="card">
+          <p class="label label-paddy" data-i18n="providersLabel">Who could help</p>
+          <ul class="nodes" id="providerList"></ul>
+        </div>
+      </div>
+      <div class="gapline">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5.5M12 16.2v.3"/></svg>
+        <p><b data-i18n="gapLabel">Main problem to check</b><span id="gap" aria-live="polite"></span></p>
+      </div>
+    </section>
+  </div>
+</main>
+
+<script src="assets/js/kse-viz.js"></script>
+<script src="assets/js/kse-pages.js"></script>
+</body>
+</html>

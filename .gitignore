@@ -1,0 +1,10 @@
+# Private working material: keep off the public repo
+dokumen/
+OPEN_ITEMS.md
+kedah_silver_economy_grant_dashboard_v1_codex.html
+kedah_silver_economy_grant_dashboard.html
+
+# System files
+desktop.ini
+.DS_Store
+Thumbs.db
