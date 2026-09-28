@@ -41,7 +41,15 @@ Everything hangs off one global, `window.KSE` (`K`). Other things to know:
 - Figures must trace back to `dokumen/`. The core facts are: 5 objectives mapped to 4 action-research phases (Objectives 4 and 5 both sit in Phase 4); 9 months, from 1 Nov 2026 to 31 Jul 2027; Objective 1 in M1–3, Objective 2 in M4–5, Objective 3 in M6–7, Objective 4 in M8, Objective 5 in M9; 8–10 Muslim older persons interviewed; 15–20 co-creation stakeholders; validation by content validity index (I-CVI, S-CVI/Ave) followed by a small-scale feasibility pilot focused on referral and coordination; RM30,000 total.
 - Framing from the reviewer response: the framework is a *complementary, optional* Islamic institutional model that sits alongside national social protection. It does not replace it.
 
-## Discrepancies to check against the application form
+## Reading the source documents
 
-- **Expert panel size:** the reviewer response says "8–10" (executive summary) in one place and "10" (methodology) in another. The KPI strip shows 10, and the evidence page quotes both, because the source says both.
-- **Budget:** the revision added a mandatory 3% RMC fee of RM874 under Vot 29000 while keeping the RM30,000 total. The grouped lines in `KSE.budget` (including "Other / admin RM300") may come from before that revision. A comment in `kse-data.js` flags this.
+The 23-page application form is the authority, and it wins over the reply table and the roadmap image when they differ. Extract its text with `pdftotext -layout` (it is at `/mingw64/bin`). Tick boxes and figures don't survive text extraction, so render those pages with PyMuPDF (`pymupdf.open(...)[n].get_pixmap(...)`) and view the image. Facts from the form that the site now shows:
+
+- **Team:** Prof. Madya Dr. Shamzaeffa binti Samsudin (leader), Prof. Madya Dr. Shazida Jan Mohd Khan (substitute leader, ticked), plus four researchers. Never publish IC numbers, staff IDs or phone numbers.
+- **Ticks:** Social Sciences, MADANI Big Bold "Social Protection Reform", SDG 3, niche "Economic, Financial Analysis and Policy", priority area "Fiscal sustainability of an aging society". Risk: technical Low, timing Medium, budget Low.
+- **Review panel:** 10 people. The criteria are relevance, feasibility, practicality and institutional readiness.
+- **Budget:** 7 lines in `KSE.budget`, keyed by Vot, summing to RM30,000.
+- **Figure 2:** the RMK13 framework, rendered as `KSE.fit` on `ecosystem.html`.
+- **Partners:** PERKIM, WANIDA and a waqf expert have signed letters of intent. MAIK is in talks.
+
+`OPEN_ITEMS.md` (kept local) records what was resolved and what is still open.

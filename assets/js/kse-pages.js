@@ -25,6 +25,18 @@ K.pageInit.overview = function () {
   };
   K.onLang.push(function () {
     K.viz.constellation(svg, $('#consLegend'), first); first = false;
+    $('#why').innerHTML = K.why.map(function (w) {
+      return '<div class="card"><b>' + esc(K.L(w.big)) + '</b><p>' + esc(K.L(w.t)) + '</p><small>' + esc(K.T('Source: ', 'Sumber: ') + K.L(w.src)) + '</small></div>';
+    }).join('');
+    $('#partnerList').innerHTML = K.partners.map(function (p) {
+      var s = K.partnerStatus[p.s];
+      return '<li><b>' + esc(K.L(p.n)) + '</b>' + K.pill(s.c === 'verified' ? 'Verified' : 'Candidate', K.L(s)) + '</li>';
+    }).join('');
+    $('#team').innerHTML = K.team.map(function (m) {
+      return '<li class="person' + (m.cls ? ' ' + m.cls : '') + '"><span class="avatar" aria-hidden="true">' + esc(m.i) + '</span><div><b>' + esc(m.n) + '</b><span>' + esc(K.L(m.r)) + '</span></div></li>';
+    }).join('');
+    $('#track').innerHTML = K.track.map(function (t) { return '<li><b>' + esc(t.n) + '</b><span>' + esc(K.L(t.t)) + '</span></li>'; }).join('');
+    $('#plans').innerHTML = K.plans.map(function (p) { return '<li><b>' + esc(K.L(p.n)) + '</b><span>' + esc(K.L(p.t)) + '</span></li>'; }).join('');
     $('#walk').innerHTML = K.PAGES.slice(1).map(function (p, i) {
       var s = STATS[p.id];
       return '<a href="' + p.href + '"><span class="no">0' + (i + 2) + K.icon('right') + '</span><b>' + esc(K.L(p.label)) + '</b><p>' + esc(K.L(p.desc)) + '</p>' +
@@ -35,6 +47,17 @@ K.pageInit.overview = function () {
 
 /* ---------- 02 Ecosystem ---------- */
 K.pageInit.ecosystem = function () {
+  var arrow = '<div class="fit-arrow" aria-hidden="true"><svg viewBox="0 0 16 22"><path d="M8 2v17M3 14l5 5 5-5"/></svg></div>';
+  function list(items) { return '<ul>' + items.map(function (x) { return '<li>' + esc(K.L(x)) + '</li>'; }).join('') + '</ul>'; }
+  K.onLang.push(function () {
+    $('#fit').innerHTML = K.fit.map(function (l) {
+      var body = l.items
+        ? '<ul class="chips">' + l.items.map(function (x) { return '<li>' + esc(K.L(x)) + '</li>'; }).join('') + '</ul>'
+        : '<div class="layer-cols">' + l.cols.map(function (c) { return '<div><h4>' + esc(K.L(c.h)) + '</h4>' + list(c.items) + '</div>'; }).join('') + '</div>';
+      return '<div class="layer' + (l.ours ? ' ours' : '') + '"><div class="layer-head"><h3>' + esc(K.L(l.t)) + '</h3><span class="layer-note">' + esc(K.L(l.note)) + '</span></div>' + body +
+        (l.foot ? '<p class="layer-foot">' + esc(K.L(l.foot)) + '</p>' : '') + '</div>';
+    }).join(arrow);
+  });
   K.onLang.push(function () {
     $('#schema').innerHTML = K.schema.map(function (s) {
       return '<div class="card"><div class="schema-head"><h3>' + esc(K.L(s.t)) + '</h3><span>' + s.f.length + ' ' + K.T('fields', 'medan') + '</span></div><ul class="fields">' +

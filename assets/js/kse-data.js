@@ -135,14 +135,74 @@ presets:[
 ]
 };
 
-/* ---------- Budget (from the application form, grouped) ----------
-   NOTE: see OPEN_ITEMS.md. The revised form adds a 3% RMC fee (RM874)
-   under Vot 29000 inside the RM30,000 total. Confirm these lines.      */
+/* ---------- Budget: section I of the revised application form ----------
+   Vot 11000: RM2,000 x 9 months. Vot 21000: RM560 + 1,050 + 900 + 1,120
+   + 425 + 226. Vot 29000: RM3,600 + 2,000 + 500 + 445 + 300 + 874.
+   Total RM30,000.                                                        */
 K.budget = [
-{l:{en:'Salary & wages',bm:'Gaji & upah'},v:18000},
-{l:{en:'Workshops, participant tokens & services',bm:'Bengkel, token peserta & perkhidmatan'},v:7419},
-{l:{en:'Travel & transport',bm:'Perjalanan & pengangkutan'},v:4281},
-{l:{en:'Other / admin',bm:'Lain-lain / pentadbiran'},v:300}
+{l:{en:'Salary & wages (RM2,000 x 9 months)',bm:'Gaji & upah (RM2,000 x 9 bulan)'},vot:'11000',v:18000},
+{l:{en:'Travel: field visits, comparison visit, expert visit',bm:'Perjalanan: lawatan lapangan, lawatan perbandingan, lawatan pakar'},vot:'21000',v:4281},
+{l:{en:'Two workshops (20 people each)',bm:'Dua bengkel (20 orang setiap satu)'},vot:'29000',v:3600},
+{l:{en:'Tokens for workshop participants and interviewees',bm:'Token untuk peserta bengkel dan responden'},vot:'29000',v:2500},
+{l:{en:'RMC admin fee (3% of RM29,126)',bm:'Yuran pentadbiran RMC (3% daripada RM29,126)'},vot:'29000',v:874},
+{l:{en:'Printing and reports',bm:'Percetakan dan laporan'},vot:'29000',v:445},
+{l:{en:'Copyright filing',bm:'Pemfailan hak cipta'},vot:'29000',v:300}
+];
+
+/* ---------- Overview: why Kedah, partners, team, earlier studies, plans ---------- */
+K.why = [
+{big:{en:'8.0%',bm:'8.0%'},t:{en:'of people in Malaysia were 65 or older in 2025, up from 7.6% in 2024.',bm:'penduduk Malaysia berumur 65 tahun ke atas pada 2025, naik daripada 7.6% pada 2024.'},src:{en:'DOSM, 2025',bm:'DOSM, 2025'}},
+{big:{en:'Kedah',bm:'Kedah'},t:{en:'Mostly Muslim, a higher poverty rate, and strong zakat and waqf bodies. A good place to test the model.',bm:'Majoriti Muslim, kadar kemiskinan lebih tinggi, dan badan zakat serta wakaf yang kukuh. Tempat yang sesuai untuk menguji model ini.'},src:{en:'Application form',bm:'Borang permohonan'}},
+{big:{en:'First',bm:'Pertama'},t:{en:'study of joined-up elderly care in Kedah. No one has done it before.',bm:'kajian penjagaan warga emas bersepadu di Kedah. Belum pernah dibuat sebelum ini.'},src:{en:'Reply to reviewers',bm:'Jawapan kepada penilai'}}
+];
+K.partners = [
+{n:'PERKIM',s:'signed'},
+{n:'WANIDA Kedah',s:'signed'},
+{n:{en:'Waqf governance expert',bm:'Pakar tadbir urus wakaf'},s:'signed'},
+{n:'MAIK',s:'talks'}
+];
+K.partnerStatus = {signed:{en:'Signed letter',bm:'Surat ditandatangani',c:'verified'},talks:{en:'In talks',bm:'Dalam perbincangan',c:'candidate'}};
+K.team = [
+{n:'Prof. Madya Dr. Shamzaeffa binti Samsudin',i:'SS',r:{en:'Project leader',bm:'Ketua projek'},cls:'lead'},
+{n:'Prof. Madya Dr. Shazida Jan Mohd Khan',i:'SJ',r:{en:'Substitute leader',bm:'Ketua gantian'},cls:'sub'},
+{n:'Prof. Madya Dr. Nur Hafizah Mohammad Ismail',i:'NH',r:{en:'Researcher',bm:'Penyelidik'}},
+{n:'Prof. Madya Dr. Nur Syakiran Akmal Ismail',i:'NS',r:{en:'Researcher',bm:'Penyelidik'}},
+{n:'Sharima Ruwaida Abbas',i:'SR',r:{en:'Researcher',bm:'Penyelidik'}},
+{n:'Prof. Madya Dr. Mukhriz Izraff Azman Aziz',i:'MI',r:{en:'Researcher',bm:'Penyelidik'}}
+];
+K.track = [
+{n:'1,414',t:{en:'older people in the northern region. Health care demand model (PBIT grant, done 2020).',bm:'warga emas di wilayah utara. Model permintaan penjagaan kesihatan (geran PBIT, siap 2020).'}},
+{n:'1,153',t:{en:'adults aged 40 to 59 on where they want to live when old (FRGS, done 2018).',bm:'orang dewasa 40 hingga 59 tahun tentang pilihan tempat tinggal semasa tua (FRGS, siap 2018).'}},
+{n:'399',t:{en:'older people in Kedah on their use of medical care (UUM grant, done 2013).',bm:'warga emas di Kedah tentang penggunaan rawatan perubatan (geran UUM, siap 2013).'}},
+{n:'Takaful',t:{en:'young adults and takaful firms on paying for elderly care (industry grant, final report 2026).',bm:'golongan dewasa muda dan syarikat takaful tentang pembiayaan penjagaan warga emas (geran industri, laporan akhir 2026).'}}
+];
+K.plans = [
+{n:{en:'13th Malaysia Plan 2026–2030',bm:'Rancangan Malaysia Ke-13 2026–2030'},t:{en:'Getting ready for an aged nation is one of its 27 priorities.',bm:'Persediaan ke arah negara tua ialah salah satu daripada 27 keutamaannya.'}},
+{n:{en:'MADANI Economy',bm:'Ekonomi MADANI'},t:{en:'Big Bold: social protection reform.',bm:'Anjakan Besar: reformasi perlindungan sosial.'}},
+{n:{en:'SDG 3',bm:'SDG 3'},t:{en:'Good health and well-being.',bm:'Kesihatan baik dan kesejahteraan.'}},
+{n:{en:'Pelan Transformasi Al-Falah 2023–2027',bm:'Pelan Transformasi Al-Falah 2023–2027'},t:{en:'JAKIM pillar: Kesejahteraan Insan (human well-being).',bm:'Teras JAKIM: Kesejahteraan Insan.'}},
+{n:{en:'MAIK Strategic Plan',bm:'Pelan Strategik MAIK'},t:{en:'Strategy 1.3: stronger social aid projects, programmes and packages.',bm:'Strategi 1.3: meningkatkan keupayaan pelaksanaan projek, program dan pakej bantuan sosial.'}},
+{n:{en:'UUM priority area',bm:'Bidang tumpuan UUM'},t:{en:'Fiscal sustainability of an ageing society.',bm:'Kemampanan fiskal masyarakat menua.'}}
+];
+
+/* ---------- "How it works": Figure 2 of the application, in four layers ---------- */
+K.fit = [
+{t:{en:'RMK13 national agenda',bm:'Agenda nasional RMK13'},note:{en:'The national direction',bm:'Hala tuju negara'},
+ items:[{en:'Getting ready for an ageing nation',bm:'Persediaan ke arah negara menua'},{en:'Stronger social protection and money security',bm:'Perlindungan sosial dan jaminan kewangan yang lebih kukuh'},{en:'Lasting long-term care',bm:'Penjagaan jangka panjang yang mampan'},{en:'Well-being and inclusion of older people',bm:'Kesejahteraan dan keterangkuman warga emas'}]},
+{t:{en:'The national system we have now',bm:'Sistem negara sedia ada'},note:{en:'Stays the main system',bm:'Kekal sebagai sistem utama'},
+ items:[{en:'Government welfare and aid',bm:'Kebajikan dan bantuan kerajaan'},{en:'Health and long-term care',bm:'Kesihatan dan penjagaan jangka panjang'},{en:'Family and community support',bm:'Sokongan keluarga dan komuniti'},{en:'Retirement and income protection',bm:'Persaraan dan perlindungan pendapatan'}]},
+{t:{en:'Our Islamic care model for Kedah',bm:'Model penjagaan Islam kami untuk Kedah'},note:{en:'Extra and optional. Not a replacement.',bm:'Tambahan dan pilihan. Bukan pengganti.'},ours:true,
+ cols:[
+  {h:{en:'Who is in it',bm:'Siapa terlibat'},items:[{en:'Zakat, waqf, baitulmal, masjids, Islamic NGOs, takaful',bm:'Zakat, wakaf, baitulmal, masjid, NGO Islam, takaful'},{en:'Government and welfare agencies',bm:'Agensi kerajaan dan kebajikan'},{en:'Health and community providers',bm:'Penyedia kesihatan dan komuniti'},{en:'Families and older people',bm:'Keluarga dan warga emas'}]},
+  {h:{en:'What it does',bm:'Apa yang dibuat'},items:[{en:'Find out what people need',bm:'Kenal pasti keperluan'},{en:'Refer and coordinate',bm:'Rujuk dan selaras'},{en:'Care and social support',bm:'Penjagaan dan sokongan sosial'},{en:'Raise resources, including sadaqah',bm:'Kumpul sumber, termasuk sedekah'},{en:'Follow up',bm:'Pantau dan susulan'}]},
+  {h:{en:'What it adds',bm:'Apa yang ditambah'},items:[{en:'A Shariah-compliant path to help',bm:'Laluan bantuan patuh Syariah'},{en:'Better coordination between bodies',bm:'Koordinasi yang lebih baik antara badan'},{en:'More support and funding options',bm:'Lebih banyak pilihan bantuan dan dana'},{en:'More community involvement',bm:'Lebih banyak penglibatan komuniti'}]}
+ ]},
+{t:{en:'The Kedah trial and national policy',bm:'Percubaan Kedah dan dasar negara'},note:{en:'What comes out',bm:'Apa yang dihasilkan'},
+ cols:[
+  {h:{en:'The Kedah trial gives',bm:'Percubaan Kedah memberi'},items:[{en:'A checked model',bm:'Model yang telah disemak'},{en:'Lessons from running it',bm:'Pengajaran daripada pelaksanaan'},{en:'Feedback from the agencies',bm:'Maklum balas daripada agensi'},{en:'A how-to guide',bm:'Panduan pelaksanaan'}]},
+  {h:{en:'How it helps the national system',bm:'Bagaimana ia membantu sistem negara'},items:[{en:'Adds to current services',bm:'Menambah perkhidmatan sedia ada'},{en:'Gives evidence for other states',bm:'Memberi bukti untuk negeri lain'},{en:'Helps agencies work together',bm:'Membantu agensi bekerjasama'},{en:'Informs RMK13 ageing and social protection work',bm:'Menyumbang kepada usaha penuaan dan perlindungan sosial RMK13'}]}
+ ],
+ foot:{en:'Growth beyond Kedah depends on readiness, governance, funding, agency commitment and good trial results.',bm:'Pengembangan ke luar Kedah bergantung pada kesediaan, tadbir urus, pembiayaan, komitmen agensi dan hasil percubaan yang baik.'}}
 ];
 
 /* ---------- Reply to reviewers (28 Sep 2026) ----------
@@ -153,7 +213,7 @@ K.reviews = [
  done:{en:'We kept the current title for now. We will decide on the new title with the agencies at the design workshop.',bm:'Kami kekalkan tajuk sekarang buat masa ini. Tajuk baharu akan diputuskan bersama agensi dalam bengkel reka bentuk.'}},
 {area:{en:'Executive summary',bm:'Ringkasan eksekutif'},s:'Verified',where:{en:'Summary',bm:'Ringkasan'},
  asked:{en:'Give the number of experts, the sample sizes and the main outputs.',bm:'Nyatakan bilangan pakar, saiz sampel dan hasil utama.'},
- done:{en:'Added a panel of 8–10 experts and the main sample sizes, within the 150-word limit.',bm:'Ditambah panel 8–10 pakar dan saiz sampel utama, dalam had 150 patah perkataan.'}},
+ done:{en:'The summary now gives the size of the expert panel (10) and the main sample sizes, within the 150-word limit.',bm:'Ringkasan kini menyatakan saiz panel pakar (10) dan saiz sampel utama, dalam had 150 patah perkataan.'}},
 {area:{en:'Background',bm:'Latar belakang'},s:'Verified',where:'p. 10',
  asked:{en:'Also discuss problems inside Islamic funding bodies, such as MAIK and LZNK roles that overlap and waqf assets that are hard to use. Add Kedah data.',bm:'Bincangkan juga masalah dalam badan kewangan Islam, seperti peranan MAIK dan LZNK yang bertindih dan aset wakaf yang sukar digunakan. Tambah data Kedah.'},
  done:{en:'Literature review updated. No study on joined-up care in Kedah exists yet.',bm:'Sorotan literatur dikemas kini. Belum ada kajian penjagaan bersepadu di Kedah.'}},
@@ -196,11 +256,12 @@ eyebrow:'Geran Penyelidikan Scale-Up UUM 2026',
 title:'Penjagaan Islam bersepadu untuk warga emas di Kedah',
 lede:'Warga emas sering perlukan bantuan daripada beberapa pihak serentak. Projek ini menghubungkan keperluan mereka dengan badan Islam, agensi kebajikan, perkhidmatan kesihatan dan sukarelawan di Kedah, dan menunjukkan di mana hubungan itu terputus.',
 metaAsk:'Jumlah',metaDur:'Tempoh',metaDurV:'9 bulan',metaPeriod:'Tarikh',metaSite:'Lokasi',
+officialLabel:'Tajuk rasmi:',
 ctaWalk:'Lihat cara ia berfungsi',ctaScenario:'Cuba satu kes',
 consTitle:'Siapa boleh membantu seorang warga emas',
 consCap:'Setiap titik ialah satu organisasi dalam senarai kami. Titik dekat tengah sudah disahkan. Titik yang lebih jauh masih perlu disemak atau hanya contoh. Klik titik untuk melihat butirannya.',
-kpi1:'objektif kajian',kpi2:'fasa projek',kpi3:'warga emas ditemu bual',kpi4:'peserta bengkel reka bentuk',kpi5:'pakar menilai model',
-partnersLabel:'Agensi dalam kajian',
+kpi1:'objektif kajian',kpi2:'fasa projek',kpi3:'warga emas ditemu bual',kpi4:'peserta bengkel reka bentuk',kpi5:'ahli panel penilai',
+partnersLabel:'Rakan kerjasama',
 caseEyebrow:'Kenapa projek ini',caseTitle:'Bantuan ada, tetapi tidak bersambung',
 caseSub:'Sekarang setiap agensi bekerja sendiri. Projek ini menguji cara mudah untuk mereka bekerjasama.',
 problemTag:'Masalah',problemQuote:'Seorang warga emas mungkin perlukan beberapa jenis bantuan serentak, tetapi setiap agensi hanya uruskan bahagian sendiri.',
@@ -217,6 +278,11 @@ o3title:'Model penjagaan bersepadu',o3body:'Model yang dibina bersama agensi, me
 o4title:'Laporan penilaian pakar',o4body:'Skor dan ulasan pakar tentang sama ada model ini relevan, boleh dilaksana dan sedia digunakan.',
 o5title:'Model akhir dan pelan',o5body:'Model yang diperbaiki dan pelan untuk menggunakannya di luar Kedah.',
 impactTag:'Matlamat kami',impactBody:'Penjagaan warga emas yang lebih tersusun, sesuai dengan agama dan budaya, dan berterusan.',
+teamEyebrow:'Pasukan',teamTitle:'Enam penyelidik dari UUM',
+teamSub:'Dari Pusat Pengajian Ekonomi, Kewangan dan Perbankan (SEFB). Pasukan ini telah mengkaji penuaan di Malaysia selama lebih sepuluh tahun.',
+trackTitle:'Berasaskan empat kajian terdahulu dengan lebih 2,900 responden',
+plansEyebrow:'Selari dengan dasar',plansTitle:'Ia menyokong pelan negara dan negeri ini',
+plansSub:'Seperti yang ditanda dan dinyatakan dalam borang permohonan.',
 walkEyebrow:'Seterusnya',walkTitle:'Lima halaman lagi',
 walkSub:'Setiap halaman menjawab satu soalan. Guna kekunci anak panah untuk beralih halaman.',
 
@@ -230,7 +296,9 @@ needs:'Apa yang diperlukan',needsSub:'Pengangkutan, teman, makanan, penjagaan di
 context:'Had',contextSub:'Kelayakan, jarak, tempat kosong, rujukan dan kos',
 engineCircle:'PADAN',engineTitle:'Langkah padanan',engineBody:'Mencari siapa boleh membantu, ikut syarat, lokasi, tempat kosong dan tahap kecemasan.',
 chipNeed:'Keperluan sesuai',chipDistrict:'Daerah sama',chipCapacity:'Ada kekosongan',chipReferral:'Rujukan',
-supply:'Siapa boleh membantu',institutions:'Agensi',providers:'Penyedia penjagaan',providersSub:'Kesihatan · penjagaan di rumah · NGO · komuniti',
+supply:'Siapa boleh membantu',institutions:'Agensi',providers:'Penyedia penjagaan',providersSub:'Kesihatan · penjagaan di rumah · takaful · NGO · komuniti',
+fitEyebrow:'Kedudukannya',fitTitle:'Ia menambah sistem negara, bukan menggantikannya',
+fitSub:'Ini Rajah 2 dalam permohonan, dalam empat lapisan.',
 volunteers:'Sukarelawan',volunteersSub:'Teman, pengangkutan, lawatan dan bantuan harian',
 pathway:'Hasil',pathwaySub:'Bantuan yang sesuai, ke mana dirujuk, dan keperluan yang belum dipenuhi',
 dataEyebrow:'Data',dataTitle:'Tiga senarai di sebalik padanan',
@@ -274,23 +342,28 @@ ph1:'Fasa 1',ph2:'Fasa 2',ph3:'Fasa 3',ph4:'Fasa 4',
 obj1:'Petakan perkhidmatan semasa',obj2:'Kenal pasti keperluan warga emas',obj3:'Reka model bersama agensi',obj4:'Uji model',obj5:'Baiki dan siapkan',
 act1:'Baca dasar dan laporan, dan temu bual badan Islam, agensi kebajikan dan NGO',
 act2:'Temu bual 8–10 warga emas Muslim dan kenal pasti tema utama',
-act3:'Bengkel bersama 15–20 wakil agensi untuk setuju peranan, pembiayaan dan cara bekerjasama',
+act3:'Bengkel bersama 15–20 orang untuk bersetuju tentang peranan, pembiayaan, peraturan dan langkah rujukan',
 act4:'Pakar menilai model, kemudian kami jalankan percubaan kecil proses rujukan',
 act5:'Kemas kini model berdasarkan skor pakar dan hasil percubaan',
 out1:'Peta perkhidmatan semasa',out2:'Keperluan dan masalah utama',out3:'Draf model',out4:'Model disemak dan maklum balas percubaan',out5:'Model akhir dan laporan',
 lgActive:'Bulan bekerja',lgOutput:'Hasil siap',
-roadSub:'Berdasarkan borang permohonan dan imej peta jalan. Objektif 4 dan 5 kedua-duanya dalam Fasa 4.',
-valTag:'Penilaian pakar · Fasa 4',valTitle:'Bagaimana pakar menilai model',
-valBody:'Panel pakar memberi skor untuk setiap bahagian model dan menulis ulasan.',
-crit1:'Relevan',crit2:'Jelas',crit3:'Boleh dilaksana',crit4:'Lengkap',crit5:'Sesuai',
+roadSub:'Berdasarkan Jadual 2 borang permohonan dan imej peta jalan. Objektif 4 dan 5 kedua-duanya dalam Fasa 4. Selangor dan Kuala Lumpur mungkin digunakan sebagai perbandingan.',
+wsTag:'Bengkel reka bentuk · Fasa 3',wsTitle:'Siapa yang terlibat',
+wsBody:'15–20 orang daripada kumpulan ini. Mereka melihat dapatan, bersetuju tentang keutamaan, peranan, pembiayaan, peraturan dan langkah rujukan, kemudian membina model bersama.',
+wsNgo:'NGO penjagaan warga emas',wsHealth:'Penyedia kesihatan',wsReligious:'Pemimpin agama',wsAcademic:'Ahli akademik',wsOlder:'Wakil warga emas',
+valTag:'Penilaian pakar · Fasa 4',valTitle:'Bagaimana panel menilai model',
+valBody:'Panel 10 orang daripada MAIK, LZNK, JKM, NGO, pemimpin komuniti, penyedia takaful dan universiti memberi skor untuk setiap bahagian model dan menulis ulasan.',
+crit1:'Relevan',crit2:'Boleh dilaksana',crit3:'Praktikal',crit4:'Kesediaan agensi',
+riskLabel:'Risiko utama: masa (sederhana)',
+riskBody:'Orang yang sibuk mungkin tidak dapat hadir bengkel. Pelan kami: wakil ganti daripada kumpulan yang sama, hubungan awal, tarikh yang fleksibel, kumpulan peserta yang lebih besar, dan agensi utama sebagai rakan kerjasama. Risiko teknikal dan bajet adalah rendah.',
 m1:'skor setiap item',m2:'purata untuk seluruh model',
 pilotTag:'Percubaan kecil',pilotTitle:'Apa yang disemak dalam percubaan',
 pilotBody:'Selepas penilaian pakar, kami cuba sebahagian model secara kecil. Fokusnya ialah cara agensi merujuk warga emas antara satu sama lain.',
 pc1:'Adakah ia berfungsi',pc2:'Adakah ia diterima',pc3:'Adakah peranan jelas',pc4:'Apa yang menghalang',pc5:'Apa perlu diperbaiki',
 budgetEyebrow:'Bajet',budgetTitle:'Bagaimana RM30,000 dibelanjakan',
-budgetSub:'Sebahagian besar untuk membayar pasukan projek selama sembilan bulan. Bakinya untuk bengkel, perjalanan dan perkhidmatan penyelidikan.',
+budgetSub:'Sebahagian besar untuk membayar pasukan projek selama sembilan bulan. Bakinya untuk perjalanan, dua bengkel, token peserta, percetakan, pemfailan hak cipta dan yuran RMC 3%.',
 totalLabel:'Jumlah',totalSub:'Untuk 9 bulan, 1 Nov 2026 hingga 31 Jul 2027',
-budgetNote:'Angka daripada borang permohonan, digabung kepada empat baris supaya mudah dibaca.',
+budgetNote:'Angka daripada bahagian bajet (Bahagian I) borang permohonan yang disemak: Vot 11000, 21000 dan 29000.',
 
 /* sources */
 evTitle:'Dari mana fakta ini datang',

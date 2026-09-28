@@ -98,7 +98,7 @@ V.budget = function (el) {
   var total = K.budget.reduce(function (a, b) { return a + b.v; }, 0);
   el.innerHTML = K.budget.map(function (b) {
     var pct = b.v / total * 100;
-    return '<div class="bud-row"><span>' + K.esc(K.L(b.l)) + '</span><div class="bud-track"><div class="bud-fill" style="width:' + pct.toFixed(2) + '%"></div></div>' +
+    return '<div class="bud-row"><span>' + K.esc(K.L(b.l)) + (b.vot ? '<small>Vot ' + K.esc(b.vot) + '</small>' : '') + '</span><div class="bud-track"><div class="bud-fill" style="width:' + pct.toFixed(2) + '%"></div></div>' +
       '<span class="bud-rm">RM' + b.v.toLocaleString('en-US') + '</span><span class="bud-pct">' + pct.toFixed(1) + '%</span></div>';
   }).join('');
 };
