@@ -287,7 +287,7 @@ o5title:'Model akhir dan pelan',o5body:'Model yang diperbaiki dan pelan untuk me
 impactTag:'Matlamat kami',impactBody:'Penjagaan warga emas yang lebih tersusun, sesuai dengan agama dan budaya, dan berterusan.',
 teamEyebrow:'Pasukan',teamTitle:'Enam penyelidik dari UUM',
 teamSub:'Dari Pusat Pengajian Ekonomi, Kewangan dan Perbankan (SEFB). Pasukan ini telah mengkaji penuaan di Malaysia selama lebih sepuluh tahun.',
-trackTitle:'Berasaskan empat kajian terdahulu dengan lebih 2,900 responden',
+trackTitle:'Tiga kajian bernombor melibatkan 2,966 orang secara keseluruhan. Kajian keempat turut disenaraikan di bawah; saiz sampelnya tidak dinyatakan di sini.',
 plansEyebrow:'Selari dengan dasar',plansTitle:'Ia menyokong pelan negara dan negeri ini',
 plansSub:'Seperti yang ditanda dan dinyatakan dalam borang permohonan.',
 walkEyebrow:'Seterusnya',walkTitle:'Indeks dashboard',
