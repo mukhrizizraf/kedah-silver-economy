@@ -481,6 +481,27 @@ K.pageInit.scenario = function () {
   K.onLang.push(function () { update(firstRun); firstRun = false; });
 };
 
+/* ---------- 08 Our Silver App ---------- */
+K.pageInit.app = function () {
+  var current = 0, screens = K.$$('[data-screen]'), dots = $('#appDots'), progress = $('#appProgress');
+  function show(n) {
+    current = Math.max(0, Math.min(screens.length - 1, n));
+    screens.forEach(function (s) { s.classList.toggle('is-active', Number(s.getAttribute('data-screen')) === current); });
+    if (progress) progress.style.setProperty('--v', ((current + 1) / screens.length * 100) + '%');
+    if (dots) dots.innerHTML = screens.map(function (s, i) { return '<button type="button" class="' + (i === current ? 'is-on' : '') + '" data-app-dot="' + i + '" aria-label="Screen ' + (i + 1) + '"></button>'; }).join('');
+    var back = $('#appScreenBack'); if (back) back.style.visibility = current ? 'visible' : 'hidden';
+  }
+  function move(n) { show(n); }
+  $('#appLaunch').addEventListener('click', function () { move(0); document.querySelector('.phone-mock').scrollIntoView({ behavior: K.reduceMotion ? 'auto' : 'smooth', block: 'center' }); });
+  $('#appScreens').addEventListener('click', function (e) {
+    var next = e.target.closest('[data-app-next]'), reset = e.target.closest('[data-app-reset]'), choice = e.target.closest('.mock-choices button'), lang = e.target.closest('[data-app-lang]');
+    if (next) move(current + 1); if (reset) move(0); if (choice) { K.$$('.mock-choices button').forEach(function (b) { b.classList.remove('is-selected'); }); choice.classList.add('is-selected'); } if (lang) document.documentElement.lang = document.documentElement.lang === 'ms' ? 'en' : 'ms';
+  });
+  $('#appScreenBack').addEventListener('click', function () { move(current - 1); });
+  $('#appDots').addEventListener('click', function (e) { var b = e.target.closest('[data-app-dot]'); if (b) move(Number(b.getAttribute('data-app-dot'))); });
+  show(0);
+};
+
 /* ---------- 05 Roadmap & budget ---------- */
 K.pageInit.roadmap = function () {
   K.onLang.push(function () {

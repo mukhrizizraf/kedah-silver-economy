@@ -43,6 +43,8 @@ K.PAGES = [
  desc:{en:'The documents behind this dashboard and the reviewer comments.',bm:'Dokumen di sebalik dashboard ini dan ulasan penilai.'}}
 ,{id:'data',href:'data.html',label:{en:'Data blueprint',bm:'Pelan data'},
  desc:{en:'The sheets and fields needed to turn this prototype into a working dashboard.',bm:'Lembaran dan medan yang diperlukan untuk menjadikan prototaip ini dashboard sebenar.'}}
+,{id:'app',href:'app.html',label:{en:'Our Silver App',bm:'Aplikasi Silver Kami'},
+ desc:{en:'A screen-by-screen mock app for an older person seeking help.',bm:'Simulasi skrin demi skrin untuk warga emas mencari bantuan.'}}
 ];
 K.page = body.getAttribute('data-page') || 'overview';
 K.pageIndex = 0;
@@ -78,7 +80,8 @@ var PICON = {
     '<path class="ai-pin" pathLength="1" d="M8 3.2v3.6M16 3.2v3.6"/><path class="ai-c" pathLength="1" d="M8.8 15.2l2.2 2.2 4.3-4.4"/>',
   evidence: '<path pathLength="1" d="M14 3.2H7.6A1.6 1.6 0 0 0 6 4.8v14.4a1.6 1.6 0 0 0 1.6 1.6h8.8a1.6 1.6 0 0 0 1.6-1.6V7.2z"/><path pathLength="1" d="M14 3.2v4h4"/>' +
     '<path class="ai-r1" pathLength="1" d="M9 11.6h6"/><path class="ai-r2" pathLength="1" d="M9 14.6h6"/><path class="ai-r3" pathLength="1" d="M9 17.6h3.6"/>',
-  data: '<path pathLength="1" d="M4 5.5h6v6H4zM14 5.5h6v6h-6zM4 15.5h6v3H4zM14 15.5h6v3h-6z"/><path class="ai-r1" pathLength="1" d="M10 8.5h4M10 17h4"/>'
+  data: '<path pathLength="1" d="M4 5.5h6v6H4zM14 5.5h6v6h-6zM4 15.5h6v3H4zM14 15.5h6v3h-6z"/><path class="ai-r1" pathLength="1" d="M10 8.5h4M10 17h4"/>',
+  app: '<rect pathLength="1" x="6" y="2.8" width="12" height="18.4" rx="2.2"/><path pathLength="1" d="M9.5 5.6h5M10.4 18.3h3.2"/><circle class="ai-app-dot" pathLength="1" cx="12" cy="11.4" r="2.8"/>'
 };
 K.pageIcon = function (id) { return '<svg class="ai ai-' + id + '" viewBox="0 0 24 24" aria-hidden="true">' + (PICON[id] || '') + '</svg>'; };
 K.mark = '<svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><rect class="sq" x="8" y="8" width="16" height="16" rx="1"/><rect class="sq" x="8" y="8" width="16" height="16" rx="1" transform="rotate(45 16 16)"/><circle class="ctr" cx="16" cy="16" r="3.4"/></svg>';
@@ -265,7 +268,8 @@ doc.addEventListener('DOMContentLoaded', function () {
       scenario: 'assets/img/elder-phone-profile.png',
       roadmap: 'assets/img/elder-budget-counting.png',
       evidence: 'assets/img/elder-source-books.png',
-      data: 'assets/img/elder-sand-blueprint.png'
+      data: 'assets/img/elder-sand-blueprint.png',
+      app: 'assets/img/elder-phone-profile.png'
     };
     var figure = doc.createElement('figure');
     figure.className = 'page-character page-character-' + K.page;
@@ -397,6 +401,4 @@ doc.addEventListener('DOMContentLoaded', function () {
 });
 
 })(window.KSE);
-
-
 

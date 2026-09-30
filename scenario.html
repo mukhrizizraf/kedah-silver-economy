@@ -1,9 +1,9 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Try a Case · Kedah Silver Economy</title>
+<title>Try a Case Â· Kedah Silver Economy</title>
 <meta name="description" content="Pick a person, district, need and income to see the suggested steps, the score and the main problem.">
 <script>try{var t=localStorage.getItem('kse-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,7 +13,7 @@
 <script src="assets/js/kse-data.js?v=20260930o"></script>
 </head>
 <body data-page="scenario">
-<script src="assets/js/kse-shell.js?v=20260930o"></script>
+<script src="assets/js/kse-shell.js?v=20260930p"></script>
 
 <main id="main">
   <section class="band pagehead">
@@ -43,7 +43,7 @@
         <div class="intake-progress"><span id="intakeStepLabel">Step 1 of 5</span><i id="intakeProgressBar" style="--v:20%"></i></div>
         <section class="intake-step is-active" data-step="1">
           <p class="label label-paddy">About you</p><h2>How old are you?</h2><p class="intake-help">Choose an age range. You do not need to remember your exact date of birth.</p>
-          <div class="choice-grid" data-choice-group="ageBand"><button type="button" data-value="60-64">60–64</button><button type="button" data-value="65-69">65–69</button><button type="button" data-value="70-74">70–74</button><button type="button" data-value="75-79">75–79</button><button type="button" data-value="80-84">80–84</button><button type="button" data-value="85+">85 or older</button></div>
+          <div class="choice-grid" data-choice-group="ageBand"><button type="button" data-value="60-64">60â€“64</button><button type="button" data-value="65-69">65â€“69</button><button type="button" data-value="70-74">70â€“74</button><button type="button" data-value="75-79">75â€“79</button><button type="button" data-value="80-84">80â€“84</button><button type="button" data-value="85+">85 or older</button></div>
           <h3>How should we record your gender?</h3><div class="choice-grid compact" data-choice-group="gender"><button type="button" data-value="woman">Woman</button><button type="button" data-value="man">Man</button><button type="button" data-value="prefer-not">Prefer not to say</button></div>
         </section>
         <section class="intake-step" data-step="2">
@@ -52,12 +52,12 @@
         </section>
         <section class="intake-step" data-step="3">
           <p class="label label-paddy">Daily life</p><h2>How do you manage day to day?</h2>
-          <div class="choice-grid" data-choice-group="persona"><button type="button" data-value="independent">🟢 I manage by myself</button><button type="button" data-value="vulnerable">🟡 I need some help</button><button type="button" data-value="highneed">🟠 I need regular help</button></div>
+          <div class="choice-grid" data-choice-group="persona"><button type="button" data-value="independent">ðŸŸ¢ I manage by myself</button><button type="button" data-value="vulnerable">ðŸŸ¡ I need some help</button><button type="button" data-value="highneed">ðŸŸ  I need regular help</button></div>
           <h3>Who is available to help you?</h3><div class="choice-grid compact multi-choice" data-multi-group="support"><button type="button" data-value="alone">I live alone</button><button type="button" data-value="spouse">Spouse / partner</button><button type="button" data-value="children">Children nearby</button><button type="button" data-value="family">Other family</button><button type="button" data-value="neighbours">Friends / neighbours</button><button type="button" data-value="none">No regular help</button></div>
         </section>
         <section class="intake-step" data-step="4">
           <p class="label label-paddy">Money and home</p><h2>What is your approximate monthly income?</h2>
-          <div class="choice-grid compact" data-choice-group="income"><button type="button" data-value="0">No regular income</button><button type="button" data-value="800">Below RM1,000</button><button type="button" data-value="1500">RM1,000–RM1,999</button><button type="button" data-value="2500">RM2,000–RM2,999</button><button type="button" data-value="3500">RM3,000–RM4,999</button><button type="button" data-value="5000">RM5,000 and above</button><button type="button" data-value="prefer-not">Prefer not to say</button></div>
+          <div class="choice-grid compact" data-choice-group="income"><button type="button" data-value="0">No regular income</button><button type="button" data-value="800">Below RM1,000</button><button type="button" data-value="1500">RM1,000â€“RM1,999</button><button type="button" data-value="2500">RM2,000â€“RM2,999</button><button type="button" data-value="3500">RM3,000â€“RM4,999</button><button type="button" data-value="5000">RM5,000 and above</button><button type="button" data-value="prefer-not">Prefer not to say</button></div>
           <h3>Do you receive regular financial support?</h3><div class="choice-grid compact multi-choice" data-multi-group="financialSupport"><button type="button" data-value="pension">Pension</button><button type="button" data-value="welfare">Welfare assistance</button><button type="button" data-value="family">Children / family</button><button type="button" data-value="zakat">Zakat / Baitulmal</button><button type="button" data-value="none">No regular support</button></div>
           <h3>Where do you live now?</h3><div class="choice-grid compact" data-choice-group="living"><button type="button" data-value="alone">Own home, alone</button><button type="button" data-value="spouse">With spouse</button><button type="button" data-value="family">With children / family</button><button type="button" data-value="care">Residential care</button></div>
         </section>
@@ -74,7 +74,7 @@
 
       <div class="controls quick-only">
         <div class="field"><label for="ageBand">Age range</label>
-          <div class="select"><select id="ageBand"><option value="60-64">60–64</option><option value="65-69">65–69</option><option value="70-74">70–74</option><option value="75-79">75–79</option><option value="80+">80 and above</option></select></div></div>
+          <div class="select"><select id="ageBand"><option value="60-64">60â€“64</option><option value="65-69">65â€“69</option><option value="70-74">70â€“74</option><option value="75-79">75â€“79</option><option value="80+">80 and above</option></select></div></div>
         <div class="field"><label for="gender">Gender</label>
           <div class="select"><select id="gender"><option value="woman">Woman</option><option value="man">Man</option><option value="prefer-not">Prefer not to say</option></select></div></div>
         <div class="field"><label for="persona" data-i18n="personaLabel">Person</label>
@@ -105,7 +105,7 @@
         <div class="field"><label for="living">Living arrangement</label>
           <div class="select"><select id="living"><option value="alone">Lives alone</option><option value="spouse">With spouse</option><option value="family">With family</option><option value="care">Residential care</option></select></div></div>
         <div class="field"><label for="income" data-i18n="incomeLabel">Household income a month</label>
-          <div class="select"><select id="income"><option value="0">No regular income</option><option value="800">Below RM1,000</option><option value="1500">RM1,000–RM1,999</option><option value="2500">RM2,000–RM2,999</option><option value="3500" selected>RM3,000–RM4,999</option><option value="5000">RM5,000 and above</option></select></div></div>
+          <div class="select"><select id="income"><option value="0">No regular income</option><option value="800">Below RM1,000</option><option value="1500">RM1,000â€“RM1,999</option><option value="2500">RM2,000â€“RM2,999</option><option value="3500" selected>RM3,000â€“RM4,999</option><option value="5000">RM5,000 and above</option></select></div></div>
       </div>
       <p class="case-context" id="caseContext" aria-live="polite"></p>
 
@@ -123,11 +123,6 @@
         </div>
         <p class="route-note" data-i18n="routeNote">This is a demonstration. Check an organisation and its contact details before making a referral.</p>
       </section>
-
-      <figure class="journey-poster">
-        <div class="journey-poster-head"><div><p class="label label-paddy" data-i18n="journeyLabel">The journey in one picture</p><h2 data-i18n="journeyTitle">From a phone tap to help at home</h2></div><span data-i18n="journeyCaption">A simple example for an older person and their family.</span></div>
-        <img src="assets/img/elderly-help-journey.png?v=20260930a" alt="Ten-step Malay infographic showing an elderly woman using the Kedah Silver Economy app to find and receive assistance">
-      </figure>
 
       <div class="lab">
         <div class="cov">
@@ -179,6 +174,7 @@
 <script src="assets/js/kse-pages.js?v=20260930u"></script>
 </body>
 </html>
+
 
 
 
