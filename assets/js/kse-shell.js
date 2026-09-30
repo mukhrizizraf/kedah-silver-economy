@@ -157,6 +157,42 @@ chrome.addEventListener('click', function (e) {
   else if (t.classList.contains('lang-btn')) K.setLang(t.getAttribute('data-lang'));
 });
 
+/* ---------- Presentation-style navigation ----------
+   Tabs still work as ordinary links when opened with a modifier, in a new
+   tab, or when scripts are unavailable. A plain click gets one short deck
+   transition so moving through the pitch feels intentional rather than like
+   a cold document reload. */
+var pageTransition = doc.createElement('div');
+pageTransition.id = 'pageTransition';
+pageTransition.className = 'page-transition';
+pageTransition.setAttribute('aria-hidden', 'true');
+pageTransition.innerHTML = '<i></i><i></i>';
+body.appendChild(pageTransition);
+function transitionTo(href, e) {
+  if (!href || K.reduceMotion || body.classList.contains('page-leaving')) return false;
+  if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return false;
+  var a = e.target && e.target.closest ? e.target.closest('a') : null;
+  if (!a || a.target === '_blank' || a.hasAttribute('download')) return false;
+  var u;
+  try { u = new URL(href, location.href); } catch (err) { return false; }
+  if (u.origin !== location.origin || u.pathname === location.pathname) return false;
+  e.preventDefault();
+  body.classList.add('page-leaving');
+  window.setTimeout(function () { location.href = u.href; }, 300);
+  return true;
+}
+doc.addEventListener('click', function (e) {
+  var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+  if (!a) return;
+  transitionTo(a.getAttribute('href'), e);
+}, true);
+doc.addEventListener('DOMContentLoaded', function () {
+  if (!K.reduceMotion) {
+    body.classList.add('page-enter');
+    window.setTimeout(function () { body.classList.remove('page-enter'); }, 650);
+  }
+});
+
 /* ---------- Footer: pager ---------- */
 function renderFooter() {
   var foot = K.$('#kse-foot'); if (!foot) return;

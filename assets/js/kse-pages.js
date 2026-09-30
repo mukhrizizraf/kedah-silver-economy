@@ -10,7 +10,25 @@ var $ = K.$, $$ = K.$$, esc = K.esc;
 
 /* ---------- 01 Overview ---------- */
 K.pageInit.overview = function () {
-  var svg = $('#constellation'), first = true;
+  var svg = $('#constellation'), first = true, scene = $('[data-scene]');
+  /* A restrained cursor parallax keeps the couple and the room feeling like
+     a living illustration without moving layout or stealing the CTAs. */
+  if (scene && !K.reduceMotion) {
+    var raf = 0;
+    scene.addEventListener('pointermove', function (e) {
+      var r = scene.getBoundingClientRect();
+      var x = ((e.clientX - r.left) / r.width - .5) * 2;
+      var y = ((e.clientY - r.top) / r.height - .5) * 2;
+      if (raf) cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(function () {
+        scene.style.setProperty('--mx', (x * 8).toFixed(2) + 'px');
+        scene.style.setProperty('--my', (y * 5).toFixed(2) + 'px');
+      });
+    });
+    scene.addEventListener('pointerleave', function () {
+      scene.style.setProperty('--mx', '0px'); scene.style.setProperty('--my', '0px');
+    });
+  }
   function go(node) { if (node) location.href = 'network.html#r' + node.getAttribute('data-idx'); }
   svg.addEventListener('click', function (e) { go(e.target.closest('.node')); });
   svg.addEventListener('keydown', function (e) {
@@ -65,6 +83,18 @@ K.pageInit.overview = function () {
 /* ---------- 02 Ecosystem ---------- */
 K.pageInit.ecosystem = function () {
   var arrow = '<div class="fit-arrow" aria-hidden="true"><svg viewBox="0 0 16 22"><path d="M8 2v17M3 14l5 5 5-5"/></svg></div>';
+  var engine = $('.engine');
+  if (engine) {
+    function toggleEngine() {
+      var open = engine.classList.toggle('is-open');
+      engine.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+    engine.addEventListener('click', toggleEngine);
+    engine.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleEngine(); }
+      if (e.key === 'Escape') { engine.classList.remove('is-open'); engine.setAttribute('aria-expanded', 'false'); }
+    });
+  }
   function list(items) { return '<ul>' + items.map(function (x) { return '<li>' + esc(K.L(x)) + '</li>'; }).join('') + '</ul>'; }
   K.onLang.push(function () {
     $('#fit').innerHTML = K.fit.map(function (l) {

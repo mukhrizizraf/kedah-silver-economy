@@ -314,6 +314,10 @@ The signature component. Concentric rings place organisations by how checked the
 
 The centre now uses a transparent 3D animated elder avatar (`assets/img/elder-motion/`) inside the gold hub. The character is a clearly illustrated, non-photoreal elder rather than a real-person portrait. Eight subtle key frames create a gentle welcome loop, with a small float and hover response, without competing with the evidence rings. The avatar links to the scenario page, making the person served by the network the entry point for trying a case. The motion stops under reduced-motion preferences.
 
+The overview opens with a wider scene before the evidence map: an illustrated elderly Malay Muslim couple on a teal couch in a Kedah kampung home (`assets/img/kampung-elder-couple-socks.png`). The woman wears cream socks. The scene carries a slow camera breath, warm light drift and restrained pointer parallax; the copy and actions remain HTML above the image so the pitch stays readable, bilingual and keyboard reachable. The map follows as the evidence layer rather than competing with the first human moment.
+
+Page changes use a short presentation-deck transition: the outgoing page folds into two colour panels and the next page settles in. This is a continuity cue for the pitch sequence, not a loading screen, and it is removed under reduced motion. On How it works, the three input nodes enter in a stagger and the matching box accepts hover, focus and click to reveal a floating explanation of what it does.
+
 ### The Coverage Meter
 A 10px gold bar on the dark card, growing to its value over 0.35s by clip-path rather than width, so its round cap survives and nothing reflows. Its scale is ticked 0 to 100 beneath. It always ships beside a "Sample data only" mark, because the number behind it is invented.
 
