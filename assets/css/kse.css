@@ -350,7 +350,8 @@ body[data-page="scenario"] .page-character{width:235px;height:178px}
 body[data-page="scenario"] .page-character img{width:235px;height:178px;object-fit:contain;border-radius:0;filter:drop-shadow(0 12px 12px rgba(3,16,12,.38))}
 body[data-page="network"] .page-character{width:235px;height:178px}
 body[data-page="network"] .page-character img{width:235px;height:178px;object-fit:contain;border-radius:0;filter:drop-shadow(0 12px 12px rgba(3,16,12,.38))}
-body[data-page="roadmap"] .page-character img{width:176px;height:132px;object-fit:cover;object-position:68% center;border-radius:18px;filter:drop-shadow(0 12px 12px rgba(3,16,12,.38))}
+body[data-page="roadmap"] .page-character{width:260px;height:190px}
+body[data-page="roadmap"] .page-character img{width:260px;height:190px;object-fit:contain;border-radius:0;filter:drop-shadow(0 12px 12px rgba(3,16,12,.38))}
 
 /* ---------- Page entrance ----------
    The one authored moment per page: the head settles in, top to bottom, a
@@ -1043,6 +1044,7 @@ tr.flash td{animation:flash 2.4s ease}
   .card,.output,.walk a,.source,.g-row,.enode{break-inside:avoid}
   .section{padding-block:24px}
 }
+
 
 
 
