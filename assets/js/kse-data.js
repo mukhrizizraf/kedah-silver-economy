@@ -377,7 +377,7 @@ confirmedLabel:'Disahkan dalam senarai kami',
 workingLabel:'Cara skor ini dibina',
 compareLabel:'Setiap daerah',
 methodNote:'Skor bermula daripada jenis warga emas, kemudian berubah ikut keperluan, daerah dan pendapatan. Ia menunjukkan cara logik berfungsi, bukan anggaran sebenar.',
-pathLabel:'Langkah dicadangkan',providersLabel:'Siapa boleh membantu',gapLabel:'Masalah utama untuk disemak',
+pathLabel:'Langkah dicadangkan',providersLabel:'Siapa boleh membantu',gapLabel:'Masalah utama untuk disemak',routeTitle:'Laluan bantuan anda',routeIntro:'Pandangan ringkas daripada keperluan kepada hubungan yang boleh dicuba.',routeDemo:'Laluan contoh',routeRequest:'Permintaan anda',routeSteps:'Langkah dicadangkan',routeContacts:'Hubungan yang boleh dicuba',routeNote:'Ini ialah demonstrasi. Semak organisasi dan nombor hubungan sebelum membuat rujukan.',
 
 /* plan & budget */
 roadTitle:'Pelan 9 bulan',

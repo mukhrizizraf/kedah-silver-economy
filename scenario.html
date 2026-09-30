@@ -109,6 +109,21 @@
       </div>
       <p class="case-context" id="caseContext" aria-live="polite"></p>
 
+      <section class="route-map" id="routeMap" aria-labelledby="routeTitle">
+        <div class="route-head">
+          <div><h2 id="routeTitle" data-i18n="routeTitle">Your route to help</h2><p data-i18n="routeIntro">A quick view of how this example case could move from a need to a contact.</p></div>
+          <span class="route-demo" data-i18n="routeDemo">Sample route</span>
+        </div>
+        <div class="route-flow" id="routeFlow">
+          <div class="route-stage route-request"><span class="route-stage-label" data-i18n="routeRequest">Your request</span><div id="routeRequest"></div></div>
+          <span class="route-connector" aria-hidden="true"><i></i></span>
+          <div class="route-stage route-steps"><span class="route-stage-label" data-i18n="routeSteps">Suggested steps</span><ol id="routeSteps"></ol></div>
+          <span class="route-connector" aria-hidden="true"><i></i></span>
+          <div class="route-stage route-contacts"><span class="route-stage-label" data-i18n="routeContacts">Possible contacts</span><div class="route-end-mark" id="routeEndMark" aria-hidden="true"></div><ul id="routeContacts"></ul></div>
+        </div>
+        <p class="route-note" data-i18n="routeNote">This is a demonstration. Check an organisation and its contact details before making a referral.</p>
+      </section>
+
       <div class="lab">
         <div class="cov">
           <div class="cov-top"><p class="label" data-i18n="coverageLabel">How well needs are covered</p><span class="demo-tag" data-i18n="demoTag">Sample data only</span></div>
@@ -154,7 +169,9 @@
 </main>
 
 <script src="assets/js/kse-viz.js"></script>
-<script src="assets/js/kse-pages.js?v=20260930t"></script>
+<script src="assets/vendor/lottie_light.min.js"></script>
+<script src="assets/js/kse-route-lottie.js"></script>
+<script src="assets/js/kse-pages.js?v=20260930u"></script>
 </body>
 </html>
 

@@ -234,7 +234,7 @@ K.pageInit.network = function () {
 /* ---------- 04 Scenario lab ---------- */
 K.pageInit.scenario = function () {
   var S = K.scenario, ageBand = $('#ageBand'), gender = $('#gender'), persona = $('#persona'), district = $('#district'), mukim = $('#mukim'), living = $('#living'), need = $('#need'), income = $('#income');
-  var shown = null, raf = 0;
+  var shown = null, raf = 0, routeAnimation = null;
   var DISTRICTS = Object.keys(S.districtAdj);
 
   function updateMukim() {
@@ -418,6 +418,7 @@ K.pageInit.scenario = function () {
 
     $('#gap').textContent = K.L(S.gaps[gap]);
     $('#caseContext').textContent = K.T('Profile: ' + optionText(ageBand) + ' · ' + optionText(gender) + ' · ' + dk + ' · ' + optionText(mukim) + ' · ' + optionText(living) + ' · ' + optionText(income), 'Profil: ' + optionText(ageBand) + ' · ' + optionText(gender) + ' · ' + dk + ' · ' + optionText(mukim) + ' · ' + optionText(living) + ' · ' + optionText(income));
+    renderRoute(path, nodes, nks);
     renderCompare(pk, nks, inc, dk);
     renderPresets();
   }
@@ -438,6 +439,25 @@ K.pageInit.scenario = function () {
     $('#compareNote').textContent = K.T(
       'Same person, same needs, same income. ' + hi.d + ' scores ' + hi.v + ' and ' + lo.d + ' scores ' + lo.v + ', a gap of ' + (hi.v - lo.v) + ' points.',
       'Orang yang sama, keperluan yang sama, pendapatan yang sama. ' + hi.d + ' dapat ' + hi.v + ' dan ' + lo.d + ' dapat ' + lo.v + ', beza ' + (hi.v - lo.v) + ' mata.');
+  }
+
+  function renderRoute(path, nodes, nks) {
+    var flow = $('#routeFlow'), request = $('#routeRequest'), stepsEl = $('#routeSteps'), contacts = $('#routeContacts'), end = $('#routeEndMark');
+    if (!flow || !request || !stepsEl || !contacts) return;
+    request.innerHTML = '<strong>' + esc(K.T('I need support with...', 'Saya perlukan bantuan untuk...')) + '</strong><div class="route-need-list">' + nks.map(function (k) { return '<span>' + esc(labelNeed(k)) + '</span>'; }).join('') + '</div>';
+    stepsEl.innerHTML = path.slice(0, 4).map(function (k, i) { return '<li><b>' + (i + 1) + '</b><span>' + esc(K.L(S.steps[k])) + '</span></li>'; }).join('');
+    contacts.innerHTML = nodes.slice(0, 3).map(function (k) {
+      var node = S.nodes[k], idx = findRecord(node, district.value), rec = idx >= 0 ? K.records[idx] : null;
+      if (!rec) return '<li><span class="route-contact-name">' + esc(K.L(node.n)) + '</span><span class="route-contact-meta">' + esc(K.T('Contact to be checked', 'Hubungan perlu disemak')) + '</span></li>';
+      return '<li><span class="route-contact-name">' + esc(rec.name) + '</span><span class="route-contact-meta">' + esc(rec.phone) + ' ' + K.pill(rec.status) + '</span><a class="route-call" href="tel:' + esc(rec.phone.replace(/[^0-9+]/g, '')) + '">' + esc(K.T('Call this contact', 'Telefon hubungan ini')) + '</a></li>';
+    }).join('');
+    flow.classList.remove('is-animating');
+    void flow.offsetWidth;
+    flow.classList.add('is-animating');
+    if (routeAnimation) { routeAnimation.destroy(); routeAnimation = null; }
+    if (end && window.lottie && K.routeLottie && !K.reduceMotion) {
+      routeAnimation = window.lottie.loadAnimation({ container:end, renderer:'svg', loop:false, autoplay:true, animationData:K.routeLottie, rendererSettings:{ progressiveLoad:true, preserveAspectRatio:'xMidYMid meet' } });
+    }
   }
 
   [ageBand, gender, persona, district, mukim, living, income].forEach(function (el) { el.addEventListener('input', function () { if (el === district) updateMukim(); update(false); }); });
