@@ -299,7 +299,7 @@ function renderFooter() {
     '<div class="foot-row"><span>' + K.T('Prototype for the UUM Scale-Up Research Grant 2026. The organisation list is a sample only.', 'Prototaip untuk Geran Penyelidikan Scale-Up UUM 2026. Senarai organisasi hanyalah contoh.') + '</span>' +
     '<span class="keys-hint"><kbd>←</kbd> <kbd>→</kbd> ' + K.T('move between pages', 'bergerak antara halaman') + '</span></div>' +
   '</div></footer>';
-  K.$$('[data-step]').forEach(function (el) {
+  K.$$('.step[data-step]').forEach(function (el) {
     var dots = K.PAGES.map(function (p, j) { return '<i' + (j <= i ? ' class="on"' : '') + '></i>'; }).join('');
     el.innerHTML = '<span class="ph-icon">' + K.pageIcon(K.page) + '</span><span>' + K.T('Page ', 'Halaman ') + no(i) + ' / ' + no(K.PAGES.length - 1) + '</span><span class="dots" aria-hidden="true">' + dots + '</span>';
   });
@@ -397,7 +397,6 @@ doc.addEventListener('DOMContentLoaded', function () {
 });
 
 })(window.KSE);
-
 
 
 
