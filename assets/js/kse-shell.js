@@ -225,7 +225,7 @@ doc.addEventListener('DOMContentLoaded', function () {
   if (pagehead && K.page !== 'overview' && !K.$('.page-character')) {
     var pageArt = {
       ecosystem: 'assets/img/elder-reaching-glass.png',
-      network: 'assets/img/kampung-elder-couple-socks.png',
+      network: 'assets/img/elder-calling-network.png',
       scenario: 'assets/img/elder-motion/frame-03.png',
       roadmap: 'assets/img/kampung-elder-couple-socks.png',
       evidence: 'assets/img/elder-motion/frame-06.png',
@@ -370,3 +370,4 @@ doc.addEventListener('DOMContentLoaded', function () {
 });
 
 })(window.KSE);
+
