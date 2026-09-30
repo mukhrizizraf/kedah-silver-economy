@@ -774,10 +774,19 @@ tr.flash td{animation:flash 2.4s ease}
 .worked li a svg{width:13px;height:13px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;opacity:.5}
 
 /* the honesty banner: this whole page is sample logic */
-.notice{display:flex;gap:14px;align-items:flex-start;padding:16px 20px;margin-bottom:22px;border-radius:var(--r);background:var(--surface);border:1px solid var(--line)}
-.notice svg{width:22px;height:22px;flex:none;margin-top:1px;fill:none;stroke:var(--gold-ink);stroke-width:1.8;stroke-linecap:round}
-.notice b{display:block;font-size:15px;color:var(--ink);margin-bottom:3px}
-.notice span{font-size:14px;line-height:1.5;color:var(--ink-2)}
+.notice{margin-bottom:22px;border-radius:var(--r);background:var(--surface);border:1px solid var(--line);overflow:hidden}
+.notice summary{display:flex;align-items:center;gap:14px;padding:16px 20px;cursor:pointer;list-style:none;color:var(--ink)}
+.notice summary::-webkit-details-marker{display:none}
+.notice summary:focus-visible{outline:2px solid var(--gold);outline-offset:-3px}
+.notice summary svg{width:22px;height:22px;flex:none;fill:none;stroke:var(--gold-ink);stroke-width:1.8;stroke-linecap:round}
+.notice summary b{font-size:15px;line-height:1.3}
+.notice summary i{display:inline-flex;align-items:center;gap:8px;margin-left:auto;padding:6px 10px;border:1px solid var(--line);border-radius:999px;background:var(--surface-2);color:var(--paddy-ink);font:800 10.5px var(--sans);letter-spacing:.08em;text-transform:uppercase;font-style:normal;transition:transform .2s var(--ease),background-color .2s var(--ease),color .2s var(--ease)}
+.notice summary i::after{content:"−";font-size:16px;line-height:.7}
+.notice:not([open]) summary i span{font-size:0}.notice:not([open]) summary i span::after{content:"Show";font-size:10.5px}.notice:not([open]) summary i::after{content:"+"}
+.notice summary:hover i{transform:translateY(-1px);background:var(--paddy);color:var(--on-paddy)}
+.notice-body{display:grid;grid-template-rows:1fr;padding:0 20px 16px 56px;opacity:1;transform:translateY(0);transition:opacity .3s var(--ease),transform .4s var(--ease)}
+.notice-body span{font-size:14px;line-height:1.5;color:var(--ink-2)}
+.notice:not([open]) .notice-body{display:none}
 
 /* show the working, and the same case priced in every district */
 .lab-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px;align-items:start}
