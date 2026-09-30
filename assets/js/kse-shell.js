@@ -226,7 +226,7 @@ doc.addEventListener('DOMContentLoaded', function () {
     var pageArt = {
       ecosystem: 'assets/img/elder-reaching-glass.png',
       network: 'assets/img/elder-calling-network.png',
-      scenario: 'assets/img/elder-motion/frame-03.png',
+      scenario: 'assets/img/elder-phone-profile.png',
       roadmap: 'assets/img/kampung-elder-couple-socks.png',
       evidence: 'assets/img/elder-motion/frame-06.png',
       data: 'assets/img/elder-motion/frame-08.png'
@@ -370,4 +370,5 @@ doc.addEventListener('DOMContentLoaded', function () {
 });
 
 })(window.KSE);
+
 
