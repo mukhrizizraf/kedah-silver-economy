@@ -331,7 +331,7 @@ chainNote:'Kami mahu tahu siapa yang ada, dan juga bagaimana seseorang bergerak 
 /* try a case */
 labTitle:'Pilih warga emas dan keperluannya. Lihat bantuan yang ada.',labSub:'Tukar pilihan di bawah. Langkah, skor dan masalah utama berubah serta-merta.',
 labStat:'kes yang boleh dicuba',
-presetLabel:'Cuba',
+presetLabel:'Contoh simulasi',
 personaLabel:'Warga emas',districtLabel:'Daerah',needLabel:'Keperluan utama',incomeLabel:'Pendapatan isi rumah sebulan',
 pIndependent:'Boleh urus diri sendiri',pVulnerable:'Perlukan sedikit bantuan',pHighneed:'Perlukan banyak bantuan',
 nCompanion:'Teman atau iringan ke hospital',nTransport:'Pengangkutan',nHomecare:'Penjagaan di rumah',nWelfare:'Bantuan wang atau kebajikan',nFood:'Makanan',
