@@ -174,7 +174,7 @@ K.team = [
 {n:'Prof. Madya Dr. Nur Hafizah Mohammad Ismail',i:'NH',r:{en:'Researcher',bm:'Penyelidik'}},
 {n:'Prof. Madya Dr. Nur Syakiran Akmal Ismail',i:'NS',r:{en:'Researcher',bm:'Penyelidik'}},
 {n:'Sharima Ruwaida Abbas',i:'SR',r:{en:'Researcher',bm:'Penyelidik'}},
-{n:'Prof. Madya Dr. Mukhriz Izraff Azman Aziz',i:'MI',r:{en:'Researcher',bm:'Penyelidik'}}
+{n:'Prof. Madya Dr. Mukhriz Izraf Azman Aziz',i:'MI',r:{en:'Researcher',bm:'Penyelidik'}}
 ];
 K.track = [
 {n:'1,414',t:{en:'older people in the northern region. Health care demand model (PBIT grant, done 2020).',bm:'warga emas di wilayah utara. Model permintaan penjagaan kesihatan (geran PBIT, siap 2020).'}},
@@ -398,3 +398,4 @@ verdictCite:'Penilai 2, ulasan keseluruhan (terjemahan)'
 };
 
 })(window.KSE);
+
