@@ -151,7 +151,7 @@ states:{good:{en:'Well covered',bm:'Dipenuhi dengan baik'},warn:{en:'Partly cove
 presets:[
   {l:{en:'Manages alone · Kota Setar',bm:'Urus diri · Kota Setar'},persona:'independent',district:'Kota Setar',need:'companion',income:3500},
   {l:{en:'Needs some help · Baling',bm:'Perlu sedikit bantuan · Baling'},persona:'vulnerable',district:'Baling',need:'welfare',income:800},
-  {l:{en:'Needs a lot of help · Langkawi',bm:'Perlu banyak bantuan · Langkawi'},persona:'highneed',district:'Langkawi',need:'homecare',income:1200}
+  {l:{en:'Needs a lot of help · Langkawi',bm:'Perlu banyak bantuan · Langkawi'},persona:'highneed',district:'Langkawi',need:'homecare',income:1500}
 ]
 };
 
@@ -436,3 +436,4 @@ dpR6q:'Bagaimana skor dikira?',dpR6u:'Semua skor dalam dashboard',dpR6r:'Setiap 
 };
 
 })(window.KSE);
+
