@@ -940,8 +940,9 @@ tr.flash td{animation:flash 2.4s ease}
 .verdict cite{font-style:normal;font-size:12.5px;color:var(--ink-2)}
 
 /* ---------- Shell: footer + pager ---------- */
-.site-foot{margin-top:24px}
-.pager{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding-block:8px 28px}
+.site-foot{margin-top:0}
+.pager{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding-block:0 28px}
+.wrap > .section:last-child{padding-bottom:12px}
 .pager a{display:grid;grid-template-columns:auto 1fr;grid-template-areas:"ic dir" "ic b";align-items:center;column-gap:14px;row-gap:3px;padding:16px 18px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface);text-decoration:none;color:var(--ink);transition:border-color .15s var(--ease),transform .2s var(--ease),box-shadow .2s var(--ease)}
 .pager a:hover{border-color:var(--paddy);transform:translateY(-2px);box-shadow:var(--shadow)}
 .pager a:active{transform:translateY(0)}
