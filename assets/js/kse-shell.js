@@ -295,11 +295,20 @@ function renderFooter() {
   var foot = K.$('#kse-foot'); if (!foot) return;
   var i = K.pageIndex, prev = K.PAGES[i - 1], next = K.PAGES[i + 1] || K.PAGES[0];
   var nextDir = K.PAGES[i + 1] ? K.T('Next', 'Seterusnya') : K.T('Back to the start', 'Kembali ke permulaan');
+  var mainFooter = K.page === 'overview' ? '<section class="site-foot-main" aria-label="' + K.T('Project navigation', 'Navigasi projek') + '">' +
+    '<div class="site-foot-brand">' + K.mark + '<div><b>Kedah Silver Economy</b><p>' + K.T('A practical research dashboard for connecting older people with help in Kedah.', 'Dashboard penyelidikan praktikal yang menghubungkan warga emas dengan bantuan di Kedah.') + '</p></div></div>' +
+    '<div class="site-foot-links">' +
+      '<div><span>' + K.T('DASHBOARD', 'DASHBOARD') + '</span><a href="index.html">' + K.T('Overview', 'Latar belakang') + '</a><a href="ecosystem.html">' + K.T('How it works', 'Cara ia berfungsi') + '</a><a href="network.html">' + K.T('Who can help', 'Siapa boleh membantu') + '</a><a href="scenario.html">' + K.T('Try a case', 'Cuba satu kes') + '</a></div>' +
+      '<div><span>' + K.T('PROJECT', 'PROJEK') + '</span><a href="roadmap.html">' + K.T('Plan and budget', 'Pelan dan bajet') + '</a><a href="evidence.html">' + K.T('Sources', 'Sumber') + '</a><a href="data.html">' + K.T('Data blueprint', 'Pelan data') + '</a><a href="app.html">' + K.T('Our Silver App', 'Aplikasi Silver Kami') + '</a></div>' +
+      '<div><span>' + K.T('ABOUT', 'TENTANG') + '</span><p>' + K.T('UUM Scale-Up Research Grant 2026', 'Geran Penyelidikan Scale-Up UUM 2026') + '</p><p>' + K.T('Kedah pilot concept', 'Konsep percubaan Kedah') + '</p></div>' +
+    '</div>' +
+  '</section>' : '';
   foot.innerHTML = '<footer class="site-foot"><div class="wrap">' +
     '<nav class="pager" aria-label="' + K.T('Page sequence', 'Urutan halaman') + '">' +
       (prev ? '<a class="prev" href="' + prev.href + '" rel="prev"><span class="pg-icon">' + K.pageIcon(prev.id) + '</span><span class="dir">' + K.icon('left') + K.T('Previous', 'Sebelumnya') + ' · ' + no(i - 1) + '</span><b>' + K.esc(K.L(prev.label)) + '</b></a>' : '<span class="ghost"></span>') +
       '<a class="next" href="' + next.href + '"' + (K.PAGES[i + 1] ? ' rel="next"' : '') + '><span class="pg-icon">' + K.pageIcon(next.id) + '</span><span class="dir">' + nextDir + ' · ' + no(K.PAGES.indexOf(next)) + K.icon('right') + '</span><b>' + K.esc(K.L(next.label)) + '</b></a>' +
     '</nav>' +
+    mainFooter +
     '<div class="foot-row"><span>' + K.T('Prototype for the UUM Scale-Up Research Grant 2026. The organisation list is a sample only.', 'Prototaip untuk Geran Penyelidikan Scale-Up UUM 2026. Senarai organisasi hanyalah contoh.') + '</span>' +
     '<span class="keys-hint"><kbd>←</kbd> <kbd>→</kbd> ' + K.T('move between pages', 'bergerak antara halaman') + '</span></div>' +
   '</div></footer>';
