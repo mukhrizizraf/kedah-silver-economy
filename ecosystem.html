@@ -69,25 +69,31 @@
       </div>
     </section>
 
-    <section class="section">
-      <div class="shead">
+    <details class="section page-drawer" open>
+      <summary class="shead page-drawer-summary">
         <div><p class="eyebrow" data-i18n="fitEyebrow">Where it fits</p><h2 data-i18n="fitTitle">It adds to the national system. It does not replace it.</h2></div>
-        <p data-i18n="fitSub">This is Figure 2 of the application, in four layers.</p>
+        <span class="page-drawer-toggle"><b>Hide</b><i aria-hidden="true">−</i></span>
+      </summary>
+      <div class="page-drawer-body">
+        <p class="page-drawer-note" data-i18n="fitSub">This is Figure 2 of the application, in four layers.</p>
+        <div class="fit" id="fit"></div>
       </div>
-      <div class="fit" id="fit"></div>
-    </section>
+    </details>
   </div>
 
   <div class="tint">
     <div class="wrap">
-      <section class="section">
-        <div class="shead">
+      <details class="section page-drawer">
+        <summary class="shead page-drawer-summary">
           <div><p class="eyebrow" data-i18n="dataEyebrow">The data</p><h2 data-i18n="dataTitle">Three lists behind the matching</h2></div>
-          <p data-i18n="dataSub">These lists hold everything the matching step needs. In Phase 1 we fill them with checked data.</p>
+          <span class="page-drawer-toggle"><b>Show</b><i aria-hidden="true">+</i></span>
+        </summary>
+        <div class="page-drawer-body">
+          <p class="page-drawer-note" data-i18n="dataSub">These lists hold everything the matching step needs. In Phase 1 we fill them with checked data.</p>
+          <div class="schema" id="schema"></div>
+          <p class="footnote" data-i18n="dataNote">This dashboard uses sample records to show how it works. Records that still need checking, and example records, are clearly marked.</p>
         </div>
-        <div class="schema" id="schema"></div>
-        <p class="footnote" data-i18n="dataNote">This dashboard uses sample records to show how it works. Records that still need checking, and example records, are clearly marked.</p>
-      </section>
+      </details>
     </div>
   </div>
 </main>

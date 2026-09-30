@@ -221,6 +221,37 @@ doc.addEventListener('DOMContentLoaded', function () {
       });
     });
   });
+  var pageDrawers = K.$$('.page-drawer');
+  pageDrawers.forEach(function (drawer) {
+    var panel = drawer.querySelector('.page-drawer-body');
+    var summary = drawer.querySelector('summary');
+    if (panel && summary) {
+      summary.addEventListener('click', function (e) {
+        if (drawer.open) {
+          e.preventDefault();
+          panel.style.maxHeight = panel.scrollHeight + 'px';
+          requestAnimationFrame(function () { panel.style.maxHeight = '0px'; });
+          window.setTimeout(function () { drawer.open = false; panel.style.maxHeight = ''; }, 620);
+        } else {
+          window.setTimeout(function () {
+            panel.style.maxHeight = '0px';
+            requestAnimationFrame(function () { panel.style.maxHeight = panel.scrollHeight + 'px'; });
+          }, 0);
+        }
+      });
+    }
+    drawer.addEventListener('toggle', function () {
+      if (!drawer.open) return;
+      pageDrawers.forEach(function (other) {
+        if (other !== drawer && other.open) {
+          var otherPanel = other.querySelector('.page-drawer-body');
+          if (otherPanel) otherPanel.style.maxHeight = '0px';
+          other.open = false;
+          if (otherPanel) otherPanel.style.maxHeight = '';
+        }
+      });
+    });
+  });
   var pagehead = K.$('.pagehead-grid');
   if (pagehead && K.page !== 'overview' && !K.$('.page-character')) {
     var pageArt = {
