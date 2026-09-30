@@ -269,7 +269,7 @@ doc.addEventListener('DOMContentLoaded', function () {
       roadmap: 'assets/img/elder-budget-counting.png',
       evidence: 'assets/img/elder-source-books.png',
       data: 'assets/img/elder-sand-blueprint.png',
-      app: 'assets/img/elder-phone-profile.png'
+      app: 'assets/img/elder-app-family-garden.png'
     };
     var figure = doc.createElement('figure');
     figure.className = 'page-character page-character-' + K.page;
