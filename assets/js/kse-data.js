@@ -377,7 +377,7 @@ confirmedLabel:'Disahkan dalam senarai kami',
 workingLabel:'Cara skor ini dibina',
 compareLabel:'Setiap daerah',
 methodNote:'Skor bermula daripada jenis warga emas, kemudian berubah ikut keperluan, daerah dan pendapatan. Ia menunjukkan cara logik berfungsi, bukan anggaran sebenar.',
-pathLabel:'Langkah dicadangkan',providersLabel:'Siapa boleh membantu',gapLabel:'Masalah utama untuk disemak',routeTitle:'Laluan bantuan anda',routeIntro:'Pandangan ringkas daripada keperluan kepada hubungan yang boleh dicuba.',routeDemo:'Laluan contoh',routeRequest:'Permintaan anda',routeSteps:'Langkah dicadangkan',routeContacts:'Hubungan yang boleh dicuba',routeNote:'Ini ialah demonstrasi. Semak organisasi dan nombor hubungan sebelum membuat rujukan.',
+pathLabel:'Langkah dicadangkan',providersLabel:'Siapa boleh membantu',gapLabel:'Masalah utama untuk disemak',routeTitle:'Laluan bantuan anda',routeIntro:'Pandangan ringkas daripada keperluan kepada hubungan yang boleh dicuba.',routeDemo:'Laluan contoh',routeRequest:'Permintaan anda',routeSteps:'Langkah dicadangkan',routeContacts:'Hubungan yang boleh dicuba',routeNote:'Ini ialah demonstrasi. Semak organisasi dan nombor hubungan sebelum membuat rujukan.',journeyLabel:'Perjalanan dalam satu gambar',journeyTitle:'Daripada satu sentuhan telefon kepada bantuan di rumah',journeyCaption:'Contoh ringkas untuk warga emas dan keluarga mereka.',
 
 /* plan & budget */
 roadTitle:'Pelan 9 bulan',

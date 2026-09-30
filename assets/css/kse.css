@@ -343,7 +343,10 @@ body[data-page="overview"] .home-drawer summary i{min-width:88px}
 .route-flow.is-animating .route-connector i{animation:route-trace .45s cubic-bezier(.16,1,.3,1) both}.route-flow.is-animating .route-connector:nth-of-type(4) i{animation-delay:.18s}
 @keyframes route-trace{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 .route-note{margin:0;padding-top:13px;border-top:1px solid var(--line-2);color:var(--muted);font-size:12px;line-height:1.45}
+.journey-poster{margin:0 0 24px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface);overflow:hidden;box-shadow:0 12px 28px -26px rgba(15,35,30,.7)}
+.journey-poster-head{display:flex;align-items:end;justify-content:space-between;gap:20px;padding:20px 24px 16px;background:linear-gradient(120deg,var(--paddy-soft),var(--surface))}.journey-poster-head h2{margin:4px 0 0;font:650 26px/1.08 var(--display);color:var(--ink)}.journey-poster-head>span{max-width:34ch;color:var(--ink-2);font-size:13px;line-height:1.4;text-align:right}.journey-poster img{display:block;width:100%;height:auto;background:#fff}
 @media (max-width:760px){.route-flow{grid-template-columns:1fr;gap:0;padding-block:18px}.route-stage{padding:0 0 4px}.route-connector{width:2px;height:27px;align-self:start;margin:7px 0 10px 13px}.route-connector::after{top:auto;bottom:0;right:-4px;transform:rotate(135deg)}.route-connector i{width:2px;height:100%;transform-origin:center top}.route-flow.is-animating .route-connector i{animation-name:route-trace-down}@keyframes route-trace-down{from{transform:scaleY(0)}to{transform:scaleY(1)}}}
+@media (max-width:620px){.journey-poster-head{display:block;padding:18px}.journey-poster-head>span{display:block;margin-top:8px;text-align:left}.journey-poster img{min-width:760px;max-width:none}.journey-poster{overflow-x:auto}}
 @media (max-width:420px){.route-map{padding:18px}.route-head{display:block}.route-demo{display:inline-block;margin-top:10px}.route-head h2{font-size:23px}}
 .page-drawer{border-top:1px solid var(--line);padding-top:0}
 .page-drawer-summary{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:24px;padding:18px 4px;cursor:pointer;list-style:none}
