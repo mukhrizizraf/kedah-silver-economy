@@ -200,11 +200,20 @@ doc.addEventListener('DOMContentLoaded', function () {
   });
   var pagehead = K.$('.pagehead-grid');
   if (pagehead && K.page !== 'overview' && !K.$('.page-character')) {
+    var pageArt = {
+      ecosystem: 'assets/img/elder-motion/frame-01.png',
+      network: 'assets/img/kampung-elder-couple-socks.png',
+      scenario: 'assets/img/elder-motion/frame-03.png',
+      roadmap: 'assets/img/kampung-elder-couple-socks.png',
+      evidence: 'assets/img/elder-motion/frame-06.png',
+      data: 'assets/img/elder-motion/frame-08.png'
+    };
+    var motionPage = K.page !== 'network' && K.page !== 'roadmap';
     var figure = doc.createElement('figure');
     figure.className = 'page-character page-character-' + K.page;
     figure.setAttribute('aria-label', 'Animated older person illustration');
     var img = doc.createElement('img');
-    img.src = 'assets/img/elder-motion/frame-01.png';
+    img.src = pageArt[K.page] || pageArt.ecosystem;
     img.alt = 'Animated illustrated older person';
     figure.appendChild(img);
     var marker = doc.createElement('span');
@@ -213,8 +222,8 @@ doc.addEventListener('DOMContentLoaded', function () {
     figure.appendChild(marker);
     var stat = K.$('.headstat', pagehead);
     pagehead.insertBefore(figure, stat || null);
-    if (!K.reduceMotion) {
-      var frame = 1;
+    if (!K.reduceMotion && motionPage) {
+      var frame = Number((img.src.match(/frame-0([1-8])/ ) || [0, 1])[1]);
       window.setInterval(function () {
         frame = frame === 8 ? 1 : frame + 1;
         img.src = 'assets/img/elder-motion/frame-0' + frame + '.png';
