@@ -56,14 +56,27 @@
             <option value="Candidate" data-i18n="optCandidate">To check</option>
             <option value="Demo" data-i18n="optDemo">Example</option>
           </select></div></div>
+        <div class="field field-search"><label for="search" data-i18n="fSearch">Search</label>
+          <div class="input-search">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4.3-4.3"/></svg>
+            <input id="search" type="search" autocomplete="off" placeholder="Name or service">
+          </div></div>
         <p class="count" id="recordCount" aria-live="polite"></p>
       </div>
+
+      <ul class="statusbar" id="statusBar"></ul>
 
       <div class="net">
         <div class="card table-card">
           <div class="table-scroll">
             <table class="data-table">
-              <thead><tr><th data-i18n="thOrg">Organisation</th><th data-i18n="thType">Type</th><th data-i18n="thDistrict">District</th><th data-i18n="thCap">What they do</th><th data-i18n="thStatus">Status</th></tr></thead>
+              <thead><tr>
+                <th><button type="button" class="sort" data-sort="name"><span data-i18n="thOrg">Organisation</span></button></th>
+                <th><button type="button" class="sort" data-sort="type"><span data-i18n="thType">Type</span></button></th>
+                <th><button type="button" class="sort" data-sort="district"><span data-i18n="thDistrict">District</span></button></th>
+                <th><span data-i18n="thCap">What they do</span></th>
+                <th><button type="button" class="sort" data-sort="status"><span data-i18n="thStatus">Status</span></button></th>
+              </tr></thead>
               <tbody id="records"></tbody>
             </table>
           </div>
@@ -77,7 +90,7 @@
           <div class="card">
             <div class="card-head">
               <p class="label label-paddy" data-i18n="chartTag">By district</p>
-              <h3 data-i18n="chartTitle">Organisations in each district</h3>
+              <h2 class="as-h3" data-i18n="chartTitle">Organisations in each district</h2>
               <p data-i18n="chartNote">The bars follow the filters above. Point at a bar to see the number.</p>
             </div>
             <div class="dlegend" id="dLegend"></div>
@@ -86,7 +99,7 @@
           <div class="card">
             <div class="card-head">
               <p class="label" data-i18n="chainTag">What we will test</p>
-              <h3 data-i18n="chainTitle">How a referral should work</h3>
+              <h2 class="as-h3" data-i18n="chainTitle">How a referral should work</h2>
             </div>
             <div class="chain">
               <div class="enode"><strong data-i18n="chain1">Older person</strong><small data-i18n="chain1s">Their need, district and whether they qualify</small></div>

@@ -4,6 +4,12 @@ OPEN_ITEMS.md
 kedah_silver_economy_grant_dashboard_v1_codex.html
 kedah_silver_economy_grant_dashboard.html
 
+# Local design tooling: the Impeccable skill, its 15 MB engine binary and
+# the design.json sidecar, which is regenerated from DESIGN.md
+.claude/
+.impeccable/
+skills-lock.json
+
 # System files
 desktop.ini
 .DS_Store

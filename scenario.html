@@ -29,6 +29,11 @@
 
   <div class="wrap">
     <section class="section">
+      <div class="notice">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5.5M12 16.2v.3"/></svg>
+        <p><b data-i18n="noticeTitle">Nothing on this page is a real measurement.</b><span data-i18n="noticeBody">The score below is worked out from weights we chose, to show how matching would run. Phase 1 replaces every weight with checked data. The organisation names are real records from our list, and each one carries its own status.</span></p>
+      </div>
+
       <div class="presets"><span class="lbl" data-i18n="presetLabel">Try</span><span id="presetList" style="display:contents"></span></div>
 
       <div class="controls">
@@ -40,7 +45,7 @@
           </select></div></div>
         <div class="field"><label for="district" data-i18n="districtLabel">District</label>
           <div class="select"><select id="district">
-            <option>Jitra</option><option selected>Kota Setar</option><option>Sungai Petani</option><option>Kulim</option><option>Baling</option><option>Langkawi</option>
+            <option>Kubang Pasu</option><option selected>Kota Setar</option><option>Sungai Petani</option><option>Kulim</option><option>Baling</option><option>Langkawi</option>
           </select></div></div>
         <div class="field"><label for="need" data-i18n="needLabel">Main need</label>
           <div class="select"><select id="need">
@@ -59,14 +64,14 @@
           <div class="cov-top"><p class="label" data-i18n="coverageLabel">How well needs are covered</p><span class="demo-tag" data-i18n="demoTag">Sample data only</span></div>
           <div class="cov-top"><span class="cov-num" id="coverage" aria-live="polite">-</span><span class="state" id="coverageState"></span></div>
           <div>
-            <div class="meter"><span id="coverageBar" style="width:0%"></span></div>
+            <div class="meter"><span id="coverageBar"></span></div>
             <div class="mticks" aria-hidden="true"><span style="left:0">0</span><span style="left:25%">25</span><span style="left:50%">50</span><span style="left:75%">75</span><span style="left:100%">100</span></div>
           </div>
           <div class="cov-rows">
-            <div><span data-i18n="matchedNeeds">Needs with help available</span><b id="matched"></b></div>
+            <div><span data-i18n="confirmedLabel">Confirmed on our list</span><b id="confirmed"></b></div>
             <div><span data-i18n="steps">Number of referrals</span><b id="steps"></b></div>
           </div>
-          <p class="cov-note" data-i18n="methodNote">The score starts from the type of person, then changes with the need, the district and income. It shows how the logic works. It is not a real estimate.</p>
+          <p class="cov-note" id="confirmedNote" aria-live="polite"></p>
         </div>
         <div class="card">
           <p class="label label-paddy" data-i18n="pathLabel">Suggested steps</p>
@@ -75,6 +80,19 @@
         <div class="card">
           <p class="label label-paddy" data-i18n="providersLabel">Who could help</p>
           <ul class="nodes" id="providerList"></ul>
+        </div>
+      </div>
+
+      <div class="lab-2">
+        <div class="card">
+          <p class="label label-paddy" data-i18n="workingLabel">How this score is built</p>
+          <ol class="working" id="working"></ol>
+          <p class="footnote" id="workingNote"></p>
+        </div>
+        <div class="card">
+          <p class="label label-paddy" data-i18n="compareLabel">Every district</p>
+          <ul class="compare" id="compare"></ul>
+          <p class="footnote" id="compareNote"></p>
         </div>
       </div>
       <div class="gapline">

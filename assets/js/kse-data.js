@@ -94,18 +94,21 @@ steps:{
   welfareElig:{en:'Check if they qualify for aid',bm:'Semak kelayakan bantuan'},
   foodMeal:{en:'Food or meal delivery',bm:'Makanan atau penghantaran makanan'}
 },
+/* m = name prefix into K.records. The page prefers a record in the chosen
+   district, so "Who could help" names the real organisation on our list and
+   takes its status from that record instead of repeating it here. */
 nodes:{
-  pawe:{n:'PAWE Kedah',s:'Verified'},
-  volPool:{n:{en:'Volunteer group',bm:'Kumpulan sukarelawan'},s:'Demo'},
-  mosqueNode:{n:{en:'Masjid or community group',bm:'Masjid atau kumpulan komuniti'},s:'Candidate'},
-  maik:{n:'MAIK / Baitulmal',s:'Candidate'},
-  jkmPawe:{n:'JKM / PAWE',s:'Verified'},
-  foodNet:{n:{en:'Food bank network',bm:'Rangkaian bank makanan'},s:'Demo'},
-  jkmHealth:{n:{en:'JKM / health services',bm:'JKM / perkhidmatan kesihatan'},s:'Verified'},
-  homeCare:{n:{en:'Home care provider',bm:'Penyedia penjagaan di rumah'},s:'Demo'},
-  transport:{n:'Kedah Community Transport',s:'Demo'},
-  nursing:{n:'Kedah Home Nursing',s:'Demo'},
-  meals:{n:'Meals-on-Wheels Kedah',s:'Demo'}
+  pawe:{n:'PAWE Kedah',s:'Verified',m:'PAWE'},
+  volPool:{n:{en:'Volunteer group',bm:'Kumpulan sukarelawan'},s:'Demo',m:'Volunteer Pool'},
+  mosqueNode:{n:{en:'Masjid or community group',bm:'Masjid atau kumpulan komuniti'},s:'Candidate',m:'Masjid'},
+  maik:{n:'MAIK / Baitulmal',s:'Candidate',m:'MAIK'},
+  jkmPawe:{n:'JKM / PAWE',s:'Verified',m:'JKM'},
+  foodNet:{n:{en:'Food bank network',bm:'Rangkaian bank makanan'},s:'Demo',m:'Meals-on-Wheels'},
+  jkmHealth:{n:{en:'JKM / health services',bm:'JKM / perkhidmatan kesihatan'},s:'Verified',m:'JKM'},
+  homeCare:{n:{en:'Home care provider',bm:'Penyedia penjagaan di rumah'},s:'Demo',m:'Amanah Elderly Care'},
+  transport:{n:'Kedah Community Transport',s:'Demo',m:'Kedah Community Transport'},
+  nursing:{n:'Kedah Home Nursing',s:'Demo',m:'Kedah Home Nursing'},
+  meals:{n:'Meals-on-Wheels Kedah',s:'Demo',m:'Meals-on-Wheels'}
 },
 profiles:{
   independent:{coverage:78,steps:3,path:['escort','commTransport','paweSocial'],nodes:['pawe','volPool','mosqueNode'],gap:'single'},
@@ -119,7 +122,9 @@ needs:{
   welfare:{add:3,step:'welfareElig',node:'maik'},
   food:{add:-2,step:'foodMeal',node:'meals'}
 },
-districtAdj:{'Jitra':2,'Kota Setar':4,'Sungai Petani':1,'Kulim':0,'Baling':-8,'Langkawi':-10},
+/* Kubang Pasu, not Jitra: Jitra is a town inside it. The organisation list
+   and the district chart both count by district, so this matches them. */
+districtAdj:{'Kubang Pasu':2,'Kota Setar':4,'Sungai Petani':1,'Kulim':0,'Baling':-8,'Langkawi':-10},
 gaps:{
   single:{en:'There is no single contact point across the agencies yet.',bm:'Belum ada satu tempat hubungan untuk semua agensi.'},
   eligibility:{en:'We must check who qualifies and who has space before a referral can go ahead.',bm:'Kita perlu semak siapa layak dan siapa ada kekosongan sebelum rujukan boleh dibuat.'},
@@ -328,6 +333,11 @@ personaLabel:'Warga emas',districtLabel:'Daerah',needLabel:'Keperluan utama',inc
 pIndependent:'Boleh urus diri sendiri',pVulnerable:'Perlukan sedikit bantuan',pHighneed:'Perlukan banyak bantuan',
 nCompanion:'Teman atau iringan ke hospital',nTransport:'Pengangkutan',nHomecare:'Penjagaan di rumah',nWelfare:'Bantuan wang atau kebajikan',nFood:'Makanan',
 coverageLabel:'Sejauh mana keperluan dipenuhi',demoTag:'Data contoh sahaja',matchedNeeds:'Keperluan yang ada bantuan',steps:'Bilangan rujukan',
+noticeTitle:'Tiada apa-apa di halaman ini yang merupakan ukuran sebenar.',
+noticeBody:'Skor di bawah dikira daripada pemberat yang kami pilih, untuk menunjukkan cara padanan akan berjalan. Fasa 1 akan ganti setiap pemberat dengan data yang disemak. Nama organisasi adalah rekod sebenar daripada senarai kami, dan setiap satu membawa statusnya sendiri.',
+confirmedLabel:'Disahkan dalam senarai kami',
+workingLabel:'Cara skor ini dibina',
+compareLabel:'Setiap daerah',
 methodNote:'Skor bermula daripada jenis warga emas, kemudian berubah ikut keperluan, daerah dan pendapatan. Ia menunjukkan cara logik berfungsi, bukan anggaran sebenar.',
 pathLabel:'Langkah dicadangkan',providersLabel:'Siapa boleh membantu',gapLabel:'Masalah utama untuk disemak',
 

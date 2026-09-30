@@ -56,6 +56,28 @@ var ICON = {
   left:'<path d="M19 12H6M11 6l-6 6 6 6"/>'
 };
 K.icon = function (n) { return '<svg viewBox="0 0 24 24" aria-hidden="true">' + ICON[n] + '</svg>'; };
+
+/* ---------- Page icons ----------
+   One drawn icon per page. Each part carries pathLength="1" so the page head
+   can draw it in, and the parts that move on hover carry a class (see the
+   "Page icons" block in kse.css). The motion says what the page does:
+   the compass finds its bearing, the match turns, someone joins, the
+   sliders move, the plan gets ticked, the lines of a source get written. */
+var PICON = {
+  overview: '<circle pathLength="1" cx="12" cy="12" r="8.6"/><path class="ai-n" pathLength="1" d="M15 9l-1.8 4.2L9 15l1.8-4.2z"/>',
+  ecosystem: '<circle pathLength="1" cx="5.2" cy="6.8" r="2.4"/><path class="ai-l1" pathLength="1" d="M6.9 8.6l3.2 4"/>' +
+    '<g class="ai-m"><rect pathLength="1" x="9.3" y="13.3" width="5.4" height="5.4" rx=".9" transform="rotate(45 12 16)"/></g>' +
+    '<path class="ai-l2" pathLength="1" d="M13.9 12.6l3.2-4"/><circle class="ai-b" pathLength="1" cx="18.8" cy="6.8" r="2.4"/>',
+  network: '<circle pathLength="1" cx="9" cy="8.2" r="3.2"/><path pathLength="1" d="M3.4 19.6a5.6 5.6 0 0 1 11.2 0"/>' +
+    '<g class="ai-p"><circle pathLength="1" cx="17" cy="9.4" r="2.4"/><path pathLength="1" d="M16.2 14.2c2.6.3 4.4 2.3 4.4 5.2"/></g>',
+  scenario: '<path class="ai-t" pathLength="1" d="M3.5 7h17M3.5 12h17M3.5 17h17"/>' +
+    '<circle class="ai-k1" pathLength="1" cx="8.5" cy="7" r="2.1"/><circle class="ai-k2" pathLength="1" cx="15.5" cy="12" r="2.1"/><circle class="ai-k3" pathLength="1" cx="7" cy="17" r="2.1"/>',
+  roadmap: '<rect pathLength="1" x="3.6" y="5.2" width="16.8" height="15.3" rx="2.6"/><path pathLength="1" d="M3.6 9.9h16.8"/>' +
+    '<path class="ai-pin" pathLength="1" d="M8 3.2v3.6M16 3.2v3.6"/><path class="ai-c" pathLength="1" d="M8.8 15.2l2.2 2.2 4.3-4.4"/>',
+  evidence: '<path pathLength="1" d="M14 3.2H7.6A1.6 1.6 0 0 0 6 4.8v14.4a1.6 1.6 0 0 0 1.6 1.6h8.8a1.6 1.6 0 0 0 1.6-1.6V7.2z"/><path pathLength="1" d="M14 3.2v4h4"/>' +
+    '<path class="ai-r1" pathLength="1" d="M9 11.6h6"/><path class="ai-r2" pathLength="1" d="M9 14.6h6"/><path class="ai-r3" pathLength="1" d="M9 17.6h3.6"/>'
+};
+K.pageIcon = function (id) { return '<svg class="ai ai-' + id + '" viewBox="0 0 24 24" aria-hidden="true">' + (PICON[id] || '') + '</svg>'; };
 K.mark = '<svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><rect class="sq" x="8" y="8" width="16" height="16" rx="1"/><rect class="sq" x="8" y="8" width="16" height="16" rx="1" transform="rotate(45 16 16)"/><circle class="ctr" cx="16" cy="16" r="3.4"/></svg>';
 function no(i) { return (i + 1 < 10 ? '0' : '') + (i + 1); }
 
@@ -85,22 +107,26 @@ function langSwitch() {
 }
 function renderChrome() {
   var dark = effectiveTheme() === 'dark';
+  /* The active tab carries the one gold marker. It has a view-transition
+     name, so when the next page loads the marker glides across to its tab. */
   var links = K.PAGES.map(function (p) {
-    return '<a class="navlink" href="' + p.href + '"' + (p.id === K.page ? ' aria-current="page"' : '') + '>' + K.esc(K.L(p.label)) + '</a>';
+    var on = p.id === K.page;
+    return '<a class="tab" href="' + p.href + '"' + (on ? ' aria-current="page"' : '') + '>' + K.pageIcon(p.id) +
+      '<span>' + K.esc(K.L(p.label)) + '</span>' + (on ? '<i class="tab-mark" aria-hidden="true"></i>' : '') + '</a>';
   }).join('');
   var dlinks = K.PAGES.map(function (p, i) {
-    return '<a class="dlink" href="' + p.href + '"' + (p.id === K.page ? ' aria-current="page"' : '') + '><span class="no">' + no(i) + '</span><b>' + K.esc(K.L(p.label)) + '</b><small>' + K.esc(K.L(p.desc)) + '</small></a>';
+    return '<a class="dlink" href="' + p.href + '"' + (p.id === K.page ? ' aria-current="page"' : '') + '><span class="no">' + K.pageIcon(p.id) + '</span><b><em>' + no(i) + '</em>' + K.esc(K.L(p.label)) + '</b><small>' + K.esc(K.L(p.desc)) + '</small></a>';
   }).join('');
   chrome.innerHTML =
     '<a class="skip" href="#main">' + K.T('Skip to content', 'Langkau ke kandungan') + '</a>' +
     '<header class="topbar"><div class="wrap topbar-row">' +
       '<a class="brand" href="index.html">' + K.mark + '<span><b>Kedah Silver Economy</b><small>' + K.T('UUM Scale-Up Research Grant 2026', 'Geran Penyelidikan Scale-Up UUM 2026') + '</small></span></a>' +
-      '<nav class="nav" aria-label="' + K.T('Pages', 'Halaman') + '">' + links + '</nav>' +
       '<div class="tools">' + langSwitch() +
         '<button class="iconbtn" id="themeBtn" aria-label="' + (dark ? K.T('Switch to light theme', 'Tukar ke tema cerah') : K.T('Switch to dark theme', 'Tukar ke tema gelap')) + '">' + K.icon(dark ? 'sun' : 'moon') + '</button>' +
         '<button class="iconbtn menubtn" id="menuBtn" aria-expanded="false" aria-controls="drawer" aria-label="' + K.T('Open page menu', 'Buka menu halaman') + '">' + K.icon('menu') + '</button>' +
       '</div>' +
     '</div></header>' +
+    '<div class="tabbar"><div class="wrap"><nav class="tabs" aria-label="' + K.T('Pages', 'Halaman') + '">' + links + '</nav></div></div>' +
     '<div class="scrim" id="scrim" hidden></div>' +
     '<nav class="drawer" id="drawer" aria-label="' + K.T('Pages', 'Halaman') + '" hidden>' +
       '<div class="drawer-head"><span class="label">' + K.T('All pages', 'Semua halaman') + '</span>' +
@@ -138,15 +164,15 @@ function renderFooter() {
   var nextDir = K.PAGES[i + 1] ? K.T('Next', 'Seterusnya') : K.T('Back to the start', 'Kembali ke permulaan');
   foot.innerHTML = '<footer class="site-foot"><div class="wrap">' +
     '<nav class="pager" aria-label="' + K.T('Page sequence', 'Urutan halaman') + '">' +
-      (prev ? '<a class="prev" href="' + prev.href + '" rel="prev"><span class="dir">' + K.icon('left') + K.T('Previous', 'Sebelumnya') + ' · ' + no(i - 1) + '</span><b>' + K.esc(K.L(prev.label)) + '</b></a>' : '<span class="ghost"></span>') +
-      '<a class="next" href="' + next.href + '"' + (K.PAGES[i + 1] ? ' rel="next"' : '') + '><span class="dir">' + nextDir + ' · ' + no(K.PAGES.indexOf(next)) + K.icon('right') + '</span><b>' + K.esc(K.L(next.label)) + '</b></a>' +
+      (prev ? '<a class="prev" href="' + prev.href + '" rel="prev"><span class="pg-icon">' + K.pageIcon(prev.id) + '</span><span class="dir">' + K.icon('left') + K.T('Previous', 'Sebelumnya') + ' · ' + no(i - 1) + '</span><b>' + K.esc(K.L(prev.label)) + '</b></a>' : '<span class="ghost"></span>') +
+      '<a class="next" href="' + next.href + '"' + (K.PAGES[i + 1] ? ' rel="next"' : '') + '><span class="pg-icon">' + K.pageIcon(next.id) + '</span><span class="dir">' + nextDir + ' · ' + no(K.PAGES.indexOf(next)) + K.icon('right') + '</span><b>' + K.esc(K.L(next.label)) + '</b></a>' +
     '</nav>' +
     '<div class="foot-row"><span>' + K.T('Prototype for the UUM Scale-Up Research Grant 2026. The organisation list is a sample only.', 'Prototaip untuk Geran Penyelidikan Scale-Up UUM 2026. Senarai organisasi hanyalah contoh.') + '</span>' +
     '<span class="keys-hint"><kbd>←</kbd> <kbd>→</kbd> ' + K.T('move between pages', 'bergerak antara halaman') + '</span></div>' +
   '</div></footer>';
   K.$$('[data-step]').forEach(function (el) {
     var dots = K.PAGES.map(function (p, j) { return '<i' + (j <= i ? ' class="on"' : '') + '></i>'; }).join('');
-    el.innerHTML = '<span>' + K.T('Page ', 'Halaman ') + no(i) + ' / ' + no(K.PAGES.length - 1) + '</span><span class="dots" aria-hidden="true">' + dots + '</span>';
+    el.innerHTML = '<span class="ph-icon">' + K.pageIcon(K.page) + '</span><span>' + K.T('Page ', 'Halaman ') + no(i) + ' / ' + no(K.PAGES.length - 1) + '</span><span class="dots" aria-hidden="true">' + dots + '</span>';
   });
 }
 
@@ -233,6 +259,8 @@ doc.addEventListener('DOMContentLoaded', function () {
   var foot = doc.createElement('div'); foot.id = 'kse-foot'; body.appendChild(foot);
   var tip = doc.createElement('div'); tip.id = 'tip'; tip.className = 'tip'; tip.setAttribute('role', 'tooltip'); tip.hidden = true; body.appendChild(tip);
   initTooltip();
+  /* static markup can ask for a page icon: <span data-icon="scenario"></span> */
+  K.$$('[data-icon]').forEach(function (el) { el.innerHTML = K.pageIcon(el.getAttribute('data-icon')); });
   var init = K.pageInit[K.page];
   if (init) { try { init(); } catch (err) { if (window.console) console.error(err); } }
   K.applyLang();

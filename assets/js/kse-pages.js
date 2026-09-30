@@ -26,8 +26,22 @@ K.pageInit.overview = function () {
   K.onLang.push(function () {
     K.viz.constellation(svg, $('#consLegend'), first); first = false;
     $('#why').innerHTML = K.why.map(function (w) {
-      return '<div class="card"><b>' + esc(K.L(w.big)) + '</b><p>' + esc(K.L(w.t)) + '</p><small>' + esc(K.T('Source: ', 'Sumber: ') + K.L(w.src)) + '</small></div>';
+      return '<div class="fig"><b>' + esc(K.L(w.big)) + '</b><p>' + esc(K.L(w.t)) + '</p><small>' + esc(K.T('Source: ', 'Sumber: ') + K.L(w.src)) + '</small></div>';
     }).join('');
+    /* The five results on the real 9-month axis. Each result sits in an even
+       column for reading, and a leader runs from it to the month it is due, so
+       the axis shows what the cards hid: three of five land in the last three
+       months. Due months follow Table 2 of the form. */
+    var MON = K.lang === 'bm' ? ['Nov', 'Dis', 'Jan', 'Feb', 'Mac', 'Apr', 'Mei', 'Jun', 'Jul'] : ['Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'];
+    var DUE = [3, 5, 7, 8, 9];
+    $('#outAxis').innerHTML = '<div class="ax-months">' + MON.map(function (m, i) {
+        return '<span>' + m + (i === 0 ? '<em>2026</em>' : i === 2 ? '<em>2027</em>' : '') + '</span>';
+      }).join('') + '</div>' +
+      '<div class="ax-rule">' + DUE.map(function (m) { return '<i style="left:' + (m / 9 * 100).toFixed(2) + '%"></i>'; }).join('') + '</div>' +
+      '<svg class="ax-lead" viewBox="0 0 1000 60" preserveAspectRatio="none">' + DUE.map(function (m, i) {
+        var a = (m / 9 * 1000).toFixed(1), b = ((i + 0.5) / 5 * 1000).toFixed(1);
+        return '<path d="M' + a + ' 0C' + a + ' 32 ' + b + ' 28 ' + b + ' 60"/>';
+      }).join('') + '</svg>';
     $('#partnerList').innerHTML = K.partners.map(function (p) {
       var s = K.partnerStatus[p.s];
       return '<li><b>' + esc(K.L(p.n)) + '</b>' + K.pill(s.c === 'verified' ? 'Verified' : 'Candidate', K.L(s)) + '</li>';
@@ -36,10 +50,13 @@ K.pageInit.overview = function () {
       return '<li class="person' + (m.cls ? ' ' + m.cls : '') + '"><span class="avatar" aria-hidden="true">' + esc(m.i) + '</span><div><b>' + esc(m.n) + '</b><span>' + esc(K.L(m.r)) + '</span></div></li>';
     }).join('');
     $('#track').innerHTML = K.track.map(function (t) { return '<li><b>' + esc(t.n) + '</b><span>' + esc(K.L(t.t)) + '</span></li>'; }).join('');
-    $('#plans').innerHTML = K.plans.map(function (p) { return '<li><b>' + esc(K.L(p.n)) + '</b><span>' + esc(K.L(p.t)) + '</span></li>'; }).join('');
+    /* ticked in the application form, so each one carries a drawn tick */
+    $('#plans').innerHTML = K.plans.map(function (p) {
+      return '<li><svg class="tick" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"/></svg><b>' + esc(K.L(p.n)) + '</b><span>' + esc(K.L(p.t)) + '</span></li>';
+    }).join('');
     $('#walk').innerHTML = K.PAGES.slice(1).map(function (p, i) {
       var s = STATS[p.id];
-      return '<a href="' + p.href + '"><span class="no">0' + (i + 2) + K.icon('right') + '</span><b>' + esc(K.L(p.label)) + '</b><p>' + esc(K.L(p.desc)) + '</p>' +
+      return '<a href="' + p.href + '"><span class="no"><span class="wk-icon">' + K.pageIcon(p.id) + '</span>0' + (i + 2) + K.icon('right') + '</span><b>' + esc(K.L(p.label)) + '</b><p>' + esc(K.L(p.desc)) + '</p>' +
         '<span class="stat"><strong>' + esc(s.n) + '</strong>' + esc(K.L(s.l)) + '</span></a>';
     }).join('');
   });
@@ -58,6 +75,38 @@ K.pageInit.ecosystem = function () {
         (l.foot ? '<p class="layer-foot">' + esc(K.L(l.foot)) + '</p>' : '') + '</div>';
     }).join(arrow);
   });
+  /* One real pass through the three steps, built from the same data the
+     "Try a case" page uses, so the diagram above stops being abstract. */
+  K.onLang.push(function () {
+    var S = K.scenario, pre = S.presets[0], nd = S.needs[pre.need];
+    /* the profile's own first port of call, not the need's fallback node: it
+       is the agency a referral actually goes through, and it is confirmed */
+    var node = S.nodes[S.profiles[pre.persona].nodes[0]];
+    var idx = -1;
+    if (node.m) for (var i = 0; i < K.records.length; i++) {
+      if (K.records[i].name.indexOf(node.m) !== 0) continue;
+      if (K.records[i].district === pre.district) { idx = i; break; }
+      if (idx < 0) idx = i;
+    }
+    var rec = idx >= 0 ? K.records[idx] : null;
+    var steps = [
+      { h: K.T('The older person', 'Warga emas'),
+        b: K.T('Manages alone, lives in ' + pre.district + ', needs ' + K.L(S.steps[nd.step]).toLowerCase() + '.',
+               'Boleh urus diri, tinggal di ' + pre.district + ', perlukan ' + K.L(S.steps[nd.step]).toLowerCase() + '.') },
+      { h: K.T('Matching step', 'Langkah padanan'),
+        b: K.T('Look for a body that offers this help, works in ' + pre.district + ', has space, and takes referrals.',
+               'Cari badan yang tawarkan bantuan ini, beroperasi di ' + pre.district + ', ada kekosongan, dan terima rujukan.') },
+      { h: K.T('Result', 'Keputusan'),
+        b: rec ? rec.name + ' · ' + rec.cap : K.L(node.n),
+        pill: rec ? rec.status : node.s, href: rec ? 'network.html#r' + idx : null }
+    ];
+    $('#worked').innerHTML = steps.map(function (s, i) {
+      return '<li><span class="n">' + (i + 1) + '</span><div><b>' + esc(s.h) + '</b>' +
+        (s.href ? '<a href="' + s.href + '">' + esc(s.b) + K.icon('right') + '</a>' : '<p>' + esc(s.b) + '</p>') +
+        (s.pill ? K.pill(s.pill) : '') + '</div></li>';
+    }).join('');
+  });
+
   K.onLang.push(function () {
     $('#schema').innerHTML = K.schema.map(function (s) {
       return '<div class="card"><div class="schema-head"><h3>' + esc(K.L(s.t)) + '</h3><span>' + s.f.length + ' ' + K.T('fields', 'medan') + '</span></div><ul class="fields">' +
@@ -71,14 +120,32 @@ K.pageInit.ecosystem = function () {
 
 /* ---------- 03 Supply network ---------- */
 K.pageInit.network = function () {
-  var tf = $('#typeFilter'), df = $('#districtFilter'), sf = $('#statusFilter');
+  var tf = $('#typeFilter'), df = $('#districtFilter'), sf = $('#statusFilter'), q = $('#search');
+  var sortKey = null, sortDir = 1;
   var focusIdx = null, m = /^#r(\d+)$/.exec(location.hash || '');
   if (m && K.records[Number(m[1])]) focusIdx = Number(m[1]);
 
+  /* Type and status sort by their own order, not alphabetically: Confirmed
+     before To check before Example is the ranking that means something. */
+  function keyOf(r, k) {
+    if (k === 'type') return K.typeOrder.indexOf(r.type);
+    if (k === 'status') return K.statusOrder.indexOf(r.status);
+    return (k === 'name' ? r.name : r.district).toLowerCase();
+  }
+  function matches(r) {
+    if (tf.value !== 'all' && r.type !== tf.value) return false;
+    if (df.value !== 'all' && r.district !== df.value) return false;
+    if (sf.value !== 'all' && r.status !== sf.value) return false;
+    var t = q.value.trim().toLowerCase();
+    return !t || (r.name + ' ' + r.cap + ' ' + r.district).toLowerCase().indexOf(t) >= 0;
+  }
+
   function renderRecords() {
     var rows = [];
-    K.records.forEach(function (r, idx) {
-      if ((tf.value === 'all' || r.type === tf.value) && (df.value === 'all' || r.district === df.value) && (sf.value === 'all' || r.status === sf.value)) rows.push(idx);
+    K.records.forEach(function (r, idx) { if (matches(r)) rows.push(idx); });
+    if (sortKey) rows.sort(function (a, b) {
+      var x = keyOf(K.records[a], sortKey), y = keyOf(K.records[b], sortKey);
+      return (x < y ? -1 : x > y ? 1 : a - b) * sortDir;
     });
     $('#records').innerHTML = rows.length ? rows.map(function (idx) {
       var r = K.records[idx], t = K.types[r.type];
@@ -86,13 +153,47 @@ K.pageInit.network = function () {
         '<td>' + esc(r.district) + '</td><td class="cap">' + esc(r.cap) + '</td><td>' + K.pill(r.status) + '</td></tr>';
     }).join('') : '<tr><td colspan="5" class="empty">' + esc(K.T('Nothing matches these filters. Try a wider filter.', 'Tiada padanan untuk penapis ini. Cuba penapis yang lebih luas.')) + '</td></tr>';
     $('#recordCount').textContent = K.T('Showing ' + rows.length + ' of ' + K.records.length, 'Memaparkan ' + rows.length + ' daripada ' + K.records.length);
+    $$('.sort').forEach(function (b) {
+      var on = b.getAttribute('data-sort') === sortKey;
+      b.parentNode.setAttribute('aria-sort', on ? (sortDir > 0 ? 'ascending' : 'descending') : 'none');
+      b.classList.toggle('is-on', on);
+      b.classList.toggle('is-desc', on && sortDir < 0);
+    });
     K.viz.districtChart($('#districtChart'), tf.value, sf.value, df.value);
   }
-  [tf, df, sf].forEach(function (el) { el.addEventListener('change', renderRecords); });
+
+  /* The status counts double as filters, so the honest breakdown is also the
+     fastest way to see only what we can vouch for. */
+  function renderStatusBar() {
+    $('#statusBar').innerHTML = K.statusOrder.map(function (s) {
+      var on = sf.value === s;
+      return '<li><button type="button" data-status="' + s + '" aria-pressed="' + on + '">' +
+        K.pill(s, K.counts[s] + ' · ' + K.L(K.status[s])) + '</button></li>';
+    }).join('') + '<li><button type="button" data-status="all" aria-pressed="' + (sf.value === 'all') + '" class="all">' +
+      esc(K.T('Show all ' + K.records.length, 'Papar semua ' + K.records.length)) + '</button></li>';
+  }
+
+  [tf, df, sf].forEach(function (el) { el.addEventListener('change', function () { renderStatusBar(); renderRecords(); }); });
+  q.addEventListener('input', renderRecords);
+  $('#statusBar').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-status]'); if (!b) return;
+    sf.value = b.getAttribute('data-status');
+    renderStatusBar(); renderRecords();
+    var again = $('#statusBar [data-status="' + b.getAttribute('data-status') + '"]'); if (again) again.focus();
+  });
+  $$('.sort').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var k = b.getAttribute('data-sort');
+      if (sortKey === k) sortDir = -sortDir; else { sortKey = k; sortDir = 1; }
+      renderRecords();
+    });
+  });
 
   K.onLang.push(function () {
+    q.placeholder = K.T('Name or service', 'Nama atau perkhidmatan');
     $('#statusKeys').innerHTML = K.statusOrder.map(function (s) { return '<li>' + K.pill(s) + '<span>' + esc(K.L(K.status[s].key)) + '</span></li>'; }).join('');
     $('#dLegend').innerHTML = K.statusOrder.map(function (s) { return K.pill(s); }).join('');
+    renderStatusBar();
     renderRecords();
     if (focusIdx !== null) {
       var row = document.getElementById('r' + focusIdx);
@@ -109,6 +210,7 @@ K.pageInit.network = function () {
 K.pageInit.scenario = function () {
   var S = K.scenario, persona = $('#persona'), district = $('#district'), need = $('#need'), income = $('#income');
   var shown = null, raf = 0;
+  var DISTRICTS = Object.keys(S.districtAdj);
 
   function setCoverage(v, instant) {
     var el = $('#coverage');
@@ -120,37 +222,119 @@ K.pageInit.scenario = function () {
       if (k < 1) raf = requestAnimationFrame(step);
     })(t0);
   }
+
+  /* The same arithmetic the prototype used, but it hands back every part so
+     the page can show its working. Income under RM1,000 adds 6; welfare on
+     over RM3,000 takes 8 away. The two can never both apply. */
+  function score(pk, nk, dk, inc) {
+    var p = S.profiles[pk], nd = S.needs[nk], adj = S.districtAdj[dk] || 0;
+    var raw = p.coverage + nd.add + adj, v = Math.max(20, Math.min(96, raw)), incAdj = 0;
+    if (inc < 1000) incAdj = Math.min(96, v + 6) - v;
+    else if (inc > 3000 && nk === 'welfare') incAdj = -8;
+    return { v: v + incAdj, sub: v, base: p.coverage, need: nd.add, district: adj, income: incAdj, clamped: v !== raw };
+  }
+
+  /* Point a case provider at the real row on the organisation list, choosing
+     the one in this district when there is one. */
+  function findRecord(node, dk) {
+    if (!node.m) return -1;
+    var best = -1;
+    for (var i = 0; i < K.records.length; i++) {
+      if (K.records[i].name.indexOf(node.m) !== 0) continue;
+      if (K.records[i].district === dk) return i;
+      if (best < 0) best = i;
+    }
+    return best;
+  }
+
+  function optionText(sel) { var o = sel.options[sel.selectedIndex]; return o ? o.textContent : sel.value; }
+  function signed(n) { return (n > 0 ? '+' : n < 0 ? '−' : '') + (n === 0 ? '0' : Math.abs(n)); }
+
   function renderPresets() {
     $('#presetList').innerHTML = S.presets.map(function (p, i) {
       var on = persona.value === p.persona && district.value === p.district && need.value === p.need && Number(income.value) === p.income;
       return '<button class="preset" type="button" data-preset="' + i + '" aria-pressed="' + on + '">' + esc(K.L(p.l)) + '</button>';
     }).join('');
   }
+
   function update(instant) {
-    var pk = persona.value, nk = need.value, p = S.profiles[pk], nd = S.needs[nk];
-    var adj = S.districtAdj[district.value] || 0, inc = Math.max(0, Number(income.value) || 0);
-    var coverage = Math.max(20, Math.min(96, p.coverage + nd.add + adj));
-    if (inc < 1000) coverage = Math.min(96, coverage + 6);
-    if (inc > 3000 && nk === 'welfare') coverage -= 8;
+    var pk = persona.value, nk = need.value, dk = district.value, p = S.profiles[pk], nd = S.needs[nk];
+    var inc = Math.max(0, Number(income.value) || 0), s = score(pk, nk, dk, inc), coverage = s.v;
     var path = p.path.slice(); if (path.indexOf(nd.step) < 0) path.unshift(nd.step);
     var nodes = p.nodes.slice(); if (nodes.indexOf(nd.node) < 0) nodes.unshift(nd.node);
-    var steps = Math.max(2, p.steps + (nd.add < 0 ? 1 : 0) + (adj < 0 ? 1 : 0));
-    var gap = p.gap; if (adj < 0) gap = 'district'; if (nd.add < 0) gap = 'capacity';
+    path = path.slice(0, 5); nodes = nodes.slice(0, 4);
+    var steps = Math.max(2, p.steps + (nd.add < 0 ? 1 : 0) + (s.district < 0 ? 1 : 0));
+    var gap = p.gap; if (s.district < 0) gap = 'district'; if (nd.add < 0) gap = 'capacity';
     var state = coverage > 70 ? 'good' : coverage > 50 ? 'warn' : 'crit';
 
     setCoverage(coverage, instant);
-    $('#coverageBar').style.width = coverage + '%';
+    $('#coverageBar').style.setProperty('--v', coverage + '%');
     var st = $('#coverageState'); st.className = 'state ' + state; st.innerHTML = '<i aria-hidden="true"></i>' + esc(K.L(S.states[state]));
-    $('#matched').textContent = coverage > 70 ? '5 / 5' : coverage > 50 ? '4 / 6' : '3 / 7';
+
+    /* Show the working. Every line is a number a reviewer can add up. */
+    var rows = [
+      { l: optionText(persona), v: s.base, head: true },
+      { l: K.T('District: ', 'Daerah: ') + dk, v: s.district },
+      { l: K.T('Main need: ', 'Keperluan utama: ') + optionText(need), v: s.need }
+    ];
+    if (s.income) rows.push({ l: K.T('Household income RM', 'Pendapatan isi rumah RM') + inc.toLocaleString('en-MY'), v: s.income });
+    $('#working').innerHTML = rows.map(function (r) {
+      return '<li' + (r.head ? ' class="is-base"' : '') + '><span>' + esc(r.l) + '</span><b>' + esc(r.head ? String(r.v) : signed(r.v)) + '</b></li>';
+    }).join('') + '<li class="is-total"><span>' + esc(K.T('Coverage score', 'Skor liputan')) + '</span><b>' + coverage + '</b></li>';
+    $('#workingNote').textContent = s.clamped
+      ? K.T('The score is held inside 20 to 96, so this one was capped before income was applied.', 'Skor dihadkan antara 20 hingga 96, jadi yang ini dicapai sebelum pendapatan dikira.')
+      : K.T('Sample logic, not an estimate. Phase 1 replaces these weights with checked data.', 'Logik contoh, bukan anggaran. Fasa 1 akan ganti pemberat ini dengan data yang disemak.');
+
     $('#steps').textContent = steps;
-    $('#pathwayList').innerHTML = path.slice(0, 5).map(function (k, i) {
+    $('#pathwayList').innerHTML = path.map(function (k, i) {
       var pr = k === nd.step;
       return '<li' + (pr ? ' class="is-priority"' : '') + '><span class="n">' + (i + 1) + '</span><span>' + esc(K.L(S.steps[k])) + '</span>' + (pr ? '<em>' + esc(K.T('Main need', 'Keperluan utama')) + '</em>' : '') + '</li>';
     }).join('');
-    $('#providerList').innerHTML = nodes.slice(0, 4).map(function (k) { return '<li><span>' + esc(K.L(S.nodes[k].n)) + '</span>' + K.pill(S.nodes[k].s) + '</li>'; }).join('');
+
+    /* Who could help, named from the organisation list and carrying that
+       record's status, so the two pages can never drift apart. */
+    var confirmed = 0;
+    $('#providerList').innerHTML = nodes.map(function (k) {
+      var node = S.nodes[k], idx = findRecord(node, dk), rec = idx >= 0 ? K.records[idx] : null;
+      var status = rec ? rec.status : node.s;
+      if (status === 'Verified') confirmed++;
+      var away = rec && rec.district !== dk
+        ? '<em>' + esc(K.T('in ' + rec.district, 'di ' + rec.district)) + '</em>' : '';
+      var name = rec
+        ? '<a href="network.html#r' + idx + '">' + esc(rec.name) + K.icon('right') + '</a>'
+        : '<span>' + esc(K.L(node.n)) + '</span>';
+      return '<li>' + name + away + K.pill(status) + '</li>';
+    }).join('');
+    $('#confirmed').textContent = confirmed + ' / ' + nodes.length;
+    $('#confirmedNote').textContent = confirmed === nodes.length
+      ? K.T('Every organisation in this plan is on our confirmed list.', 'Semua organisasi dalam pelan ini ada dalam senarai disahkan kami.')
+      : K.T(
+        (nodes.length - confirmed) + ' of these are still to check or examples, so this plan is not yet a promise of help.',
+        (nodes.length - confirmed) + ' daripadanya masih perlu disemak atau contoh, jadi pelan ini belum satu janji bantuan.');
+
     $('#gap').textContent = K.L(S.gaps[gap]);
+    renderCompare(pk, nk, inc, dk);
     renderPresets();
   }
+
+  /* The same person and the same need, priced in every district. This is the
+     argument the project is making, so it stays on screen. */
+  function renderCompare(pk, nk, inc, dk) {
+    var vals = DISTRICTS.map(function (d) { return { d: d, v: score(pk, nk, d, inc).v }; })
+      .sort(function (a, b) { return b.v - a.v; });
+    var hi = vals[0], lo = vals[vals.length - 1];
+    $('#compare').innerHTML = vals.map(function (x) {
+      var on = x.d === dk;
+      return '<li' + (on ? ' class="is-on"' : '') + '><button type="button" data-district="' + esc(x.d) + '"' + (on ? ' aria-current="true"' : '') + '>' +
+        '<span class="d">' + esc(x.d) + '</span>' +
+        '<span class="cmp-bar"><i style="--v:' + x.v + '%"></i></span>' +
+        '<b>' + x.v + '</b></button></li>';
+    }).join('');
+    $('#compareNote').textContent = K.T(
+      'Same person, same need, same income. ' + hi.d + ' scores ' + hi.v + ' and ' + lo.d + ' scores ' + lo.v + ', a gap of ' + (hi.v - lo.v) + ' points.',
+      'Orang yang sama, keperluan yang sama, pendapatan yang sama. ' + hi.d + ' dapat ' + hi.v + ' dan ' + lo.d + ' dapat ' + lo.v + ', beza ' + (hi.v - lo.v) + ' mata.');
+  }
+
   [persona, district, need, income].forEach(function (el) { el.addEventListener('input', function () { update(false); }); });
   $('#presetList').addEventListener('click', function (e) {
     var b = e.target.closest('[data-preset]'); if (!b) return;
@@ -158,6 +342,12 @@ K.pageInit.scenario = function () {
     persona.value = p.persona; district.value = p.district; need.value = p.need; income.value = p.income;
     update(false);
     var again = $('#presetList [data-preset="' + b.getAttribute('data-preset') + '"]'); if (again) again.focus();
+  });
+  $('#compare').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-district]'); if (!b) return;
+    district.value = b.getAttribute('data-district');
+    update(false);
+    var again = $('#compare [data-district="' + b.getAttribute('data-district') + '"]'); if (again) again.focus();
   });
   var firstRun = true;
   K.onLang.push(function () { update(firstRun); firstRun = false; });

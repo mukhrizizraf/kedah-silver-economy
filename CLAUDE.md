@@ -8,7 +8,8 @@ A static, multi-page, bilingual (English / Bahasa Melayu) pitch site for a **UUM
 
 - **Where it lives:** the folder is in Google Drive and is also the git repo `mukhrizizraf/kedah-silver-economy`. GitHub Pages serves `main` from the root at <https://mukhrizizraf.github.io/kedah-silver-economy/>.
 - **Source documents:** `dokumen/` holds the revised application form (23-page PDF), the reply-to-reviewers table (5-page PDF) and the pilot-to-policy roadmap image (the WhatsApp JPEG).
-- **Kept off GitHub:** `.gitignore` excludes `dokumen/`, `OPEN_ITEMS.md` (local notes), the original Codex single-file version (`kedah_silver_economy_grant_dashboard_v1_codex.html`) and its old filename, which is now just a redirect to `index.html`. Never commit the grant PDFs.
+- **Kept off GitHub:** `.gitignore` excludes `dokumen/`, `OPEN_ITEMS.md` (local notes), the original Codex single-file version (`kedah_silver_economy_grant_dashboard_v1_codex.html`) and its old filename, which is now just a redirect to `index.html`. It also excludes `.claude/` (the Impeccable design skill and its 15 MB engine binary) and `.impeccable/` (a sidecar regenerated from `DESIGN.md`). Never commit the grant PDFs.
+- **Design context:** `PRODUCT.md` records who the site is for and why (the review panel first; presented live, then sent as a link; becomes the project site for the 9 months). `DESIGN.md` records the visual system and its named rules. Read both before design work. When a token in `kse.css` changes, update `DESIGN.md` to match.
 - **No build step:** there is no build, lint or test tooling. The site uses classic `<script src>` tags on purpose (no ES modules, no `fetch()`), so it works from `file://` as well as GitHub Pages. Keep it that way. Fonts come from Google Fonts and fall back to system fonts offline.
 - **Origin of the structure:** it was modelled on the user's `mukhrizizraf/sefb_planner_code` repo (multi-page static HTML, one design-system CSS file, shared JS, `body[data-page]`). It deliberately does not look like that repo, so don't copy its naming or visuals.
 
@@ -62,7 +63,7 @@ Everything hangs off one global, `window.KSE` (`K`). Other things to know:
 - **Data (`kse-data.js`):**
   - `records`: the 30-organisation sample list, with `types`/`typeOrder` and `status`/`statusOrder` (`ring` sets each dot's distance from the centre on the overview map)
   - `schema`: the three data lists
-  - `scenario`: the "Try a case" model
+  - `scenario`: the "Try a case" model. Each of its `nodes` has an `m` name prefix into `records`, so "Who could help" names the real organisation (preferring one in the chosen district) and shows that record's status, not its own. `districtAdj` is keyed by district (`Kubang Pasu`, not the town `Jitra`) to match `records`
   - `budget`: 7 lines, keyed by Vot
   - `reviews`/`reviewStatus`: the reviewer comments
   - `why`, `partners`/`partnerStatus`, `team`, `track`, `plans`: the overview sections
@@ -71,12 +72,15 @@ Everything hangs off one global, `window.KSE` (`K`). Other things to know:
 
   Filters match record fields by exact string, so `<option value>`s must equal the `type`, `district` and `status` values.
 - **Colour roles:** organisation types use the fixed categorical slots `--t1..5` on page surfaces and `--b1..5` on the dark band. They are assigned by `types[x].c` and never cycled. Evidence, partner and review statuses reuse the reserved good/warn/neutral tokens and always come with a text label (`K.pill`). The dark theme is defined three times in `kse.css` (bare `:root`, the `prefers-color-scheme` block, `[data-theme="dark"]`). Keep all three in sync.
-- **Navigation:** map dots link to `network.html#r<index>`, which scrolls to that row and highlights it. The arrow keys move through `K.PAGES`, except when focus is in a form control or a scroll container. Below 1260px the nav collapses into the drawer, because the BM labels are long.
-- **"Try a case" logic:** it is the same as the original prototype's. Coverage is clamped to 20–96%. The need and district adjustments apply. Income under RM1,000 adds 6, and welfare with income over RM3,000 subtracts 8. The outputs are sample logic, not estimates, and the page says so.
+- **Navigation:** map dots link to `network.html#r<index>`, which scrolls to that row and highlights it. The arrow keys move through `K.PAGES`, except when focus is in a form control or a scroll container. The header is two rows: a brand bar that scrolls away and a sticky tab bar (`.tabbar`). The tabs have their own row so every BM label fits. At 760px and below the tab bar hides and the menu button opens the drawer. `#kse-chrome` must stay `display:contents`, or the tab bar has no room to stick.
+- **Page icons:** `K.pageIcon(id)` in `kse-shell.js` returns the animated line icon for a page id. Static HTML can ask for one with `<span data-icon="scenario"></span>`. Each icon plays its own motion on hover and focus, and the page head draws its icon in on load (the "Page icons" block in `kse.css`). Keep every part `pathLength="1"`, or the draw-in breaks.
+- **"Try a case" logic:** it is the same as the original prototype's. Coverage is clamped to 20–96%. The need and district adjustments apply. Income under RM1,000 adds 6, and welfare with income over RM3,000 subtracts 8. The outputs are sample logic, not estimates, and the page says so in a banner at the top. `score()` in `kse-pages.js` returns every part, so the page shows the working line by line and prices the same case in all six districts. If you change the formula, keep `score()` the single source: the breakdown, the meter and the district list all read from it and must always agree.
+- **Network table:** columns sort by clicking the header. Type and status sort by `typeOrder` and `statusOrder` (Confirmed first), not alphabetically. The status counts above the table are also filter buttons, kept in sync with the status `<select>`.
 - **Hard-coded figures in HTML:** these don't update on their own when the data changes:
   - the KPI strip on `index.html`
   - the `headstat` on each page head (network `5 / 30`, scenario `90`, evidence `9 / 11`)
   - the Gantt `grid-column` spans on `roadmap.html`: column 1 is the label, and month *n* is column *n+1*
+  - the results axis on `index.html`: `DUE = [3, 5, 7, 8, 9]` in the overview init in `kse-pages.js`, plus the matching "By month" labels in the HTML (both follow Table 2)
 
   `data-count` (the count-up) is only for plain integers.
 
