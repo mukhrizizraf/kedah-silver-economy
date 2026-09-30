@@ -84,7 +84,7 @@ var PICON = {
   app: '<rect pathLength="1" x="6" y="2.8" width="12" height="18.4" rx="2.2"/><path pathLength="1" d="M9.5 5.6h5M10.4 18.3h3.2"/><circle class="ai-app-dot" pathLength="1" cx="12" cy="11.4" r="2.8"/>'
 };
 K.pageIcon = function (id) { return '<svg class="ai ai-' + id + '" viewBox="0 0 24 24" aria-hidden="true">' + (PICON[id] || '') + '</svg>'; };
-K.mark = '<svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><rect class="sq" x="8" y="8" width="16" height="16" rx="1"/><rect class="sq" x="8" y="8" width="16" height="16" rx="1" transform="rotate(45 16 16)"/><circle class="ctr" cx="16" cy="16" r="3.4"/></svg>';
+K.mark = '<svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true"><path class="leaf" d="M24 5C13 10 8 20 12 29c4 10 14 14 23 9 8-5 8-17 3-24C34 9 29 6 24 5Z"/><path class="vein" d="M14 35c7-8 12-16 10-28M15 28c5-1 9-3 13-7"/><circle class="node" cx="9" cy="35" r="3"/><circle class="node" cx="39" cy="11" r="3"/><circle class="node" cx="24" cy="5" r="3"/></svg>';
 function no(i) { return (i + 1 < 10 ? '0' : '') + (i + 1); }
 
 /* ---------- Theme ---------- */
@@ -401,4 +401,3 @@ doc.addEventListener('DOMContentLoaded', function () {
 });
 
 })(window.KSE);
-
