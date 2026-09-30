@@ -191,6 +191,29 @@ doc.addEventListener('click', function (e) {
   transitionTo(a.getAttribute('href'), e);
 }, true);
 doc.addEventListener('DOMContentLoaded', function () {
+  var pagehead = K.$('.pagehead-grid');
+  if (pagehead && K.page !== 'overview' && !K.$('.page-character')) {
+    var figure = doc.createElement('figure');
+    figure.className = 'page-character page-character-' + K.page;
+    figure.setAttribute('aria-label', 'Animated older person illustration');
+    var img = doc.createElement('img');
+    img.src = 'assets/img/elder-motion/frame-01.png';
+    img.alt = 'Animated illustrated older person';
+    figure.appendChild(img);
+    var marker = doc.createElement('span');
+    marker.className = 'page-character-mark';
+    marker.innerHTML = K.pageIcon(K.page);
+    figure.appendChild(marker);
+    var stat = K.$('.headstat', pagehead);
+    pagehead.insertBefore(figure, stat || null);
+    if (!K.reduceMotion) {
+      var frame = 1;
+      window.setInterval(function () {
+        frame = frame === 8 ? 1 : frame + 1;
+        img.src = 'assets/img/elder-motion/frame-0' + frame + '.png';
+      }, 850);
+    }
+  }
   if (!K.reduceMotion) {
     body.classList.add('page-enter');
     window.setTimeout(function () { body.classList.remove('page-enter'); }, 650);
