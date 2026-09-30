@@ -191,6 +191,13 @@ doc.addEventListener('click', function (e) {
   transitionTo(a.getAttribute('href'), e);
 }, true);
 doc.addEventListener('DOMContentLoaded', function () {
+  var overviewDrawers = K.$$('.overview-button-grid .home-drawer');
+  overviewDrawers.forEach(function (drawer) {
+    drawer.addEventListener('toggle', function () {
+      if (!drawer.open) return;
+      overviewDrawers.forEach(function (other) { if (other !== drawer && other.open) other.open = false; });
+    });
+  });
   var pagehead = K.$('.pagehead-grid');
   if (pagehead && K.page !== 'overview' && !K.$('.page-character')) {
     var figure = doc.createElement('figure');
