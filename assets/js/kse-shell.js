@@ -262,13 +262,11 @@ doc.addEventListener('DOMContentLoaded', function () {
       evidence: 'assets/img/elder-source-books.png',
       data: 'assets/img/elder-sand-blueprint.png'
     };
-    var motionPage = K.page !== 'network' && K.page !== 'roadmap' && K.page !== 'ecosystem';
     var figure = doc.createElement('figure');
     figure.className = 'page-character page-character-' + K.page;
-    figure.setAttribute('aria-label', 'Animated older person illustration');
     var img = doc.createElement('img');
     img.src = pageArt[K.page] || pageArt.ecosystem;
-    img.alt = 'Animated illustrated older person';
+    img.alt = '';
     figure.appendChild(img);
     var marker = doc.createElement('span');
     marker.className = 'page-character-mark';
@@ -276,13 +274,6 @@ doc.addEventListener('DOMContentLoaded', function () {
     figure.appendChild(marker);
     var stat = K.$('.headstat', pagehead);
     pagehead.insertBefore(figure, stat || null);
-    if (!K.reduceMotion && motionPage) {
-      var frame = Number((img.src.match(/frame-0([1-8])/ ) || [0, 1])[1]);
-      window.setInterval(function () {
-        frame = frame === 8 ? 1 : frame + 1;
-        img.src = 'assets/img/elder-motion/frame-0' + frame + '.png';
-      }, 850);
-    }
   }
   if (!K.reduceMotion) {
     body.classList.add('page-enter');
