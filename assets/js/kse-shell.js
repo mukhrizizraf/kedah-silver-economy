@@ -228,7 +228,7 @@ doc.addEventListener('DOMContentLoaded', function () {
       network: 'assets/img/elder-calling-network.png',
       scenario: 'assets/img/elder-phone-profile.png',
       roadmap: 'assets/img/elder-budget-counting.png',
-      evidence: 'assets/img/elder-motion/frame-06.png',
+      evidence: 'assets/img/elder-source-books.png',
       data: 'assets/img/elder-motion/frame-08.png'
     };
     var motionPage = K.page !== 'network' && K.page !== 'roadmap' && K.page !== 'ecosystem';
@@ -370,6 +370,7 @@ doc.addEventListener('DOMContentLoaded', function () {
 });
 
 })(window.KSE);
+
 
 
 
