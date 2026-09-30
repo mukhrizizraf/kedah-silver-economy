@@ -182,7 +182,7 @@ function transitionTo(href, e) {
   if (u.origin !== location.origin || u.pathname === location.pathname) return false;
   e.preventDefault();
   body.classList.add('page-leaving');
-  window.setTimeout(function () { location.href = u.href; }, 480);
+  window.setTimeout(function () { location.href = u.href; }, 160);
   return true;
 }
 /* Back and Forward can restore this page from the browser cache exactly as
@@ -397,7 +397,6 @@ doc.addEventListener('DOMContentLoaded', function () {
 });
 
 })(window.KSE);
-
 
 
 
