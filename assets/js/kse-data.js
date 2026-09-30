@@ -287,7 +287,7 @@ o5title:'Model akhir dan pelan',o5body:'Model yang diperbaiki dan pelan untuk me
 impactTag:'Matlamat kami',impactBody:'Penjagaan warga emas yang lebih tersusun, sesuai dengan agama dan budaya, dan berterusan.',
 teamEyebrow:'Pasukan',teamTitle:'Enam penyelidik dari UUM',
 teamSub:'Dari Pusat Pengajian Ekonomi, Kewangan dan Perbankan (SEFB). Pasukan ini telah mengkaji penuaan di Malaysia selama lebih sepuluh tahun.',
-trackTitle:'Tiga kajian bernombor melibatkan 2,966 orang secara keseluruhan. Kajian keempat turut disenaraikan di bawah; saiz sampelnya tidak dinyatakan di sini.',
+trackTitle:'Berasaskan empat kajian terdahulu. Tiga kajian yang ada saiz sampel melibatkan 2,966 orang.',
 plansEyebrow:'Selari dengan dasar',plansTitle:'Ia menyokong pelan negara dan negeri ini',
 plansSub:'Seperti yang ditanda dan dinyatakan dalam borang permohonan.',
 walkEyebrow:'Seterusnya',walkTitle:'Indeks dashboard',
@@ -333,7 +333,7 @@ labTitle:'Pilih warga emas dan keperluannya. Lihat bantuan yang ada.',labSub:'Tu
 labStat:'kes yang boleh dicuba',
 presetLabel:'Contoh simulasi',
 scoreTipTitle:'Cara skor dikira',scoreTipBody:'Mulakan dengan profil warga emas. Tambah atau tolak pelarasan bagi setiap keperluan, daerah dan pendapatan. Beberapa keperluan turut mengambil kira penyelarasan. Skor contoh akhir dihadkan antara 20 hingga 96.',
-personaLabel:'Warga emas',districtLabel:'Daerah',needLabel:'Keperluan utama',incomeLabel:'Pendapatan isi rumah sebulan',
+personaLabel:'Warga emas',districtLabel:'Daerah',needLabel:'Keperluan',incomeLabel:'Pendapatan isi rumah sebulan',
 pIndependent:'Boleh urus diri sendiri',pVulnerable:'Perlukan sedikit bantuan',pHighneed:'Perlukan banyak bantuan',
 nCompanion:'Teman atau iringan ke hospital',nTransport:'Pengangkutan',nHomecare:'Penjagaan di rumah',nWelfare:'Bantuan wang atau kebajikan',nFood:'Makanan',
 coverageLabel:'Sejauh mana keperluan dipenuhi',demoTag:'Data contoh sahaja',matchedNeeds:'Keperluan yang ada bantuan',steps:'Bilangan rujukan',
@@ -394,7 +394,31 @@ revSub:'Daripada jadual jawapan bertarikh 28 September 2026. Nombor halaman meru
 thNo:'Bil.',thArea:'Topik',thAsked:'Apa yang diminta',thDone:'Apa kami buat',thWhere:'Halaman',thState:'Status',
 verdictTag:'Keputusan keseluruhan',
 verdictQuote:'"Cadangan ini disyorkan dengan sedikit penambahbaikan pada metodologi, hasil projek, pelan pelaksanaan dan butiran bajet."',
-verdictCite:'Penilai 2, ulasan keseluruhan (terjemahan)'
+verdictCite:'Penilai 2, ulasan keseluruhan (terjemahan)',
+
+/* data blueprint */
+dpTitle:'Apa yang dashboard perlukan untuk berfungsi',
+dpLede:'Prototaip ini guna logik contoh. Lembaran berkaitan ini menyenaraikan data yang kami akan kumpul, semak dan kemas kini sebelum skor boleh digunakan secara sebenar.',
+dpStat:'lembaran workbook berkaitan',
+dpNoticeTitle:'Data contoh sahaja',
+dpNoticeBody:'Workbook ini menunjukkan susunan yang kami rancang. Ia mengandungi baris contoh dan nama medan, bukan orang sebenar. Kami hanya akan masukkan rekod sebenar selepas persetujuan, peraturan data dan semakan sumber diluluskan.',
+dpHeroLabel:'Muat turun workbook',dpHeroTitle:'Satu workbook yang menghubungkan setiap warga emas dengan bantuan di sekelilingnya.',
+dpHeroBody:'Setiap lembaran menyatakan siapa yang mengisinya, berapa kerap ia dikemas kini dan bahagian dashboard yang menggunakannya.',
+dpDownload:'Muat turun fail Excel',
+dp1t:'Profil warga emas',dp1b:'Siapa yang minta bantuan, di mana mereka tinggal dan cara mereka mahu dihubungi.',dp1o:'Diurus oleh pasukan lapangan · dikemas kini semasa lawatan pertama',
+dp2t:'Penilaian keperluan',dp2b:'Seorang warga emas boleh ada lebih daripada satu keperluan, setiap satu dengan tahap kecemasan dan buktinya.',dp2o:'Diurus oleh penilai · dikemas kini setiap kali disemak semula',
+dp3t:'Isi rumah dan kelayakan',dp3b:'Pendapatan, sokongan keluarga, bantuan sedia ada dan syarat untuk menentukan siapa layak.',dp3o:'Diurus oleh rakan kebajikan · dikemas kini setiap 3 bulan',
+dp4t:'Penyedia dan perkhidmatan',dp4b:'Siapa boleh membantu, apa yang mereka tawarkan, di mana mereka beroperasi dan sama ada mereka ada kekosongan.',dp4o:'Diurus oleh ketua rangkaian · dikemas kini setiap bulan',
+dp5t:'Rujukan dan hasil',dp5b:'Setiap rujukan, maklum balas, masa menunggu dan hasil, supaya kami tahu sama ada padanan berjaya.',dp5o:'Diurus oleh penyelaras · dikemas kini selepas setiap rujukan',
+dp6t:'Senarai dan pemarkahan',dp6b:'Senarai tetap dan pemberat terbuka yang menukar data yang disemak kepada skor.',dp6o:'Diurus oleh pasukan penyelidik · setiap perubahan diberi nombor versi',
+dpMapLabel:'Peta lembaran',dpMapTitle:'Cara setiap lembaran menyumbang kepada dashboard',dpMapTag:'Baris contoh sahaja',
+dpThSheet:'Lembaran workbook',dpThQ:'Soalan yang dijawab',dpThUse:'Digunakan dalam dashboard',dpThRef:'Dikemas kini sekurang-kurangnya',
+dpR1q:'Siapa perlukan bantuan?',dpR1u:'Pilihan warga emas, peta daerah',dpR1r:'Semasa lawatan pertama',
+dpR2q:'Apa yang warga emas ini perlukan?',dpR2u:'Pilihan keperluan, langkah dicadangkan',dpR2r:'Setiap kali disemak semula',
+dpR3q:'Apakah had yang terpakai?',dpR3u:'Pelarasan skor, masalah utama',dpR3r:'Setiap 3 bulan',
+dpR4q:'Siapa boleh membantu di sini?',dpR4u:'Siapa boleh membantu, bilangan disahkan',dpR4r:'Setiap bulan',
+dpR5q:'Adakah bantuan sampai?',dpR5u:'Skor hasil, masa menunggu',dpR5r:'Selepas setiap rujukan',
+dpR6q:'Bagaimana skor dikira?',dpR6u:'Semua skor dalam dashboard',dpR6r:'Setiap versi baharu'
 };
 
 })(window.KSE);

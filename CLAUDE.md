@@ -61,7 +61,7 @@ The file names are older than the labels. Keep them, because links depend on the
 Everything hangs off one global, `window.KSE` (`K`). Other things to know:
 
 - **Rendering contract:** a page init binds its events once and pushes its render functions onto `K.onLang`. `K.applyLang()` runs them on load and on every EN/BM switch. So dynamic text must use `K.L({en,bm})` or `K.T(en,bm)` at render time, never at init time.
-- **Static i18n:** the English text lives in the HTML, and an element opts in with `data-i18n="key"`. On first run `applyLang` stores the English in `data-en`, and `K.bm[key]` supplies the BM. `applyLang` sets `textContent`, so a `data-i18n` element must contain text only. Wrap the text in a `<span data-i18n>` when it sits next to an icon or a form control.
+- **Static i18n:** the English text lives in the HTML, and an element opts in with `data-i18n="key"`. On first run `applyLang` stores the English in `data-en`, and `K.bm[key]` supplies the BM. `applyLang` sets `textContent`, so a `data-i18n` element must contain text only. Wrap the text in a `<span data-i18n>` when it sits next to an icon or a form control. The Show / Hide words on drawer and notice toggles are not in the HTML: they come from `--t-show` / `--t-hide` in `kse.css`, which switch to Buka / Tutup under `:root:lang(ms)` (`applyLang` sets `lang="ms"` in BM). Leave the toggle's `<b>` or `<span>` empty.
 - **Data (`kse-data.js`):**
   - `records`: the 30-organisation sample list, with `types`/`typeOrder` and `status`/`statusOrder` (`ring` sets each dot's distance from the centre on the overview map)
   - `schema`: the three data lists
@@ -80,7 +80,7 @@ Everything hangs off one global, `window.KSE` (`K`). Other things to know:
 - **Network table:** columns sort by clicking the header. Type and status sort by `typeOrder` and `statusOrder` (Confirmed first), not alphabetically. The status counts above the table are also filter buttons, kept in sync with the status `<select>`.
 - **Hard-coded figures in HTML:** these don't update on their own when the data changes:
   - the KPI strip on `index.html`
-  - the `headstat` on each page head (network `5 / 30`, scenario `90`, evidence `9 / 11`)
+  - the `headstat` on each page head (network `5 / 30`, scenario `558` = 3 people × 6 districts × 31 need combinations, evidence `9 / 11`, data `11` = the sheets in `assets/data/kedah-silver-data-blueprint.xlsx`)
   - the Gantt `grid-column` spans on `roadmap.html`: column 1 is the label, and month *n* is column *n+1*
   - the results axis on `index.html`: `DUE = [3, 5, 7, 8, 9]` in the overview init in `kse-pages.js`, plus the matching "By month" labels in the HTML (both follow Table 2)
 

@@ -185,6 +185,11 @@ function transitionTo(href, e) {
   window.setTimeout(function () { location.href = u.href; }, 480);
   return true;
 }
+/* Back and Forward can restore this page from the browser cache exactly as
+   it was left, mid-fade. Clear the leaving state so it is visible again. */
+window.addEventListener('pageshow', function (e) {
+  if (e.persisted) body.classList.remove('page-leaving');
+});
 doc.addEventListener('click', function (e) {
   var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
   if (!a) return;

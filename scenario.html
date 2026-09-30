@@ -9,11 +9,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Onest:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="assets/css/kse.css?v=20260930b">
+<link rel="stylesheet" href="assets/css/kse.css?v=20260930c">
 <script src="assets/js/kse-data.js"></script>
 </head>
 <body data-page="scenario">
-<script src="assets/js/kse-shell.js?v=20260930b"></script>
+<script src="assets/js/kse-shell.js?v=20260930c"></script>
 
 <main id="main">
   <section class="band pagehead">
@@ -23,14 +23,14 @@
         <h1 data-i18n="labTitle">Pick a person and a need. See what help they get.</h1>
         <p class="lede" data-i18n="labSub">Change the options below. The steps, the score and the main problem change straight away.</p>
       </div>
-      <div class="headstat"><b data-count="90">90</b><span data-i18n="labStat">cases you can try</span></div>
+      <div class="headstat"><b data-count="558">558</b><span data-i18n="labStat">cases you can try</span></div>
     </div>
   </section>
 
   <div class="wrap">
     <section class="section">
       <details class="notice notice-toggle" open>
-        <summary><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5.5M12 16.2v.3"/></svg><b data-i18n="noticeTitle">Nothing on this page is a real measurement.</b><i aria-hidden="true"><span>Hide</span></i></summary>
+        <summary><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5.5M12 16.2v.3"/></svg><b data-i18n="noticeTitle">Nothing on this page is a real measurement.</b><i aria-hidden="true"><span></span></i></summary>
         <div class="notice-body"><span data-i18n="noticeBody">The score below is worked out from weights we chose, to show how matching would run. Phase 1 replaces every weight with checked data. The organisation names are real records from our list, and each one carries its own status.</span></div>
       </details>
 
@@ -47,10 +47,10 @@
           <div class="select"><select id="district">
             <option>Kubang Pasu</option><option selected>Kota Setar</option><option>Sungai Petani</option><option>Kulim</option><option>Baling</option><option>Langkawi</option>
           </select></div></div>
-        <div class="field"><label for="needPicker" data-i18n="needLabel">Needs</label>
+        <div class="field"><span class="field-label" id="needsLabel" data-i18n="needLabel">Needs</span>
           <details class="multi-select" id="needPicker">
-            <summary><span id="needSummary">Company or hospital escort</span><span class="multi-chevron" aria-hidden="true"></span></summary>
-            <div class="multi-options" role="group" aria-label="Needs">
+            <summary aria-labelledby="needsLabel needSummary"><span id="needSummary">Company or hospital escort</span><span class="multi-chevron" aria-hidden="true"></span></summary>
+            <div class="multi-options" role="group" aria-labelledby="needsLabel">
               <label><input type="checkbox" name="needs" value="companion" checked><span data-i18n="nCompanion">Company or hospital escort</span></label>
               <label><input type="checkbox" name="needs" value="transport"><span data-i18n="nTransport">Transport</span></label>
               <label><input type="checkbox" name="needs" value="homecare"><span data-i18n="nHomecare">Home care</span></label>
