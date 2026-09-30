@@ -269,7 +269,7 @@ consTitle:'Siapa boleh membantu seorang warga emas',
 consCap:'Setiap titik ialah satu organisasi dalam senarai kami. Titik dekat tengah sudah disahkan. Titik yang lebih jauh masih perlu disemak atau hanya contoh. Klik titik untuk melihat butirannya.',
 kpi1:'objektif kajian',kpi2:'fasa projek',kpi3:'warga emas ditemu bual',kpi4:'peserta bengkel reka bentuk',kpi5:'ahli panel penilai',
 partnersLabel:'Rakan kerjasama',
-caseEyebrow:'Kenapa projek ini',caseTitle:'Bantuan ada, tetapi tidak bersambung',
+caseEyebrow:'Kenapa projek ini',objectivesLabel:'Objektif projek',dashboardIndexLabel:'Indeks dashboard',caseTitle:'Bantuan ada, tetapi tidak bersambung',
 caseSub:'Sekarang setiap agensi bekerja sendiri. Projek ini menguji cara mudah untuk mereka bekerjasama.',
 problemTag:'Masalah',problemQuote:'Seorang warga emas mungkin perlukan beberapa jenis bantuan serentak, tetapi setiap agensi hanya uruskan bahagian sendiri.',
 problemBody:'Kedah sudah ada agensi dan program yang sesuai. Yang tiada ialah hubungan yang jelas antara mereka. Keperluan tercicir apabila rujukan, syarat atau kekurangan kakitangan menghalang.',
@@ -290,7 +290,7 @@ teamSub:'Dari Pusat Pengajian Ekonomi, Kewangan dan Perbankan (SEFB). Pasukan in
 trackTitle:'Berasaskan empat kajian terdahulu dengan lebih 2,900 responden',
 plansEyebrow:'Selari dengan dasar',plansTitle:'Ia menyokong pelan negara dan negeri ini',
 plansSub:'Seperti yang ditanda dan dinyatakan dalam borang permohonan.',
-walkEyebrow:'Seterusnya',walkTitle:'Lima halaman lagi',
+walkEyebrow:'Seterusnya',walkTitle:'Indeks dashboard',
 walkSub:'Setiap halaman menjawab satu soalan. Guna kekunci anak panah untuk beralih halaman.',
 
 /* how it works */
