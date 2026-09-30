@@ -303,6 +303,13 @@ body[data-page="overview"] .home-drawer summary{min-height:88px;padding:20px 24p
 body[data-page="overview"] .home-drawer summary:hover{border-color:var(--paddy);transform:perspective(700px) rotateX(2deg) translateY(-4px);box-shadow:0 11px 0 color-mix(in srgb,var(--paddy-soft) 80%,var(--line)),0 20px 28px -20px rgba(15,35,30,.65)}
 body[data-page="overview"] .home-drawer[open] summary{border-color:var(--paddy);box-shadow:0 4px 0 color-mix(in srgb,var(--paddy-soft) 80%,var(--line)),0 10px 18px -18px rgba(15,35,30,.55)}
 body[data-page="overview"] .home-drawer summary i{min-width:88px}
+.overview-button-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;padding-block:14px 34px}
+.overview-button-grid .home-drawer{border-top:0;padding-top:0}
+.overview-button-grid .home-drawer summary{display:flex;flex-direction:column;align-items:stretch;gap:14px;min-height:176px;padding:22px}
+.overview-button-grid .home-drawer summary>span{font-size:11px}
+.overview-button-grid .home-drawer summary strong{font-size:25px;max-width:15ch}
+.overview-button-grid .home-drawer summary i{align-self:flex-end;margin-top:auto}
+.overview-button-grid .home-drawer .drawer-body{grid-column:1/-1}
 body[data-page="overview"] .tint{background:color-mix(in srgb,var(--gold-soft) 28%,var(--bg))}
 body[data-page="overview"] .hero-scene::before{background:linear-gradient(90deg,rgba(13,45,38,.45) 0%,rgba(13,45,38,.08) 32%,transparent 62%),linear-gradient(0deg,rgba(5,20,16,.42),transparent 42%)}
 @media (min-width:1200px){
@@ -925,6 +932,7 @@ tr.flash td{animation:flash 2.4s ease}
   .people{grid-template-columns:1fr 1fr}
   .validate{grid-template-columns:1fr 1fr}
   .validate .card:first-child{grid-column:1/-1}
+  .overview-button-grid{grid-template-columns:1fr 1fr}
   .data-grid{grid-template-columns:1fr 1fr}
 }
 @media (max-width:960px){
@@ -973,6 +981,7 @@ tr.flash td{animation:flash 2.4s ease}
   .plans{grid-template-columns:1fr}
   .impact{grid-template-columns:1fr}
   .lab,.lab-2,.controls,.sources,.people,.plans,.track{grid-template-columns:1fr}
+  .overview-button-grid{grid-template-columns:1fr}
   .compare button{grid-template-columns:minmax(78px,auto) 1fr 30px;gap:9px}
   .count{margin-left:0;width:100%;padding-bottom:0}
   .filters .field{flex:1 1 140px}
