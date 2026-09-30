@@ -124,7 +124,21 @@ needs:{
 },
 /* Kubang Pasu, not Jitra: Jitra is a town inside it. The organisation list
    and the district chart both count by district, so this matches them. */
-districtAdj:{'Kubang Pasu':2,'Kota Setar':4,'Sungai Petani':1,'Kulim':0,'Baling':-8,'Langkawi':-10},
+districtAdj:{'Kubang Pasu':2,'Kota Setar':4,'Sungai Petani':1,'Kulim':0,'Baling':-8,'Langkawi':-10,'Padang Terap':0,'Pokok Sena':0,'Pendang':0,'Sik':0,'Yan':0,'Bandar Baharu':0},
+mukimByDistrict:{
+ 'Kubang Pasu':['Jitra','Changlun','Kodiang','Jerlun','Sintok','Tunjang','Sanglang','Ayer Hitam','Bandar Darul Aman','Bukit Kayu Hitam'],
+ 'Kota Setar':['Alor Mengkudu','Anak Bukit','Mergong','Kangkong','Langgar','Pumpong','Tandop','Tebengau','Gunung Keriang','Hutan Kampung','Kuala Kedah','Kubang Rotan','Simpang Empat'],
+ 'Sungai Petani':['Sungai Petani','Bakar Arang','Sidam','Pantai Merdeka'],
+ 'Kulim':['Kulim','Lunas','Junjung','Karangan','Keladi','Mahang','Merbau Pulas','Padang Serai','Sungai Ular'],
+ 'Baling':['Baling','Kuala Ketil','Kuala Pegang','Tawar','Kupang','Bongor','Pulai','Bakai','Bayu'],
+ 'Langkawi':['Kuah','Bohor','Kedawang','Ayer Hangat','Pulau Tuba','Ulu Melaka','Padang Matsirat'],
+ 'Padang Terap':['Kuala Nerang','Padang Sanai','Belimbing','Naka','Nami','Pedu','Tekai','Terolak'],
+ 'Pokok Sena':['Pokok Sena','Gajah Mati','Jabi','Tualang','Lesong','Bukit Lada','Derang'],
+ 'Pendang':['Pendang','Ayer Putih','Bukit Jenun','Bukit Raya','Kubur Panjang','Sungai Tiang','Tanah Merah','Kobah','Rambai','Tobiar','Tokai'],
+ 'Sik':['Sik','Beris','Belantik','Gulau','Jeneri','Sok'],
+ 'Yan':['Yan','Guar Cempedak','Sungai Limau','Sungai Daun','Singkir','Dulang'],
+ 'Bandar Baharu':['Serdang','Relau','Selama','Bagan Samak','Kuala Selama','Permatang Pasir','Sungai Batu','Sungai Kechil']
+},
 gaps:{
   single:{en:'There is no single contact point across the agencies yet.',bm:'Belum ada satu tempat hubungan untuk semua agensi.'},
   eligibility:{en:'We must check who qualifies and who has space before a referral can go ahead.',bm:'Kita perlu semak siapa layak dan siapa ada kekosongan sebelum rujukan boleh dibuat.'},
@@ -422,4 +436,3 @@ dpR6q:'Bagaimana skor dikira?',dpR6u:'Semua skor dalam dashboard',dpR6r:'Setiap 
 };
 
 })(window.KSE);
-

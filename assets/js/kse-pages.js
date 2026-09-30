@@ -225,9 +225,56 @@ K.pageInit.network = function () {
 
 /* ---------- 04 Scenario lab ---------- */
 K.pageInit.scenario = function () {
-  var S = K.scenario, persona = $('#persona'), district = $('#district'), need = $('#need'), income = $('#income');
+  var S = K.scenario, ageBand = $('#ageBand'), gender = $('#gender'), persona = $('#persona'), district = $('#district'), mukim = $('#mukim'), living = $('#living'), need = $('#need'), income = $('#income');
   var shown = null, raf = 0;
   var DISTRICTS = Object.keys(S.districtAdj);
+
+  function updateMukim() {
+    if (!mukim) return;
+    var list = S.mukimByDistrict[district.value] || [];
+    mukim.innerHTML = list.map(function (x) { return '<option>' + esc(x) + '</option>'; }).join('');
+  }
+  var wizard = $('#intakeWizard'), wizardStep = 1, wizardState = { ageBand:'60-64', gender:'woman', district:district.value, mukim:'', persona:'independent', support:['alone'], financialSupport:[], income:'3500', living:'alone', needs:['companion'], urgency:'info' };
+  function wizardOptions() {
+    var wd = $('#wizardDistrict'), wm = $('#wizardMukim');
+    if (!wd || !wm) return;
+    wd.innerHTML = DISTRICTS.map(function (d) { return '<option>' + esc(d) + '</option>'; }).join(''); wd.value = wizardState.district;
+    wm.innerHTML = (S.mukimByDistrict[wd.value] || []).map(function (x) { return '<option>' + esc(x) + '</option>'; }).join('');
+    if (wizardState.mukim && (S.mukimByDistrict[wd.value] || []).indexOf(wizardState.mukim) >= 0) wm.value = wizardState.mukim;
+    wizardState.mukim = wm.value;
+  }
+  function setWizardChoices() {
+    if (!wizard) return;
+    K.$$('[data-choice-group]').forEach(function (group) { var key = group.getAttribute('data-choice-group'); group.querySelectorAll('button').forEach(function (b) { b.classList.toggle('is-selected', String(wizardState[key]) === b.getAttribute('data-value')); }); });
+    K.$$('[data-multi-group]').forEach(function (group) { var key = group.getAttribute('data-multi-group'); group.querySelectorAll('button').forEach(function (b) { b.classList.toggle('is-selected', (wizardState[key] || []).indexOf(b.getAttribute('data-value')) >= 0); }); });
+  }
+  function showWizardStep() {
+    if (!wizard) return;
+    wizard.querySelectorAll('.intake-step').forEach(function (s) { s.classList.toggle('is-active', Number(s.getAttribute('data-step')) === wizardStep); });
+    $('#intakeStepLabel').textContent = 'Step ' + wizardStep + ' of 5'; $('#intakeProgressBar').style.setProperty('--v', (wizardStep * 20) + '%');
+    $('#intakeBack').disabled = wizardStep === 1; $('#intakeNext').textContent = wizardStep === 5 ? 'See support options' : 'Next';
+    wizardOptions(); setWizardChoices();
+  }
+  function finishWizard() {
+    ageBand.value = wizardState.ageBand; gender.value = wizardState.gender; district.value = wizardState.district; updateMukim(); if (wizardState.mukim) mukim.value = wizardState.mukim;
+    persona.value = wizardState.persona; living.value = wizardState.living; income.value = wizardState.income; setNeeds(wizardState.needs); update(false); wizard.classList.add('is-complete');
+    var score = document.querySelector('.lab'); if (score) score.scrollIntoView({behavior:K.reduceMotion?'auto':'smooth',block:'start'});
+  }
+  if (wizard) {
+    wizard.addEventListener('click', function (e) {
+      var mode = e.target.closest('[data-mode]'); if (mode) return;
+      var choice = e.target.closest('[data-choice-group] button');
+      if (choice) { wizardState[choice.parentNode.getAttribute('data-choice-group')] = choice.getAttribute('data-value'); setWizardChoices(); return; }
+      var multi = e.target.closest('[data-multi-group] button');
+      if (multi) { var key = multi.parentNode.getAttribute('data-multi-group'), v = multi.getAttribute('data-value'), a = wizardState[key] || []; wizardState[key] = a.indexOf(v) >= 0 ? a.filter(function (x) { return x !== v; }) : a.concat(v); if (!wizardState[key].length) wizardState[key] = [v]; setWizardChoices(); }
+    });
+    $('#wizardDistrict').addEventListener('change', function () { wizardState.district = this.value; wizardState.mukim = ''; wizardOptions(); });
+    $('#wizardMukim').addEventListener('change', function () { wizardState.mukim = this.value; });
+    $('#intakeBack').addEventListener('click', function () { if (wizardStep > 1) { wizardStep--; showWizardStep(); } });
+    $('#intakeNext').addEventListener('click', function () { if (wizardStep < 5) { wizardStep++; showWizardStep(); } else finishWizard(); });
+    showWizardStep();
+  }
+  $$('.case-mode').forEach(function (b) { b.addEventListener('click', function () { var guided = b.getAttribute('data-mode') === 'guided'; $$('.case-mode').forEach(function (x) { x.classList.toggle('is-on', x === b); }); if (wizard) wizard.hidden = !guided; $$('.quick-only').forEach(function (x) { x.hidden = guided; }); }); });
 
   function setCoverage(v, instant) {
     var el = $('#coverage');
@@ -354,6 +401,7 @@ K.pageInit.scenario = function () {
         (nodes.length - confirmed) + ' daripadanya masih perlu disemak atau contoh, jadi pelan ini belum satu janji bantuan.');
 
     $('#gap').textContent = K.L(S.gaps[gap]);
+    $('#caseContext').textContent = K.T('Profile: ' + optionText(ageBand) + ' · ' + optionText(gender) + ' · ' + dk + ' · ' + optionText(mukim) + ' · ' + optionText(living) + ' · ' + optionText(income), 'Profil: ' + optionText(ageBand) + ' · ' + optionText(gender) + ' · ' + dk + ' · ' + optionText(mukim) + ' · ' + optionText(living) + ' · ' + optionText(income));
     renderCompare(pk, nks, inc, dk);
     renderPresets();
   }
@@ -376,7 +424,8 @@ K.pageInit.scenario = function () {
       'Orang yang sama, keperluan yang sama, pendapatan yang sama. ' + hi.d + ' dapat ' + hi.v + ' dan ' + lo.d + ' dapat ' + lo.v + ', beza ' + (hi.v - lo.v) + ' mata.');
   }
 
-  [persona, district, income].forEach(function (el) { el.addEventListener('input', function () { update(false); }); });
+  [ageBand, gender, persona, district, mukim, living, income].forEach(function (el) { el.addEventListener('input', function () { if (el === district) updateMukim(); update(false); }); });
+  district.addEventListener('change', function () { updateMukim(); update(false); });
   K.$$('#needPicker input[name="needs"]').forEach(function (el) { el.addEventListener('change', function () { selectedNeeds(); update(false); }); });
   $('#presetList').addEventListener('click', function (e) {
     var b = e.target.closest('[data-preset]'); if (!b) return;
@@ -392,6 +441,7 @@ K.pageInit.scenario = function () {
     var again = $('#compare [data-district="' + b.getAttribute('data-district') + '"]'); if (again) again.focus();
   });
   var firstRun = true;
+  updateMukim();
   K.onLang.push(function () { update(firstRun); firstRun = false; });
 };
 

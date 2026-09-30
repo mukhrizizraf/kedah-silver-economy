@@ -9,11 +9,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Onest:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="assets/css/kse.css?v=20260930c">
-<script src="assets/js/kse-data.js"></script>
+<link rel="stylesheet" href="assets/css/kse.css?v=20260930k">
+<script src="assets/js/kse-data.js?v=20260930k"></script>
 </head>
 <body data-page="scenario">
-<script src="assets/js/kse-shell.js?v=20260930c"></script>
+<script src="assets/js/kse-shell.js?v=20260930k"></script>
 
 <main id="main">
   <section class="band pagehead">
@@ -34,9 +34,49 @@
         <div class="notice-body"><span data-i18n="noticeBody">The score below is worked out from weights we chose, to show how matching would run. Phase 1 replaces every weight with checked data. The organisation names are real records from our list, and each one carries its own status.</span></div>
       </details>
 
-      <div class="presets"><span class="lbl" data-i18n="presetLabel">Simulated examples</span><span id="presetList" style="display:contents"></span></div>
+      <div class="case-modes" role="group" aria-label="Choose intake mode">
+        <button type="button" class="case-mode is-on" data-mode="guided">Guided intake</button>
+        <button type="button" class="case-mode" data-mode="quick">Quick demo</button>
+      </div>
 
-      <div class="controls">
+      <div class="intake-wizard" id="intakeWizard">
+        <div class="intake-progress"><span id="intakeStepLabel">Step 1 of 5</span><i id="intakeProgressBar" style="--v:20%"></i></div>
+        <section class="intake-step is-active" data-step="1">
+          <p class="label label-paddy">About you</p><h2>How old are you?</h2><p class="intake-help">Choose an age range. You do not need to remember your exact date of birth.</p>
+          <div class="choice-grid" data-choice-group="ageBand"><button type="button" data-value="60-64">60–64</button><button type="button" data-value="65-69">65–69</button><button type="button" data-value="70-74">70–74</button><button type="button" data-value="75-79">75–79</button><button type="button" data-value="80-84">80–84</button><button type="button" data-value="85+">85 or older</button></div>
+          <h3>How should we record your gender?</h3><div class="choice-grid compact" data-choice-group="gender"><button type="button" data-value="woman">Woman</button><button type="button" data-value="man">Man</button><button type="button" data-value="prefer-not">Prefer not to say</button></div>
+        </section>
+        <section class="intake-step" data-step="2">
+          <p class="label label-paddy">Where you live</p><h2>Which area in Kedah?</h2><p class="intake-help">Choose your district, then your nearest mukim or town.</p>
+          <div class="intake-fields"><label>District<select id="wizardDistrict"></select></label><label>Mukim / nearest area<select id="wizardMukim"></select></label></div>
+        </section>
+        <section class="intake-step" data-step="3">
+          <p class="label label-paddy">Daily life</p><h2>How do you manage day to day?</h2>
+          <div class="choice-grid" data-choice-group="persona"><button type="button" data-value="independent">🟢 I manage by myself</button><button type="button" data-value="vulnerable">🟡 I need some help</button><button type="button" data-value="highneed">🟠 I need regular help</button></div>
+          <h3>Who is available to help you?</h3><div class="choice-grid compact multi-choice" data-multi-group="support"><button type="button" data-value="alone">I live alone</button><button type="button" data-value="spouse">Spouse / partner</button><button type="button" data-value="children">Children nearby</button><button type="button" data-value="family">Other family</button><button type="button" data-value="neighbours">Friends / neighbours</button><button type="button" data-value="none">No regular help</button></div>
+        </section>
+        <section class="intake-step" data-step="4">
+          <p class="label label-paddy">Money and home</p><h2>What is your approximate monthly income?</h2>
+          <div class="choice-grid compact" data-choice-group="income"><button type="button" data-value="0">No regular income</button><button type="button" data-value="800">Below RM1,000</button><button type="button" data-value="1500">RM1,000–RM1,999</button><button type="button" data-value="2500">RM2,000–RM2,999</button><button type="button" data-value="3500">RM3,000–RM4,999</button><button type="button" data-value="5000">RM5,000 and above</button><button type="button" data-value="prefer-not">Prefer not to say</button></div>
+          <h3>Do you receive regular financial support?</h3><div class="choice-grid compact multi-choice" data-multi-group="financialSupport"><button type="button" data-value="pension">Pension</button><button type="button" data-value="welfare">Welfare assistance</button><button type="button" data-value="family">Children / family</button><button type="button" data-value="zakat">Zakat / Baitulmal</button><button type="button" data-value="none">No regular support</button></div>
+          <h3>Where do you live now?</h3><div class="choice-grid compact" data-choice-group="living"><button type="button" data-value="alone">Own home, alone</button><button type="button" data-value="spouse">With spouse</button><button type="button" data-value="family">With children / family</button><button type="button" data-value="care">Residential care</button></div>
+        </section>
+        <section class="intake-step" data-step="5">
+          <p class="label label-paddy">What you need</p><h2>What kind of help are you looking for?</h2><p class="intake-help">Select one or more. You can change this later.</p>
+          <div class="choice-grid compact multi-choice" data-multi-group="needs"><button type="button" data-value="companion">Someone to accompany me</button><button type="button" data-value="transport">Transport</button><button type="button" data-value="homecare">Help at home</button><button type="button" data-value="food">Food / daily necessities</button><button type="button" data-value="welfare">Financial / welfare help</button></div>
+          <h3>How soon do you need help?</h3><div class="choice-grid compact" data-choice-group="urgency"><button type="button" data-value="info">Just looking for information</button><button type="button" data-value="weeks">Within the next few weeks</button><button type="button" data-value="soon">I need help soon</button><button type="button" data-value="urgent">I need help urgently</button></div>
+          <label class="intake-note">Anything else you want us to know? <textarea id="wizardNote" rows="2" placeholder="Optional"></textarea></label>
+        </section>
+        <div class="intake-actions"><button type="button" class="btn btn-quiet" id="intakeBack">Back</button><button type="button" class="btn btn-paddy" id="intakeNext">Next</button></div>
+      </div>
+
+      <div class="presets quick-only"><span class="lbl" data-i18n="presetLabel">Simulated examples</span><span id="presetList" style="display:contents"></span></div>
+
+      <div class="controls quick-only">
+        <div class="field"><label for="ageBand">Age range</label>
+          <div class="select"><select id="ageBand"><option value="60-64">60–64</option><option value="65-69">65–69</option><option value="70-74">70–74</option><option value="75-79">75–79</option><option value="80+">80 and above</option></select></div></div>
+        <div class="field"><label for="gender">Gender</label>
+          <div class="select"><select id="gender"><option value="woman">Woman</option><option value="man">Man</option><option value="prefer-not">Prefer not to say</option></select></div></div>
         <div class="field"><label for="persona" data-i18n="personaLabel">Person</label>
           <div class="select"><select id="persona">
             <option value="independent" data-i18n="pIndependent">Can manage alone</option>
@@ -45,8 +85,10 @@
           </select></div></div>
         <div class="field"><label for="district" data-i18n="districtLabel">District</label>
           <div class="select"><select id="district">
-            <option>Kubang Pasu</option><option selected>Kota Setar</option><option>Sungai Petani</option><option>Kulim</option><option>Baling</option><option>Langkawi</option>
+            <option>Kubang Pasu</option><option selected>Kota Setar</option><option>Sungai Petani</option><option>Kulim</option><option>Baling</option><option>Langkawi</option><option>Padang Terap</option><option>Pokok Sena</option><option>Pendang</option><option>Sik</option><option>Yan</option><option>Bandar Baharu</option>
           </select></div></div>
+        <div class="field"><label for="mukim">Mukim / town</label>
+          <div class="select"><select id="mukim"></select></div></div>
         <div class="field"><span class="field-label" id="needsLabel" data-i18n="needLabel">Needs</span>
           <details class="multi-select" id="needPicker">
             <summary aria-labelledby="needsLabel needSummary"><span id="needSummary">Company or hospital escort</span><span class="multi-chevron" aria-hidden="true"></span></summary>
@@ -60,9 +102,12 @@
           </details>
           <input id="need" type="hidden" value="companion">
         </div>
+        <div class="field"><label for="living">Living arrangement</label>
+          <div class="select"><select id="living"><option value="alone">Lives alone</option><option value="spouse">With spouse</option><option value="family">With family</option><option value="care">Residential care</option></select></div></div>
         <div class="field"><label for="income" data-i18n="incomeLabel">Household income a month</label>
-          <div class="input-rm"><span>RM</span><input id="income" type="number" inputmode="numeric" min="0" step="100" value="3500"></div></div>
+          <div class="select"><select id="income"><option value="0">No regular income</option><option value="800">Below RM1,000</option><option value="1500">RM1,000–RM1,999</option><option value="2500">RM2,000–RM2,999</option><option value="3500" selected>RM3,000–RM4,999</option><option value="5000">RM5,000 and above</option></select></div></div>
       </div>
+      <p class="case-context" id="caseContext" aria-live="polite"></p>
 
       <div class="lab">
         <div class="cov">
@@ -109,6 +154,7 @@
 </main>
 
 <script src="assets/js/kse-viz.js"></script>
-<script src="assets/js/kse-pages.js"></script>
+<script src="assets/js/kse-pages.js?v=20260930k"></script>
 </body>
 </html>
+
