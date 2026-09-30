@@ -290,8 +290,11 @@ body[data-page="evidence"] .band{--glow-x:16%;--glow-y:52%;--glow-a:.14}
 .home-drawer summary i{display:inline-flex;align-items:center;gap:9px;min-width:76px;justify-content:center;padding:7px 10px;border:1px solid var(--paddy);border-radius:999px;background:var(--paddy-soft);color:var(--paddy-ink);font:800 11px var(--sans);letter-spacing:.1em;text-transform:uppercase;font-style:normal;transition:transform .2s var(--ease),background-color .2s var(--ease),box-shadow .2s var(--ease)}
 .home-drawer summary i::after{content:"+";font:800 17px/1 var(--sans);transition:transform .25s var(--ease)}
 .home-drawer summary i b{font-weight:800}
-.home-drawer[open] summary i b{font-size:0}
-.home-drawer[open] summary i b::after{content:"Hide";font-size:11px}
+/* Show / Hide words come from CSS so they follow the page language (html lang="ms" in BM) */
+:root{--t-show:"Show";--t-hide:"Hide"}
+:root:lang(ms){--t-show:"Buka";--t-hide:"Tutup"}
+.home-drawer summary i b::before{content:var(--t-show)}
+.home-drawer[open] summary i b::before{content:var(--t-hide)}
 .home-drawer[open] summary i::after{content:"−";font-size:18px}
 .home-drawer summary:hover strong{color:var(--paddy-ink)}
 .home-drawer summary:hover i{transform:translateY(-2px) scale(1.04);background:var(--paddy);color:var(--on-paddy);box-shadow:0 8px 16px -10px var(--paddy)}
@@ -325,8 +328,8 @@ body[data-page="overview"] .home-drawer summary i{min-width:88px}
 .page-drawer-body{max-height:0;overflow:hidden;opacity:0;transform:translateY(-12px);transition:max-height .7s var(--ease),opacity .35s var(--ease),transform .55s var(--ease);padding:0}
 .page-drawer[open] .page-drawer-body{max-height:2200px;opacity:1;transform:translateY(0);padding:4px 0 18px}
 .page-drawer-note{margin:0 0 18px;color:var(--muted)}
-.page-drawer[open] .page-drawer-toggle b{font-size:0}
-.page-drawer[open] .page-drawer-toggle b::after{content:"Hide";font-size:11px}
+.page-drawer-toggle b::before{content:var(--t-show)}
+.page-drawer[open] .page-drawer-toggle b::before{content:var(--t-hide)}
 .page-drawer[open] .page-drawer-toggle i::after{content:"−"}
 .page-drawer:not([open]) .page-drawer-toggle i::after{content:"+"}
 body[data-page="overview"] .tint{background:color-mix(in srgb,var(--gold-soft) 28%,var(--bg))}
@@ -576,6 +579,7 @@ body[data-page="roadmap"] .page-character img{width:260px;height:190px;object-fi
 .person:hover .avatar{transform:translateY(-2px) scale(1.05);box-shadow:0 8px 14px -8px rgba(15,35,30,.5)}
 .person.lead .avatar{background-color:var(--gold);background-image:url('../img/team-avatar-sprite.png?v=20260930d');color:var(--on-gold)}
 .avatar-0{background-image:url('../img/avatar-shamzaeffa.png?v=20260930f');background-size:cover;background-position:center}
+.avatar-3{background-image:url('../img/avatar-syakiran.png?v=20260930g');background-size:cover;background-position:center}
 .person b{display:block;font-size:14.5px;font-weight:650;line-height:1.3}
 .person div>span{display:block;font-size:12.5px;color:var(--muted);margin-top:2px}
 .person.lead div>span,.person.sub div>span{color:var(--gold-ink);font-weight:600}
@@ -842,7 +846,7 @@ tr.flash td{animation:flash 2.4s ease}
 .notice summary b{font-size:15px;line-height:1.3}
 .notice summary i{display:inline-flex;align-items:center;gap:8px;margin-left:auto;padding:6px 10px;border:1px solid var(--line);border-radius:999px;background:var(--surface-2);color:var(--paddy-ink);font:800 10.5px var(--sans);letter-spacing:.08em;text-transform:uppercase;font-style:normal;transition:transform .2s var(--ease),background-color .2s var(--ease),color .2s var(--ease)}
 .notice summary i::after{content:"−";font-size:16px;line-height:.7}
-.notice:not([open]) summary i span{font-size:0}.notice:not([open]) summary i span::after{content:"Show";font-size:10.5px}.notice:not([open]) summary i::after{content:"+"}
+.notice summary i span::before{content:var(--t-hide)}.notice:not([open]) summary i span::before{content:var(--t-show)}.notice:not([open]) summary i::after{content:"+"}
 .notice summary:hover i{transform:translateY(-1px);background:var(--paddy);color:var(--on-paddy)}
 .notice-body{display:grid;grid-template-rows:1fr;padding:0 20px 16px 56px;opacity:1;transform:translateY(0);transition:opacity .3s var(--ease),transform .4s var(--ease)}
 .notice-body span{font-size:14px;line-height:1.5;color:var(--ink-2)}
@@ -1067,6 +1071,7 @@ tr.flash td{animation:flash 2.4s ease}
   .card,.output,.walk a,.source,.g-row,.enode{break-inside:avoid}
   .section{padding-block:24px}
 }
+
 
 
 
