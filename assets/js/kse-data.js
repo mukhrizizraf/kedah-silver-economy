@@ -94,6 +94,12 @@ steps:{
   welfareElig:{en:'Check if they qualify for aid',bm:'Semak kelayakan bantuan'},
   foodMeal:{en:'Food or meal delivery',bm:'Makanan atau penghantaran makanan'}
 },
+stepInfo:{
+  paweSocial:{
+    en:'PAWE means Pusat Aktiviti Warga Emas. It provides regular social activities, peer support, light exercise and a place for older people to stay connected.',
+    bm:'PAWE bermaksud Pusat Aktiviti Warga Emas. Ia menyediakan aktiviti sosial, sokongan rakan sebaya, senaman ringan dan ruang untuk warga emas terus berhubung.'
+  }
+},
 /* m = name prefix into K.records. The page prefers a record in the chosen
    district, so "Who could help" names the real organisation on our list and
    takes its status from that record instead of repeating it here. */

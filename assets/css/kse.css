@@ -833,6 +833,9 @@ tr.flash td{animation:flash 2.4s ease}
 .path li+li::before{content:"";position:absolute;left:13px;top:-9px;height:18px;width:1.5px;background:var(--line)}
 .path .n{position:relative;z-index:1;width:28px;height:28px;flex:none;border-radius:50%;display:grid;place-items:center;background:var(--surface-2);border:1px solid var(--line);font:700 12px var(--sans);color:var(--ink-2)}
 .path li.is-priority .n{background:var(--gold);border-color:var(--gold);color:var(--on-gold)}
+.path-info{width:21px;height:21px;font-size:12px;cursor:help;box-shadow:none}
+.path-info:hover,.path-info:focus-visible{transform:translateY(-1px) scale(1.06);box-shadow:0 3px 8px -5px rgba(15,35,30,.5)}
+.path-label{min-width:0}
 .path em{margin-left:auto;font:600 10.5px var(--sans);font-style:normal;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-ink)}
 .nodes li{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid var(--line-2);font-size:14px}
 .nodes li:last-child{border-bottom:0}

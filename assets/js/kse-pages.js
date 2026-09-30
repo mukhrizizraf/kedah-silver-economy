@@ -384,7 +384,12 @@ K.pageInit.scenario = function () {
     $('#steps').textContent = steps;
     $('#pathwayList').innerHTML = path.map(function (k, i) {
       var pr = nks.some(function (nk) { return S.needs[nk].step === k; });
-      return '<li' + (pr ? ' class="is-priority"' : '') + '><span class="n">' + (i + 1) + '</span><span>' + esc(K.L(S.steps[k])) + '</span>' + (pr ? '<em>' + esc(K.T('Selected need', 'Keperluan dipilih')) + '</em>' : '') + '</li>';
+      var detail = S.stepInfo && S.stepInfo[k], info = '';
+      if (detail) {
+        var tipTitle = K.T('About this step', 'Tentang langkah ini');
+        info = '<button class="info-btn path-info" type="button" aria-label="' + esc(tipTitle) + '" data-tip="' + esc('<b>' + tipTitle + '</b><span>' + K.L(detail) + '</span>') + '">i</button>';
+      }
+      return '<li' + (pr ? ' class="is-priority"' : '') + '><span class="n">' + (i + 1) + '</span><span class="path-label">' + esc(K.L(S.steps[k])) + '</span>' + info + (pr ? '<em>' + esc(K.T('Selected need', 'Keperluan dipilih')) + '</em>' : '') + '</li>';
     }).join('');
 
     /* Who could help, named from the organisation list and carrying that
