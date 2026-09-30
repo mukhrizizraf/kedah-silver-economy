@@ -10,6 +10,7 @@ A static, multi-page, bilingual (English / Bahasa Melayu) pitch site for a **UUM
 - **Source documents:** `dokumen/` holds the revised application form (23-page PDF), the reply-to-reviewers table (5-page PDF) and the pilot-to-policy roadmap image (the WhatsApp JPEG).
 - **Kept off GitHub:** `.gitignore` excludes `dokumen/`, `OPEN_ITEMS.md` (local notes), the original Codex single-file version (`kedah_silver_economy_grant_dashboard_v1_codex.html`) and its old filename, which is now just a redirect to `index.html`. It also excludes `.claude/` (the Impeccable design skill and its 15 MB engine binary) and `.impeccable/` (a sidecar regenerated from `DESIGN.md`). Never commit the grant PDFs.
 - **Design context:** `PRODUCT.md` records who the site is for and why (the review panel first; presented live, then sent as a link; becomes the project site for the 9 months). `DESIGN.md` records the visual system and its named rules. Read both before design work. When a token in `kse.css` changes, update `DESIGN.md` to match.
+- **Future mobile app:** Treat this dashboard as the starting point for a future mobile app for older people in Kedah. Preserve an elderly-first approach in all later product and UI work: large readable type, strong contrast, clear Malay and English language choices, touch targets of at least 44px, short step-by-step flows, plain labels, visible back and home actions, minimal typing, support for screen readers and text scaling, forgiving forms with confirmation before submission, and useful feedback after every action. Keep the most important tasks possible with one hand and on a low-end phone or weak connection. Do not make older people navigate the research dashboard directly; provide a simple task view for the older person and a separate coordinator or family view for assessment, referrals and follow-up. Protect consent, privacy and sensitive personal data from the beginning.
 - **No build step:** there is no build, lint or test tooling. The site uses classic `<script src>` tags on purpose (no ES modules, no `fetch()`), so it works from `file://` as well as GitHub Pages. Keep it that way. Fonts come from Google Fonts and fall back to system fonts offline.
 - **Origin of the structure:** it was modelled on the user's `mukhrizizraf/sefb_planner_code` repo (multi-page static HTML, one design-system CSS file, shared JS, `body[data-page]`). It deliberately does not look like that repo, so don't copy its naming or visuals.
 
@@ -39,7 +40,7 @@ curl -s https://mukhrizizraf.github.io/kedah-silver-economy/assets/js/kse-data.j
 
 ## Architecture
 
-The six pages, in pitch order, are:
+The seven pages, in pitch order, are:
 
 | File | EN label | BM label |
 | --- | --- | --- |
@@ -49,6 +50,7 @@ The six pages, in pitch order, are:
 | `scenario.html` | Try a case | Cuba satu kes |
 | `roadmap.html` | Plan & budget | Pelan & bajet |
 | `evidence.html` | Sources | Sumber |
+| `data.html` | Data blueprint | Pelan data |
 
 The file names are older than the labels. Keep them, because links depend on them. Each page contains only its `<main>` content, and the load order matters:
 
