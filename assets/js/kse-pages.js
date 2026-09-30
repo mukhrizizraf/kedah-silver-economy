@@ -47,20 +47,6 @@ K.pageInit.overview = function () {
     $('#why').innerHTML = K.why.map(function (w) {
       return '<div class="fig"><b>' + esc(K.L(w.big)) + '</b><p>' + esc(K.L(w.t)) + '</p><small>' + esc(K.T('Source: ', 'Sumber: ') + K.L(w.src)) + '</small></div>';
     }).join('');
-    /* The five results on the real 9-month axis. Each result sits in an even
-       column for reading, and a leader runs from it to the month it is due, so
-       the axis shows what the cards hid: three of five land in the last three
-       months. Due months follow Table 2 of the form. */
-    var MON = K.lang === 'bm' ? ['Nov', 'Dis', 'Jan', 'Feb', 'Mac', 'Apr', 'Mei', 'Jun', 'Jul'] : ['Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'];
-    var DUE = [3, 5, 7, 8, 9];
-    $('#outAxis').innerHTML = '<div class="ax-months">' + MON.map(function (m, i) {
-        return '<span>' + m + (i === 0 ? '<em>2026</em>' : i === 2 ? '<em>2027</em>' : '') + '</span>';
-      }).join('') + '</div>' +
-      '<div class="ax-rule">' + DUE.map(function (m) { return '<i style="left:' + (m / 9 * 100).toFixed(2) + '%"></i>'; }).join('') + '</div>' +
-      '<svg class="ax-lead" viewBox="0 0 1000 60" preserveAspectRatio="none">' + DUE.map(function (m, i) {
-        var a = (m / 9 * 1000).toFixed(1), b = ((i + 0.5) / 5 * 1000).toFixed(1);
-        return '<path d="M' + a + ' 0C' + a + ' 32 ' + b + ' 28 ' + b + ' 60"/>';
-      }).join('') + '</svg>';
     $('#partnerList').innerHTML = K.partners.map(function (p) {
       var s = K.partnerStatus[p.s];
       return '<li><b>' + esc(K.L(p.n)) + '</b>' + K.pill(s.c === 'verified' ? 'Verified' : 'Candidate', K.L(s)) + '</li>';
