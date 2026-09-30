@@ -594,6 +594,7 @@ body[data-page="roadmap"] .page-character img{width:260px;height:190px;object-fi
 .avatar-3{background-image:url('../img/avatar-syakiran.png?v=20260930g');background-size:cover;background-position:center}
 .avatar-4{background-image:url('../img/avatar-sharima.png?v=20260930i');background-size:cover;background-position:center}
 .avatar-5{background-image:url('../img/avatar-mukhriz-izraf.png?v=20260930j');background-size:cover;background-position:center}
+.person .avatar.avatar-5{background-image:url('../img/avatar-mukhriz-izraf.png?v=20260930l') !important;background-size:cover !important;background-position:center !important}
 .person b{display:block;font-size:14.5px;font-weight:650;line-height:1.3}
 .person div>span{display:block;font-size:12.5px;color:var(--muted);margin-top:2px}
 .person.lead div>span,.person.sub div>span{color:var(--gold-ink);font-weight:600}
@@ -1087,6 +1088,7 @@ tr.flash td{animation:flash 2.4s ease}
   .card,.output,.walk a,.source,.g-row,.enode{break-inside:avoid}
   .section{padding-block:24px}
 }
+
 
 
 
