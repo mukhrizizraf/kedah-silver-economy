@@ -193,6 +193,9 @@ K.pageInit.network = function () {
 
   [tf, df, sf].forEach(function (el) { el.addEventListener('change', function () { renderStatusBar(); renderRecords(); }); });
   q.addEventListener('input', renderRecords);
+  $$('.search-suggestions [data-search-example]').forEach(function (b) {
+    b.addEventListener('click', function () { q.value = b.getAttribute('data-search-example'); renderRecords(); q.focus(); });
+  });
   $('#statusBar').addEventListener('click', function (e) {
     var b = e.target.closest('[data-status]'); if (!b) return;
     if (b.getAttribute('data-status') === 'reset') {

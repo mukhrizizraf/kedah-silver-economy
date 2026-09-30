@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Onest:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="assets/css/kse.css?v=20260930c">
+<link rel="stylesheet" href="assets/css/kse.css?v=20260930q">
 <script src="assets/js/kse-data.js"></script>
 </head>
 <body data-page="network">
@@ -59,8 +59,11 @@
         <div class="field field-search"><label for="search" data-i18n="fSearch">Search</label>
           <div class="input-search">
             <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4.3-4.3"/></svg>
-            <input id="search" type="search" autocomplete="off" placeholder="Name or service">
-          </div></div>
+            <input id="search" type="search" list="networkSearchHints" autocomplete="off" placeholder="Name or service">
+          </div>
+          <datalist id="networkSearchHints"><option value="MAIK"><option value="transport"><option value="Kota Setar"><option value="home care"><option value="masjid"></datalist>
+          <div class="search-suggestions" aria-label="Search examples"><span>Try:</span><button type="button" data-search-example="MAIK">MAIK</button><button type="button" data-search-example="transport">transport</button><button type="button" data-search-example="Kota Setar">Kota Setar</button></div>
+        </div>
         <p class="count" id="recordCount" aria-live="polite"></p>
       </div>
 
@@ -117,7 +120,8 @@
 </main>
 
 <script src="assets/js/kse-viz.js"></script>
-<script src="assets/js/kse-pages.js?v=20260930p"></script>
+<script src="assets/js/kse-pages.js?v=20260930q"></script>
 </body>
 </html>
+
 
