@@ -295,6 +295,11 @@ K.pageInit.scenario = function () {
   function update(instant) {
     var pk = persona.value, nks = selectedNeeds(), dk = district.value, p = S.profiles[pk];
     var inc = Math.max(0, Number(income.value) || 0), s = score(pk, nks, dk, inc), coverage = s.v;
+    var tipTitle = K.T('How the score is calculated', 'Cara skor dikira');
+    var tipBody = K.T('Start with the person profile. Add or subtract each selected need, district availability and income adjustment. Multiple needs include a coordination adjustment. The final sample score is capped between 20 and 96.', 'Mulakan dengan profil warga emas. Tambah atau tolak pelarasan bagi setiap keperluan, daerah dan pendapatan. Beberapa keperluan turut mengambil kira penyelarasan. Skor contoh akhir dihadkan antara 20 hingga 96.');
+    var info = $('#scoreInfo');
+    info.setAttribute('aria-label', tipTitle);
+    info.setAttribute('data-tip', '<b>' + esc(tipTitle) + '</b><span>' + esc(tipBody) + '</span>');
     var path = p.path.slice(), nodes = p.nodes.slice();
     nks.forEach(function (k) { var nd = S.needs[k]; if (path.indexOf(nd.step) < 0) path.unshift(nd.step); if (nodes.indexOf(nd.node) < 0) nodes.unshift(nd.node); });
     path = path.slice(0, 5); nodes = nodes.slice(0, 4);

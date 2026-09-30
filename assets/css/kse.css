@@ -770,6 +770,9 @@ tr.flash td{animation:flash 2.4s ease}
 .cov-rows b{color:var(--band-ink);font-variant-numeric:tabular-nums}
 .cov-note{font-size:12px;line-height:1.5;color:var(--band-muted)}
 .lab .card{display:grid;gap:14px;align-content:start}
+.label-with-info{display:flex;align-items:center;gap:9px}
+.info-btn{appearance:none;display:grid;place-items:center;width:24px;height:24px;flex:none;padding:0;border:1.5px solid var(--paddy);border-radius:50%;background:var(--paddy-soft);color:var(--paddy-ink);font:800 14px/1 var(--sans);font-style:italic;cursor:help;box-shadow:0 2px 0 color-mix(in srgb,var(--paddy) 35%,var(--line));transition:transform .18s var(--ease),background-color .18s,color .18s,box-shadow .18s}
+.info-btn:hover,.info-btn:focus-visible{transform:translateY(-2px) scale(1.08);background:var(--paddy);color:var(--on-paddy);box-shadow:0 4px 0 var(--paddy-ink),0 8px 12px -8px rgba(15,35,30,.5)}
 .path{display:grid}
 .path li{position:relative;display:flex;align-items:center;gap:12px;padding:9px 0;font-size:14px}
 .path li+li::before{content:"";position:absolute;left:13px;top:-9px;height:18px;width:1.5px;background:var(--line)}

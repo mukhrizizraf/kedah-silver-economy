@@ -332,6 +332,7 @@ chainNote:'Kami mahu tahu siapa yang ada, dan juga bagaimana seseorang bergerak 
 labTitle:'Pilih warga emas dan keperluannya. Lihat bantuan yang ada.',labSub:'Tukar pilihan di bawah. Langkah, skor dan masalah utama berubah serta-merta.',
 labStat:'kes yang boleh dicuba',
 presetLabel:'Contoh simulasi',
+scoreTipTitle:'Cara skor dikira',scoreTipBody:'Mulakan dengan profil warga emas. Tambah atau tolak pelarasan bagi setiap keperluan, daerah dan pendapatan. Beberapa keperluan turut mengambil kira penyelarasan. Skor contoh akhir dihadkan antara 20 hingga 96.',
 personaLabel:'Warga emas',districtLabel:'Daerah',needLabel:'Keperluan utama',incomeLabel:'Pendapatan isi rumah sebulan',
 pIndependent:'Boleh urus diri sendiri',pVulnerable:'Perlukan sedikit bantuan',pHighneed:'Perlukan banyak bantuan',
 nCompanion:'Teman atau iringan ke hospital',nTransport:'Pengangkutan',nHomecare:'Penjagaan di rumah',nWelfare:'Bantuan wang atau kebajikan',nFood:'Makanan',
