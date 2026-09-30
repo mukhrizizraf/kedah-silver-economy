@@ -169,7 +169,8 @@ var pageTransition = doc.createElement('div');
 pageTransition.id = 'pageTransition';
 pageTransition.className = 'page-transition';
 pageTransition.setAttribute('aria-hidden', 'true');
-pageTransition.innerHTML = '<i></i><i></i>';
+pageTransition.innerHTML = '<i class="swish swish-a"></i><i class="swish swish-b"></i>' +
+  Array.from({length:18}, function (_, i) { return '<i class="dust dust-' + (i + 1) + '"></i>'; }).join('');
 body.appendChild(pageTransition);
 function transitionTo(href, e) {
   if (!href || K.reduceMotion || body.classList.contains('page-leaving')) return false;
@@ -181,7 +182,7 @@ function transitionTo(href, e) {
   if (u.origin !== location.origin || u.pathname === location.pathname) return false;
   e.preventDefault();
   body.classList.add('page-leaving');
-  window.setTimeout(function () { location.href = u.href; }, 300);
+  window.setTimeout(function () { location.href = u.href; }, 480);
   return true;
 }
 doc.addEventListener('click', function (e) {
