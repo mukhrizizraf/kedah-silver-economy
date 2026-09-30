@@ -56,7 +56,7 @@ K.pageInit.overview = function () {
     }).join('');
     $('#track').innerHTML = K.track.map(function (t) { return '<li><b>' + esc(t.n) + '</b><span>' + esc(K.L(t.t)) + '</span></li>'; }).join('');
     /* ticked in the application form, so each one carries a drawn tick */
-    $('#plans').innerHTML = K.plans.map(function (p) {
+    if ($('#plans')) $('#plans').innerHTML = K.plans.map(function (p) {
       return '<li><svg class="tick" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"/></svg><b>' + esc(K.L(p.n)) + '</b><span>' + esc(K.L(p.t)) + '</span></li>';
     }).join('');
     $('#walk').innerHTML = K.PAGES.slice(1).map(function (p, i) {
