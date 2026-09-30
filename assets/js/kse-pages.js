@@ -187,13 +187,18 @@ K.pageInit.network = function () {
       return '<li><button type="button" data-status="' + s + '" aria-pressed="' + on + '">' +
         K.pill(s, K.counts[s] + ' · ' + K.L(K.status[s])) + '</button></li>';
     }).join('') + '<li><button type="button" data-status="all" aria-pressed="' + (sf.value === 'all') + '" class="all">' +
-      esc(K.T('Show all ' + K.records.length, 'Papar semua ' + K.records.length)) + '</button></li>';
+      esc(K.T('Show all ' + K.records.length, 'Papar semua ' + K.records.length)) + '</button></li>' +
+      '<li><button type="button" data-status="reset" class="reset">' + esc(K.T('Reset', 'Set semula')) + '</button></li>';
   }
 
   [tf, df, sf].forEach(function (el) { el.addEventListener('change', function () { renderStatusBar(); renderRecords(); }); });
   q.addEventListener('input', renderRecords);
   $('#statusBar').addEventListener('click', function (e) {
     var b = e.target.closest('[data-status]'); if (!b) return;
+    if (b.getAttribute('data-status') === 'reset') {
+      tf.value = 'all'; df.value = 'all'; sf.value = 'all'; q.value = '';
+      sortKey = null; sortDir = 1; renderStatusBar(); renderRecords(); b.focus(); return;
+    }
     sf.value = b.getAttribute('data-status');
     renderStatusBar(); renderRecords();
     var again = $('#statusBar [data-status="' + b.getAttribute('data-status') + '"]'); if (again) again.focus();

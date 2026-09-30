@@ -711,6 +711,8 @@ body[data-page="roadmap"] .page-character img{width:260px;height:190px;object-fi
 .statusbar button[aria-pressed="true"] .pill{background:transparent;color:var(--bg)}
 .statusbar button.all{padding:7px 14px;font:600 12px var(--sans);color:var(--ink-2)}
 .statusbar button.all[aria-pressed="true"]{color:var(--bg)}
+.statusbar button.reset{padding:7px 14px;font:700 12px var(--sans);color:var(--paddy-ink);border-color:var(--paddy)}
+.statusbar button.reset:hover{background:var(--paddy);color:var(--on-paddy);border-color:var(--paddy)}
 
 .field-search{min-width:220px;flex:1 1 220px}
 .input-search{position:relative;display:flex;align-items:center}
