@@ -41,6 +41,8 @@ K.PAGES = [
  desc:{en:'What happens each month, and how the RM30,000 is spent.',bm:'Apa berlaku setiap bulan, dan bagaimana RM30,000 dibelanjakan.'}},
 {id:'evidence',href:'evidence.html',label:{en:'Sources',bm:'Sumber'},
  desc:{en:'The documents behind this dashboard and the reviewer comments.',bm:'Dokumen di sebalik dashboard ini dan ulasan penilai.'}}
+,{id:'data',href:'data.html',label:{en:'Data blueprint',bm:'Pelan data'},
+ desc:{en:'The sheets and fields needed to turn this prototype into a working dashboard.',bm:'Lembaran dan medan yang diperlukan untuk menjadikan prototaip ini dashboard sebenar.'}}
 ];
 K.page = body.getAttribute('data-page') || 'overview';
 K.pageIndex = 0;
@@ -75,7 +77,8 @@ var PICON = {
   roadmap: '<rect pathLength="1" x="3.6" y="5.2" width="16.8" height="15.3" rx="2.6"/><path pathLength="1" d="M3.6 9.9h16.8"/>' +
     '<path class="ai-pin" pathLength="1" d="M8 3.2v3.6M16 3.2v3.6"/><path class="ai-c" pathLength="1" d="M8.8 15.2l2.2 2.2 4.3-4.4"/>',
   evidence: '<path pathLength="1" d="M14 3.2H7.6A1.6 1.6 0 0 0 6 4.8v14.4a1.6 1.6 0 0 0 1.6 1.6h8.8a1.6 1.6 0 0 0 1.6-1.6V7.2z"/><path pathLength="1" d="M14 3.2v4h4"/>' +
-    '<path class="ai-r1" pathLength="1" d="M9 11.6h6"/><path class="ai-r2" pathLength="1" d="M9 14.6h6"/><path class="ai-r3" pathLength="1" d="M9 17.6h3.6"/>'
+    '<path class="ai-r1" pathLength="1" d="M9 11.6h6"/><path class="ai-r2" pathLength="1" d="M9 14.6h6"/><path class="ai-r3" pathLength="1" d="M9 17.6h3.6"/>',
+  data: '<path pathLength="1" d="M4 5.5h6v6H4zM14 5.5h6v6h-6zM4 15.5h6v3H4zM14 15.5h6v3h-6z"/><path class="ai-r1" pathLength="1" d="M10 8.5h4M10 17h4"/>'
 };
 K.pageIcon = function (id) { return '<svg class="ai ai-' + id + '" viewBox="0 0 24 24" aria-hidden="true">' + (PICON[id] || '') + '</svg>'; };
 K.mark = '<svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><rect class="sq" x="8" y="8" width="16" height="16" rx="1"/><rect class="sq" x="8" y="8" width="16" height="16" rx="1" transform="rotate(45 16 16)"/><circle class="ctr" cx="16" cy="16" r="3.4"/></svg>';
