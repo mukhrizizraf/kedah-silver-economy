@@ -303,7 +303,7 @@ body[data-page="overview"] .home-drawer summary{min-height:88px;padding:20px 24p
 body[data-page="overview"] .home-drawer summary:hover{border-color:var(--paddy);transform:perspective(700px) rotateX(2deg) translateY(-4px);box-shadow:0 11px 0 color-mix(in srgb,var(--paddy-soft) 80%,var(--line)),0 20px 28px -20px rgba(15,35,30,.65)}
 body[data-page="overview"] .home-drawer[open] summary{border-color:var(--paddy);box-shadow:0 4px 0 color-mix(in srgb,var(--paddy-soft) 80%,var(--line)),0 10px 18px -18px rgba(15,35,30,.55)}
 body[data-page="overview"] .home-drawer summary i{min-width:88px}
-.overview-button-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;padding-block:14px 34px}
+.overview-button-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;padding-block:14px 34px}
 .overview-button-grid .home-drawer{border-top:0;padding-top:0}
 .overview-button-grid .home-drawer:not([open]){height:176px}
 .overview-button-grid .home-drawer[open]{grid-column:1/-1}
