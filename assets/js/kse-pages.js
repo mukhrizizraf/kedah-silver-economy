@@ -39,7 +39,8 @@ K.pageInit.overview = function () {
     network: { n: K.counts.Verified + ' / ' + K.records.length, l: { en: 'confirmed so far', bm: 'disahkan setakat ini' } },
     scenario: { n: '3', l: { en: 'sample people', bm: 'contoh warga emas' } },
     roadmap: { n: '9', l: { en: 'months, 4 phases', bm: 'bulan, 4 fasa' } },
-    evidence: { n: String(K.reviews.length), l: { en: 'reviewer comments', bm: 'ulasan penilai' } }
+    evidence: { n: String(K.reviews.length), l: { en: 'reviewer comments', bm: 'ulasan penilai' } },
+    data: { n: '11', l: { en: 'workbook sheets', bm: 'lembaran workbook' } }
   };
   K.onLang.push(function () {
     K.viz.constellation(svg, $('#consLegend'), first); first = false;
