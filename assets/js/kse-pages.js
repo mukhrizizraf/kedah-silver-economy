@@ -256,12 +256,30 @@ K.pageInit.scenario = function () {
   /* The same arithmetic the prototype used, but it hands back every part so
      the page can show its working. Income under RM1,000 adds 6; welfare on
      over RM3,000 takes 8 away. The two can never both apply. */
-  function score(pk, nk, dk, inc) {
-    var p = S.profiles[pk], nd = S.needs[nk], adj = S.districtAdj[dk] || 0;
-    var raw = p.coverage + nd.add + adj, v = Math.max(20, Math.min(96, raw)), incAdj = 0;
+  var NEEDS = ['companion','transport','homecare','welfare','food'];
+  function labelNeed(k) {
+    var map = {companion:'Company or hospital escort',transport:'Transport',homecare:'Home care',welfare:'Money or welfare help',food:'Food'};
+    return K.T(map[k], {companion:'Teman atau iringan ke hospital',transport:'Pengangkutan',homecare:'Penjagaan di rumah',welfare:'Bantuan wang atau kebajikan',food:'Makanan'}[k]);
+  }
+  function selectedNeeds() {
+    var out = K.$$('#needPicker input[name="needs"]:checked').map(function (el) { return el.value; });
+    if (!out.length) { var first = $('#needPicker input[name="needs"]'); first.checked = true; out = [first.value]; }
+    need.value = out.join(',');
+    $('#needSummary').textContent = out.length === 1 ? labelNeed(out[0]) : out.length + ' ' + K.T('needs selected', 'keperluan dipilih');
+    return out;
+  }
+  function setNeeds(arr) {
+    K.$$('#needPicker input[name="needs"]').forEach(function (el) { el.checked = arr.indexOf(el.value) >= 0; });
+    selectedNeeds();
+  }
+  function score(pk, nks, dk, inc) {
+    var p = S.profiles[pk], adj = S.districtAdj[dk] || 0;
+    var needAdd = nks.reduce(function (sum, k) { return sum + S.needs[k].add; }, 0);
+    var complexity = Math.max(0, nks.length - 1) * -4;
+    var raw = p.coverage + needAdd + complexity + adj, v = Math.max(20, Math.min(96, raw)), incAdj = 0;
     if (inc < 1000) incAdj = Math.min(96, v + 6) - v;
-    else if (inc > 3000 && nk === 'welfare') incAdj = -8;
-    return { v: v + incAdj, sub: v, base: p.coverage, need: nd.add, district: adj, income: incAdj, clamped: v !== raw };
+    else if (inc > 3000 && nks.indexOf('welfare') >= 0) incAdj = -8;
+    return { v: v + incAdj, sub: v, base: p.coverage, need: needAdd, complexity: complexity, district: adj, income: incAdj, clamped: v !== raw };
   }
 
   /* Point a case provider at the real row on the organisation list, choosing
@@ -282,19 +300,20 @@ K.pageInit.scenario = function () {
 
   function renderPresets() {
     $('#presetList').innerHTML = S.presets.map(function (p, i) {
-      var on = persona.value === p.persona && district.value === p.district && need.value === p.need && Number(income.value) === p.income;
+      var on = persona.value === p.persona && district.value === p.district && selectedNeeds().length === 1 && selectedNeeds()[0] === p.need && Number(income.value) === p.income;
       return '<button class="preset" type="button" data-preset="' + i + '" aria-pressed="' + on + '">' + esc(K.L(p.l)) + '</button>';
     }).join('');
   }
 
   function update(instant) {
-    var pk = persona.value, nk = need.value, dk = district.value, p = S.profiles[pk], nd = S.needs[nk];
-    var inc = Math.max(0, Number(income.value) || 0), s = score(pk, nk, dk, inc), coverage = s.v;
-    var path = p.path.slice(); if (path.indexOf(nd.step) < 0) path.unshift(nd.step);
-    var nodes = p.nodes.slice(); if (nodes.indexOf(nd.node) < 0) nodes.unshift(nd.node);
+    var pk = persona.value, nks = selectedNeeds(), dk = district.value, p = S.profiles[pk];
+    var inc = Math.max(0, Number(income.value) || 0), s = score(pk, nks, dk, inc), coverage = s.v;
+    var path = p.path.slice(), nodes = p.nodes.slice();
+    nks.forEach(function (k) { var nd = S.needs[k]; if (path.indexOf(nd.step) < 0) path.unshift(nd.step); if (nodes.indexOf(nd.node) < 0) nodes.unshift(nd.node); });
     path = path.slice(0, 5); nodes = nodes.slice(0, 4);
-    var steps = Math.max(2, p.steps + (nd.add < 0 ? 1 : 0) + (s.district < 0 ? 1 : 0));
-    var gap = p.gap; if (s.district < 0) gap = 'district'; if (nd.add < 0) gap = 'capacity';
+    var negativeNeeds = nks.filter(function (k) { return S.needs[k].add < 0; }).length;
+    var steps = Math.max(2, p.steps + Math.max(0, nks.length - 1) + negativeNeeds + (s.district < 0 ? 1 : 0));
+    var gap = p.gap; if (s.district < 0) gap = 'district'; else if (nks.length > 1) gap = 'multiple'; else if (negativeNeeds) gap = 'capacity';
     var state = coverage > 70 ? 'good' : coverage > 50 ? 'warn' : 'crit';
 
     setCoverage(coverage, instant);
@@ -305,8 +324,8 @@ K.pageInit.scenario = function () {
     var rows = [
       { l: optionText(persona), v: s.base, head: true },
       { l: K.T('District: ', 'Daerah: ') + dk, v: s.district },
-      { l: K.T('Main need: ', 'Keperluan utama: ') + optionText(need), v: s.need }
-    ];
+    ].concat(nks.map(function (k) { return { l: K.T('Need: ', 'Keperluan: ') + labelNeed(k), v: S.needs[k].add }; }));
+    if (s.complexity) rows.push({ l: K.T('Several needs: coordination', 'Penyelarasan beberapa keperluan'), v: s.complexity });
     if (s.income) rows.push({ l: K.T('Household income RM', 'Pendapatan isi rumah RM') + inc.toLocaleString('en-MY'), v: s.income });
     $('#working').innerHTML = rows.map(function (r) {
       return '<li' + (r.head ? ' class="is-base"' : '') + '><span>' + esc(r.l) + '</span><b>' + esc(r.head ? String(r.v) : signed(r.v)) + '</b></li>';
@@ -317,8 +336,8 @@ K.pageInit.scenario = function () {
 
     $('#steps').textContent = steps;
     $('#pathwayList').innerHTML = path.map(function (k, i) {
-      var pr = k === nd.step;
-      return '<li' + (pr ? ' class="is-priority"' : '') + '><span class="n">' + (i + 1) + '</span><span>' + esc(K.L(S.steps[k])) + '</span>' + (pr ? '<em>' + esc(K.T('Main need', 'Keperluan utama')) + '</em>' : '') + '</li>';
+      var pr = nks.some(function (nk) { return S.needs[nk].step === k; });
+      return '<li' + (pr ? ' class="is-priority"' : '') + '><span class="n">' + (i + 1) + '</span><span>' + esc(K.L(S.steps[k])) + '</span>' + (pr ? '<em>' + esc(K.T('Selected need', 'Keperluan dipilih')) + '</em>' : '') + '</li>';
     }).join('');
 
     /* Who could help, named from the organisation list and carrying that
@@ -343,14 +362,14 @@ K.pageInit.scenario = function () {
         (nodes.length - confirmed) + ' daripadanya masih perlu disemak atau contoh, jadi pelan ini belum satu janji bantuan.');
 
     $('#gap').textContent = K.L(S.gaps[gap]);
-    renderCompare(pk, nk, inc, dk);
+    renderCompare(pk, nks, inc, dk);
     renderPresets();
   }
 
   /* The same person and the same need, priced in every district. This is the
      argument the project is making, so it stays on screen. */
-  function renderCompare(pk, nk, inc, dk) {
-    var vals = DISTRICTS.map(function (d) { return { d: d, v: score(pk, nk, d, inc).v }; })
+  function renderCompare(pk, nks, inc, dk) {
+    var vals = DISTRICTS.map(function (d) { return { d: d, v: score(pk, nks, d, inc).v }; })
       .sort(function (a, b) { return b.v - a.v; });
     var hi = vals[0], lo = vals[vals.length - 1];
     $('#compare').innerHTML = vals.map(function (x) {
@@ -361,15 +380,16 @@ K.pageInit.scenario = function () {
         '<b>' + x.v + '</b></button></li>';
     }).join('');
     $('#compareNote').textContent = K.T(
-      'Same person, same need, same income. ' + hi.d + ' scores ' + hi.v + ' and ' + lo.d + ' scores ' + lo.v + ', a gap of ' + (hi.v - lo.v) + ' points.',
+      'Same person, same needs, same income. ' + hi.d + ' scores ' + hi.v + ' and ' + lo.d + ' scores ' + lo.v + ', a gap of ' + (hi.v - lo.v) + ' points.',
       'Orang yang sama, keperluan yang sama, pendapatan yang sama. ' + hi.d + ' dapat ' + hi.v + ' dan ' + lo.d + ' dapat ' + lo.v + ', beza ' + (hi.v - lo.v) + ' mata.');
   }
 
-  [persona, district, need, income].forEach(function (el) { el.addEventListener('input', function () { update(false); }); });
+  [persona, district, income].forEach(function (el) { el.addEventListener('input', function () { update(false); }); });
+  K.$$('#needPicker input[name="needs"]').forEach(function (el) { el.addEventListener('change', function () { selectedNeeds(); update(false); }); });
   $('#presetList').addEventListener('click', function (e) {
     var b = e.target.closest('[data-preset]'); if (!b) return;
     var p = S.presets[Number(b.getAttribute('data-preset'))];
-    persona.value = p.persona; district.value = p.district; need.value = p.need; income.value = p.income;
+    persona.value = p.persona; district.value = p.district; setNeeds([p.need]); income.value = p.income;
     update(false);
     var again = $('#presetList [data-preset="' + b.getAttribute('data-preset') + '"]'); if (again) again.focus();
   });

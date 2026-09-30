@@ -648,6 +648,18 @@ tr.flash td{animation:flash 2.4s ease}
 .preset[aria-pressed="true"]{background:var(--paddy);border-color:var(--paddy);color:var(--on-paddy)}
 .controls{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:18px}
 .controls .select select,.controls .input-rm input{min-width:0}
+.multi-select{position:relative;width:100%;min-width:0}
+.multi-select summary{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:42px;padding:10px 36px 10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--surface);font-size:14px;color:var(--ink);cursor:pointer;list-style:none;position:relative}
+.multi-select summary::-webkit-details-marker{display:none}
+.multi-select summary:hover{border-color:var(--paddy)}
+.multi-select[open] summary{border-color:var(--paddy);border-radius:10px 10px 0 0}
+.multi-select summary:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.multi-chevron{position:absolute;right:13px;top:50%;width:8px;height:8px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:translateY(-65%) rotate(45deg);transition:transform .15s}
+.multi-select[open] .multi-chevron{transform:translateY(-25%) rotate(225deg)}
+.multi-options{position:absolute;z-index:10;left:0;right:0;top:calc(100% - 1px);display:grid;gap:2px;padding:6px;background:var(--surface);border:1px solid var(--paddy);border-top:0;border-radius:0 0 10px 10px;box-shadow:0 12px 28px rgba(8,43,35,.12)}
+.multi-options label{display:flex;align-items:center;gap:9px;padding:9px 8px;border-radius:7px;color:var(--ink-2);font-size:13px;cursor:pointer}
+.multi-options label:hover{background:var(--surface-2);color:var(--ink)}
+.multi-options input{accent-color:var(--paddy);width:16px;height:16px;margin:0;flex:none}
 .lab{display:grid;grid-template-columns:1.05fr 1fr 1fr;gap:16px;align-items:stretch}
 .cov{background:var(--band);color:var(--band-ink);border-radius:var(--r);padding:24px;display:grid;gap:14px;align-content:start}
 .cov .label{color:var(--band-muted)}

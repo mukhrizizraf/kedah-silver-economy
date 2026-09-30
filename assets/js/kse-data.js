@@ -131,6 +131,7 @@ gaps:{
   coordinator:{en:'People with high needs need one named person to organise their medical, welfare and community help.',bm:'Warga emas berkeperluan tinggi perlukan seorang penyelaras untuk bantuan perubatan, kebajikan dan komuniti.'},
   district:{en:'Our list has few organisations in this district. Phase 1 must check what help is really there.',bm:'Senarai kami ada sedikit organisasi di daerah ini. Fasa 1 perlu semak bantuan yang benar-benar ada.'},
   capacity:{en:'There may not be enough trained staff. We will check this in the interviews and the trial.',bm:'Mungkin tidak cukup kakitangan terlatih. Kami akan semak perkara ini dalam temu bual dan percubaan.'}
+  ,multiple:{en:'Several needs need one coordinator to keep referrals from splitting across different services.',bm:'Beberapa keperluan perlukan seorang penyelaras supaya rujukan tidak berpecah antara perkhidmatan.'}
 },
 states:{good:{en:'Well covered',bm:'Dipenuhi dengan baik'},warn:{en:'Partly covered',bm:'Dipenuhi sebahagian'},crit:{en:'Poorly covered',bm:'Kurang dipenuhi'}},
 presets:[

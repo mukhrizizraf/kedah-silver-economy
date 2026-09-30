@@ -47,14 +47,19 @@
           <div class="select"><select id="district">
             <option>Kubang Pasu</option><option selected>Kota Setar</option><option>Sungai Petani</option><option>Kulim</option><option>Baling</option><option>Langkawi</option>
           </select></div></div>
-        <div class="field"><label for="need" data-i18n="needLabel">Main need</label>
-          <div class="select"><select id="need">
-            <option value="companion" data-i18n="nCompanion">Company or hospital escort</option>
-            <option value="transport" data-i18n="nTransport">Transport</option>
-            <option value="homecare" data-i18n="nHomecare">Home care</option>
-            <option value="welfare" data-i18n="nWelfare">Money or welfare help</option>
-            <option value="food" data-i18n="nFood">Food</option>
-          </select></div></div>
+        <div class="field"><label for="needPicker" data-i18n="needLabel">Needs</label>
+          <details class="multi-select" id="needPicker">
+            <summary><span id="needSummary">Company or hospital escort</span><span class="multi-chevron" aria-hidden="true"></span></summary>
+            <div class="multi-options" role="group" aria-label="Needs">
+              <label><input type="checkbox" name="needs" value="companion" checked><span data-i18n="nCompanion">Company or hospital escort</span></label>
+              <label><input type="checkbox" name="needs" value="transport"><span data-i18n="nTransport">Transport</span></label>
+              <label><input type="checkbox" name="needs" value="homecare"><span data-i18n="nHomecare">Home care</span></label>
+              <label><input type="checkbox" name="needs" value="welfare"><span data-i18n="nWelfare">Money or welfare help</span></label>
+              <label><input type="checkbox" name="needs" value="food"><span data-i18n="nFood">Food</span></label>
+            </div>
+          </details>
+          <input id="need" type="hidden" value="companion">
+        </div>
         <div class="field"><label for="income" data-i18n="incomeLabel">Household income a month</label>
           <div class="input-rm"><span>RM</span><input id="income" type="number" inputmode="numeric" min="0" step="100" value="3500"></div></div>
       </div>
