@@ -47,6 +47,20 @@ K.records = [
 {name:'Kedah Silver Economy Coordination Desk',type:'Institution',district:'Kota Setar',cap:'Intake · referral tracking · gap reports',status:'Demo'}
 ];
 
+/* Contact fields are illustrative demo records for the pitch. They are never
+   presented as confirmed live numbers or guaranteed aid. */
+var demoAreaCodes = {'Kubang Pasu':'04-700 10','Kota Setar':'04-700 20','Sungai Petani':'04-700 30','Kulim':'04-700 40','Baling':'04-700 50','Langkawi':'04-700 60','Padang Terap':'04-700 70','Pokok Sena':'04-700 80','Pendang':'04-700 90','Sik':'04-700 11','Yan':'04-700 12','Bandar Baharu':'04-700 13'};
+K.records.forEach(function (r, i) {
+  r.phone = demoAreaCodes[r.district] + ' ' + String(i + 1).padStart(2, '0');
+  r.contact = r.type === 'Institution' ? 'Kaunter bantuan' : r.type === 'Mosque' ? 'Penyelaras komuniti' : r.type === 'Provider' ? 'Meja khidmat' : 'Penyelaras sukarelawan';
+  r.help = r.type === 'Institution' ? 'Semakan kelayakan dan rujukan' : r.type === 'Mosque' ? 'Lawatan, makanan dan sokongan komuniti' : r.type === 'Provider' ? 'Perkhidmatan penjagaan dan temujanji' : 'Teman, panggilan dan bantuan harian';
+  r.aid = r.type === 'Institution' ? 'Bantuan tertakluk kepada semakan kelayakan' : r.type === 'Provider' ? 'Harga dan kapasiti perlu disahkan' : 'Sokongan percuma atau sumbangan, perlu disahkan';
+  r.amount = r.name.indexOf('MAIK') === 0 || r.name.indexOf('LZNK') === 0 ? 'Contoh RM300–RM1,500; tertakluk kepada semakan' : r.name.indexOf('JKM') === 0 ? 'Skim dan jumlah ditentukan selepas semakan' : r.type === 'Provider' ? 'Harga atau kadar contoh; sahkan semasa panggilan' : 'Tiada bayaran atau sumbangan; sahkan dahulu';
+  if (r.name.indexOf('PAWE') === 0) { r.help = 'Aktiviti sosial, sokongan rakan sebaya dan senaman ringan'; r.aid = 'Aktiviti komuniti; tempat dan syarat perlu disahkan'; }
+  r.hours = 'Isnin–Jumaat · 9:00–16:30';
+  r.demoContact = true;
+});
+
 /* c = colour slot (tokens --t1..5 / --b1..5). Order is fixed. */
 K.types = {
 Institution:{c:1,one:{en:'Agency',bm:'Agensi'},many:{en:'Agencies',bm:'Agensi'}},
@@ -421,7 +435,7 @@ dpTitle:'Apa yang dashboard perlukan untuk berfungsi',
 dpLede:'Prototaip ini guna logik contoh. Lembaran berkaitan ini menyenaraikan data yang kami akan kumpul, semak dan kemas kini sebelum skor boleh digunakan secara sebenar.',
 dpStat:'lembaran workbook berkaitan',
 dpNoticeTitle:'Data contoh sahaja',
-dpNoticeBody:'Workbook ini menunjukkan susunan yang kami rancang. Ia mengandungi baris contoh dan nama medan, bukan orang sebenar. Kami hanya akan masukkan rekod sebenar selepas persetujuan, peraturan data dan semakan sumber diluluskan.',
+dpNoticeBody:'Workbook ini mengandungi profil, keperluan, daerah, penyedia, medan hubungan dan rujukan contoh yang saling berkaitan. Nombor telefon dan jumlah bantuan ialah data demo, bukan janji sebenar. Rekod sebenar hanya akan dimasukkan selepas persetujuan, peraturan data dan semakan sumber diluluskan.',
 dpHeroLabel:'Muat turun workbook',dpHeroTitle:'Satu workbook yang menghubungkan setiap warga emas dengan bantuan di sekelilingnya.',
 dpHeroBody:'Setiap lembaran menyatakan siapa yang mengisinya, berapa kerap ia dikemas kini dan bahagian dashboard yang menggunakannya.',
 dpDownload:'Muat turun fail Excel',

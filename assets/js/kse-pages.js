@@ -404,7 +404,10 @@ K.pageInit.scenario = function () {
       var name = rec
         ? '<a href="network.html#r' + idx + '">' + esc(rec.name) + K.icon('right') + '</a>'
         : '<span>' + esc(K.L(node.n)) + '</span>';
-      return '<li>' + name + away + K.pill(status) + '</li>';
+      var contact = rec && rec.phone ? '<div class="node-meta"><span>' + esc(rec.help) + '</span><small>' + esc(K.T('Sample contact · ' + rec.contact, 'Hubungan contoh · ' + rec.contact)) + '</small></div>' : '';
+      var call = rec && rec.phone ? '<a class="call-btn" href="tel:' + esc(rec.phone.replace(/[^0-9+]/g, '')) + '">' + esc(K.T('Call', 'Telefon')) + '</a>' : '';
+      var note = rec && rec.aid ? '<small class="node-aid">' + esc(rec.aid + (rec.amount ? ' · ' + rec.amount : '')) + '</small>' : '';
+      return '<li><div class="node-copy"><div class="node-name">' + name + away + K.pill(status) + '</div>' + contact + note + '</div><div class="node-actions">' + call + '</div></li>';
     }).join('');
     $('#confirmed').textContent = confirmed + ' / ' + nodes.length;
     $('#confirmedNote').textContent = confirmed === nodes.length

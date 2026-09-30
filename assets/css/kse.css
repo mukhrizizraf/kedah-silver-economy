@@ -837,8 +837,9 @@ tr.flash td{animation:flash 2.4s ease}
 .path-info:hover,.path-info:focus-visible{transform:translateY(-1px) scale(1.06);box-shadow:0 3px 8px -5px rgba(15,35,30,.5)}
 .path-label{min-width:0}
 .path em{margin-left:auto;font:600 10.5px var(--sans);font-style:normal;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-ink)}
-.nodes li{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid var(--line-2);font-size:14px}
+.nodes li{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line-2);font-size:14px}
 .nodes li:last-child{border-bottom:0}
+.node-copy{min-width:0;display:grid;gap:5px;flex:1}.node-name{display:flex;align-items:center;flex-wrap:wrap;gap:7px}.node-meta{display:grid;gap:2px;color:var(--ink-2);font-size:12px;line-height:1.35}.node-meta small{color:var(--muted);font-size:11px}.node-aid{display:block;color:var(--muted);font-size:11px;line-height:1.35}.node-actions{flex:none}.call-btn{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:0 12px;border-radius:999px;background:var(--paddy);color:var(--on-paddy);font:700 12px var(--sans);text-decoration:none;white-space:nowrap}.call-btn:hover,.call-btn:focus-visible{background:var(--paddy-ink);color:var(--on-paddy)}
 .nodes a{display:inline-flex;align-items:center;gap:5px;color:var(--ink);text-decoration:none;text-underline-offset:3px;font-weight:600}
 .nodes a:hover{text-decoration:underline;color:var(--paddy-ink)}
 .nodes a svg{width:13px;height:13px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;opacity:.5}
