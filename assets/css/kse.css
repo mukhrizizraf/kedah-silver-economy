@@ -159,10 +159,12 @@ kbd{font:600 11px var(--sans);padding:1px 6px;border:1px solid var(--line);borde
 .tabbar{position:sticky;top:0;z-index:30;background:var(--bg);background:color-mix(in srgb,var(--bg) 86%,transparent);-webkit-backdrop-filter:saturate(1.4) blur(14px);backdrop-filter:saturate(1.4) blur(14px);border-block:1px solid var(--line)}
 .tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;padding:7px 6px;margin-inline:-6px}
 .tabs::-webkit-scrollbar{display:none}
-.tab{position:relative;display:inline-flex;align-items:center;gap:8px;flex:none;height:38px;padding:0 14px 0 11px;border-radius:10px;font:600 13.5px var(--sans);color:var(--muted);text-decoration:none;white-space:nowrap;transition:color .15s var(--ease),background-color .15s var(--ease)}
-.tab .ai{width:19px;height:19px;flex:none}
-.tab:hover{color:var(--ink);background:var(--surface-2)}
+.tab{position:relative;display:inline-flex;align-items:center;gap:9px;flex:none;height:44px;padding:0 15px 0 10px;border-radius:12px;font:650 14px var(--sans);color:var(--muted);text-decoration:none;white-space:nowrap;transition:color .2s var(--ease),background-color .2s var(--ease),transform .2s var(--ease),box-shadow .2s var(--ease)}
+.tab .ai{width:28px;height:28px;flex:none;padding:5px;border-radius:9px;background:var(--surface);border:1px solid var(--line);box-shadow:0 3px 0 color-mix(in srgb,var(--line) 80%,transparent),0 6px 10px -8px rgba(15,35,30,.7);transition:transform .22s var(--ease),background-color .2s var(--ease),color .2s var(--ease),box-shadow .22s var(--ease)}
+.tab:hover{color:var(--ink);background:var(--surface-2);transform:translateY(-2px)}
+.tab:hover .ai,.tab:focus-visible .ai{transform:translateY(-2px) rotate(-5deg) scale(1.08);background:var(--gold-soft);color:var(--gold-ink);box-shadow:0 5px 0 color-mix(in srgb,var(--gold) 50%,var(--line)),0 10px 14px -9px rgba(15,35,30,.7)}
 .tab[aria-current="page"]{color:var(--paddy-ink);background:var(--paddy-soft)}
+.tab[aria-current="page"] .ai{background:var(--paddy);border-color:var(--paddy);color:var(--on-paddy);box-shadow:0 3px 0 var(--paddy-ink),0 8px 12px -9px rgba(15,35,30,.75)}
 .tab:focus-visible{outline-offset:-2px}
 /* the one gold marker; it glides to the new tab on page change */
 .tab-mark{position:absolute;left:12px;right:12px;bottom:-7px;height:2px;border-radius:2px;background:var(--gold);view-transition-name:kse-tab}
