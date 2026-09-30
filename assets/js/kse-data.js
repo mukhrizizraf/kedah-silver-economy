@@ -447,7 +447,7 @@ dp4t:'Penyedia dan perkhidmatan',dp4b:'Siapa boleh membantu, apa yang mereka taw
 dp5t:'Rujukan dan hasil',dp5b:'Setiap rujukan, maklum balas, masa menunggu dan hasil, supaya kami tahu sama ada padanan berjaya.',dp5o:'Diurus oleh penyelaras · dikemas kini selepas setiap rujukan',
 dp6t:'Senarai dan pemarkahan',dp6b:'Senarai tetap dan pemberat terbuka yang menukar data yang disemak kepada skor.',dp6o:'Diurus oleh pasukan penyelidik · setiap perubahan diberi nombor versi',
 dpMapLabel:'Peta lembaran',dpMapTitle:'Cara setiap lembaran menyumbang kepada dashboard',dpMapTag:'Baris contoh sahaja',
-dpThSheet:'Lembaran workbook',dpThQ:'Soalan yang dijawab',dpThUse:'Digunakan dalam dashboard',dpThRef:'Dikemas kini sekurang-kurangnya',
+dpThSheet:'Lembaran workbook',dpThQ:'Soalan yang dijawab',dpThUse:'Digunakan dalam dashboard',dpThRef:'Dikemas kini sekurang-kurangnya',dpSheet1:'Profil warga emas',dpSheet2:'Penilaian keperluan',dpSheet3:'Kelayakan isi rumah',dpSheet4:'Penyedia dan perkhidmatan',dpSheet5:'Rujukan dan hasil',dpSheet6:'Rujukan pemberat',
 dpR1q:'Siapa perlukan bantuan?',dpR1u:'Pilihan warga emas, peta daerah',dpR1r:'Semasa lawatan pertama',
 dpR2q:'Apa yang warga emas ini perlukan?',dpR2u:'Pilihan keperluan, langkah dicadangkan',dpR2r:'Setiap kali disemak semula',
 dpR3q:'Apakah had yang terpakai?',dpR3u:'Pelarasan skor, masalah utama',dpR3r:'Setiap 3 bulan',
