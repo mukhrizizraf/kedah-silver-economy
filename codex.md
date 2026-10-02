@@ -152,3 +152,11 @@ The user requested more elderly images as alternatives and additions to the curr
 - `assets/img/silver-app-couple.webp` — older Malay couple using a smartphone together.
 
 The existing `assets/img/silver-app-welcome.webp` remains the current app image. `assets/img/elderly-image-options.md` provides previews, suggested uses, alt text, and the generation prompts. The protected Claude folder was not accessed.
+
+### 7. Dashboard illustration set
+
+The user requested 20 additional 3D animated elderly illustrations for dashboard tabs and purposes. Created and stored all final WebP assets under `assets/img`:
+
+- Welcome, family support, volunteer companion, community, mosque, welfare, health, transport, meals, home care, wellbeing, digital help, accessibility, family network, location matching, evidence, roadmap, and budget scenes.
+- `assets/img/dashboard-image-options.md` maps every filename to a dashboard purpose and alt text.
+- Each asset was verified as a readable 1254 × 1254 WebP file. No current app image was replaced, and the protected Claude folder was not accessed.
