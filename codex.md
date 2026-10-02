@@ -142,3 +142,13 @@ User asked for a complete working record and a strict separation between the act
 - `assets/img/silver-app-welcome.webp`
 
 Committed as `b6ca007` (`Harden Try a case blueprint and record Codex history`) and pushed to `origin/main` after the validation pass.
+
+### 6. Additional elderly illustrations
+
+The user requested more elderly images as alternatives and additions to the current Silver App welcome art. Created three original portrait illustrations using the built-in imagegen tool and stored compact WebP copies in the root project:
+
+- `assets/img/silver-app-welcome-man.webp` — older Malay man using a smartphone.
+- `assets/img/silver-app-family-support.webp` — older Malay woman and adult daughter using the app together.
+- `assets/img/silver-app-couple.webp` — older Malay couple using a smartphone together.
+
+The existing `assets/img/silver-app-welcome.webp` remains the current app image. `assets/img/elderly-image-options.md` provides previews, suggested uses, alt text, and the generation prompts. The protected Claude folder was not accessed.
