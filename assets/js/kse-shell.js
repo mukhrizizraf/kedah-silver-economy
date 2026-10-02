@@ -296,11 +296,11 @@ function renderFooter() {
   var i = K.pageIndex, prev = K.PAGES[i - 1], next = K.PAGES[i + 1] || K.PAGES[0];
   var nextDir = K.PAGES[i + 1] ? K.T('Next', 'Seterusnya') : K.T('Back to the start', 'Kembali ke permulaan');
   var mainFooter = K.page === 'overview' ? '<section class="site-foot-main" aria-label="' + K.T('Project navigation', 'Navigasi projek') + '">' +
-    '<div class="site-foot-brand">' + K.mark + '<div><b>Kedah Silver Economy</b><p>' + K.T('A practical research dashboard for connecting older people with help in Kedah.', 'Dashboard penyelidikan praktikal yang menghubungkan warga emas dengan bantuan di Kedah.') + '</p></div></div>' +
+    '<div class="site-foot-brand">' + K.mark + '<div><b>Kedah Silver Economy</b><p>' + K.T('A prototype that shows how older people in Kedah could be linked to help.', 'Prototaip yang menunjukkan cara warga emas di Kedah boleh dihubungkan dengan bantuan.') + '</p></div></div>' +
     '<div class="site-foot-links">' +
       '<div><span>' + K.T('DASHBOARD', 'DASHBOARD') + '</span><a href="index.html">' + K.T('Overview', 'Latar belakang') + '</a><a href="ecosystem.html">' + K.T('How it works', 'Cara ia berfungsi') + '</a><a href="network.html">' + K.T('Who can help', 'Siapa boleh membantu') + '</a><a href="scenario.html">' + K.T('Try a case', 'Cuba satu kes') + '</a></div>' +
-      '<div><span>' + K.T('PROJECT', 'PROJEK') + '</span><a href="roadmap.html">' + K.T('Plan and budget', 'Pelan dan bajet') + '</a><a href="evidence.html">' + K.T('Sources', 'Sumber') + '</a><a href="data.html">' + K.T('Data blueprint', 'Pelan data') + '</a><a href="app.html">' + K.T('Our Silver App', 'Aplikasi Silver Kami') + '</a></div>' +
-      '<div><span>' + K.T('ABOUT', 'TENTANG') + '</span><p>' + K.T('UUM Scale-Up Research Grant 2026', 'Geran Penyelidikan Scale-Up UUM 2026') + '</p><p>' + K.T('Kedah pilot concept', 'Konsep percubaan Kedah') + '</p></div>' +
+      '<div><span>' + K.T('PROJECT', 'PROJEK') + '</span><a href="roadmap.html">' + K.T('Plan &amp; budget', 'Pelan &amp; bajet') + '</a><a href="evidence.html">' + K.T('Sources', 'Sumber') + '</a><a href="data.html">' + K.T('Data blueprint', 'Pelan data') + '</a><a href="app.html">' + K.T('Our Silver App', 'Aplikasi Silver Kami') + '</a></div>' +
+      '<div><span>' + K.T('ABOUT', 'TENTANG') + '</span><p>' + K.T('9 months, Nov 2026 to Jul 2027', '9 bulan, Nov 2026 hingga Jul 2027') + '</p><p>' + K.T('Kedah pilot concept', 'Konsep percubaan Kedah') + '</p></div>' +
     '</div>' +
   '</section>' : '';
   foot.innerHTML = '<footer class="site-foot"><div class="wrap">' +
