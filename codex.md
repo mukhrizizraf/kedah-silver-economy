@@ -141,4 +141,4 @@ User asked for a complete working record and a strict separation between the act
 - `scenario.html`
 - `assets/img/silver-app-welcome.webp`
 
-No commit or push was performed in this session.
+Committed as `b6ca007` (`Harden Try a case blueprint and record Codex history`) and pushed to `origin/main` after the validation pass.
