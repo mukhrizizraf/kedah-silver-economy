@@ -50,6 +50,27 @@ K.page = body.getAttribute('data-page') || 'overview';
 K.pageIndex = 0;
 K.PAGES.forEach(function (p, i) { if (p.id === K.page) K.pageIndex = i; });
 
+/* Start the destination motion as soon as the shell runs.  Waiting for
+   DOMContentLoaded makes a fast tap feel like it has been ignored, especially
+   on pages with images.  The animationend listener removes the hook when the
+   actual main content has arrived, with a short fallback for older browsers. */
+if (!K.reduceMotion) {
+  body.classList.add('page-enter');
+  var clearPageEnter = function () { body.classList.remove('page-enter'); };
+  var onPageEnterEnd = function (e) {
+    if (e.animationName !== 'page-arrive') return;
+    var target = e.target;
+    if (!target || !target.closest || !target.closest('main')) return;
+    clearPageEnter();
+    doc.removeEventListener('animationend', onPageEnterEnd, true);
+  };
+  doc.addEventListener('animationend', onPageEnterEnd, true);
+  window.setTimeout(function () {
+    clearPageEnter();
+    doc.removeEventListener('animationend', onPageEnterEnd, true);
+  }, 900);
+}
+
 /* ---------- Icons ---------- */
 var ICON = {
   menu:'<path d="M4 7h16M4 12h16M4 17h16"/>',
@@ -247,10 +268,6 @@ doc.addEventListener('DOMContentLoaded', function () {
     figure.appendChild(marker);
     var stat = K.$('.headstat', pagehead);
     pagehead.insertBefore(figure, stat || null);
-  }
-  if (!K.reduceMotion) {
-    body.classList.add('page-enter');
-    window.setTimeout(function () { body.classList.remove('page-enter'); }, 380);
   }
 });
 

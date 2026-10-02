@@ -177,3 +177,17 @@ The galleries use the new WebP assets, descriptive alt text, responsive grids, r
 ### 9. Latest GitHub sync
 
 The dashboard image placement work was committed as `2fcb4fa` (`Place elderly illustrations across dashboard tabs`) and pushed to `origin/main`. The root workspace is clean after the push. The protected `claude-code-silver-app-version` folder remains untouched.
+
+### 10. iOS-like page transitions
+
+The user asked for page changes to feel immediate and smooth, with no lag. Updated the shared root shell and stylesheet:
+
+- `assets/js/kse-shell.js` now adds the page entrance hook as soon as the shell runs instead of waiting for `DOMContentLoaded`. This removes the pause that made a fast navigation tap feel ignored.
+- The hook clears on the real `page-arrive` animation end, with a 900 ms fallback for browsers that do not emit the event.
+- `assets/css/kse.css` now uses a compositor-friendly 420 ms `translate3d` and near-zero scale settle on the shared main content, using the existing corporate easing curve.
+- The below-fold dashboard illustrations use lazy loading and asynchronous decoding so image work does not compete with the first page frame.
+- Reduced-motion users still receive no entrance animation, and browser View Transitions remain disabled so there is only one authored transition layer.
+- Root HTML cache references were bumped to CSS `20261002d` and shell `20261002b`.
+- `DESIGN.md` records the timing and first-paint behavior as part of the navigation motion rules.
+
+The protected `claude-code-silver-app-version` folder was not accessed or changed.

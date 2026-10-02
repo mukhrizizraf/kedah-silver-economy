@@ -68,9 +68,9 @@
 
 /* ---------- Base ---------- */
 @view-transition{navigation:none}
-/* Keep links immediate; the destination settles into place after load. */
-@keyframes page-arrive{from{opacity:0;transform:translateY(10px)}}
-body.page-enter main{animation:page-arrive .34s var(--ease) both}
+/* Keep links immediate; the destination settles in from its first paint. */
+@keyframes page-arrive{from{opacity:0;transform:translate3d(0,12px,0) scale(.992)}to{opacity:1;transform:translate3d(0,0,0) scale(1)}}
+body.page-enter main{animation:page-arrive .42s var(--ease) both;will-change:opacity,transform}
 @media (prefers-reduced-motion:reduce){
   body.page-enter main{animation:none}
 }
