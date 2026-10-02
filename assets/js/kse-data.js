@@ -302,7 +302,7 @@ sceneCaption:'Penjagaan bermula dengan seorang, sebuah tempat dan sebuah hubunga
 consTitle:'Siapa boleh membantu seorang warga emas',
 consCap:'Setiap titik ialah satu organisasi dalam senarai kami. Titik dekat tengah sudah disahkan. Titik yang lebih jauh masih perlu disemak atau hanya contoh. Klik titik untuk melihat butirannya.',
 kpi1:'objektif kajian',kpi2:'fasa projek',kpi3:'warga emas ditemu bual',kpi4:'peserta bengkel reka bentuk',kpi5:'ahli panel penilai',
-partnersLabel:'Rakan kerjasama',
+partnersLabel:'Rakan kerjasama',imgPeopleEyebrow:'Utamakan manusia',imgPeopleTitle:'Dashboard yang bermula dengan kehidupan sebenar',imgPeopleBody:'Orang yang berbeza perlukan jenis sokongan yang berbeza. Adegan ini memastikan warga emas kekal di tengah-tengah penyelidikan.',
 caseEyebrow:'Apa yang kami ingin lakukan',objectivesLabel:'Apa yang kami ingin lakukan',dashboardIndexLabel:'Indeks dashboard',caseTitle:'Satukan bantuan untuk seorang warga emas',
 caseSub:'Kami hubungkan agensi supaya seorang warga emas mendapat bantuan yang sesuai.',
 problemTag:'Masalah',problemQuote:'Seorang warga emas mungkin perlukan beberapa jenis bantuan serentak, tetapi setiap agensi hanya uruskan bahagian sendiri.',
@@ -345,7 +345,7 @@ volunteers:'Sukarelawan',volunteersSub:'Teman, pengangkutan, lawatan dan bantuan
 pathway:'Hasil',pathwaySub:'Bantuan yang sesuai, ke mana dirujuk, dan keperluan yang belum dipenuhi',
 dataEyebrow:'Data',dataTitle:'Tiga senarai di sebalik padanan',
 dataSub:'Senarai ini menyimpan semua yang diperlukan untuk padanan. Dalam Fasa 1 kami isikan dengan data yang telah disemak.',
-dataNote:'Dashboard ini guna rekod contoh untuk menunjukkan cara ia berfungsi. Rekod yang perlu disemak dan rekod contoh ditanda dengan jelas.',
+dataNote:'Dashboard ini guna rekod contoh untuk menunjukkan cara ia berfungsi. Rekod yang perlu disemak dan rekod contoh ditanda dengan jelas.',imgEcoEyebrow:'Manusia di sebalik laluan',imgEcoTitle:'Bantuan ialah rangkaian hubungan',imgEcoBody:'Padanan hanya bermakna apabila ia membawa kepada seseorang yang boleh mendengar, menerangkan dan membuat susulan.',
 
 /* who can help */
 netTitle:'30 organisasi yang boleh membantu',
@@ -360,7 +360,7 @@ chartTag:'Ikut daerah',chartTitle:'Organisasi di setiap daerah',chartNote:'Bar m
 chainTag:'Apa yang akan diuji',chainTitle:'Bagaimana rujukan sepatutnya berjalan',
 chain1:'Warga emas',chain1s:'Keperluan, daerah dan kelayakan mereka',chain2:'Seorang penyelaras',chain2s:'Satu tempat hubungan untuk bantuan kebajikan, kesihatan dan komuniti',
 chain3:'Pasukan bantuan',chain3s:'Penyedia penjagaan, sukarelawan dan bantuan kewangan',chainLink:'Belum diuji',
-chainNote:'Kami mahu tahu siapa yang ada, dan juga bagaimana seseorang bergerak dari satu pihak ke pihak lain.',
+chainNote:'Kami mahu tahu siapa yang ada, dan juga bagaimana seseorang bergerak dari satu pihak ke pihak lain.',imgNetEyebrow:'Siapa boleh membantu',imgNetTitle:'Senarai ini menjadi manusia dan perkhidmatan',imgNetBody:'Ilustrasi ini menunjukkan jenis sokongan yang mungkin ditawarkan oleh rangkaian. Jadual di bawah kekal sebagai sumber status dan butiran hubungan.',
 
 /* try a case */
 labTitle:'Pilih warga emas dan keperluannya. Lihat bantuan yang ada.',labSub:'Tukar pilihan di bawah. Langkah, skor dan masalah utama berubah serta-merta.',
@@ -376,7 +376,7 @@ noticeBody:'Skor di bawah dikira daripada pemberat yang kami pilih, untuk menunj
 confirmedLabel:'Disahkan dalam senarai kami',
 workingLabel:'Cara skor ini dibina',
 compareLabel:'Setiap daerah',
-caseRecordLabel:'Kes yang boleh diulang',caseRulesLabel:'Versi peraturan',caseCopy:'Salin ringkasan kes',caseCopied:'Ringkasan kes disalin',caseCopyError:'Tidak dapat menyalin. Pilih dan salin teks secara manual.',
+caseRecordLabel:'Kes yang boleh diulang',caseRulesLabel:'Versi peraturan',caseCopy:'Salin ringkasan kes',caseCopied:'Ringkasan kes disalin',caseCopyError:'Tidak dapat menyalin. Pilih dan salin teks secara manual.',imgCaseEyebrow:'Cuba satu kes',imgCaseTitle:'Sokongan boleh terasa lebih manusiawi',imgCaseBody:'Gunakan soalan berpandu di bawah untuk menukar situasi sebenar kepada laluan yang jelas dan mudah diterangkan.',
 methodNote:'Skor bermula daripada jenis warga emas, kemudian berubah ikut keperluan, daerah dan pendapatan. Ia menunjukkan cara logik berfungsi, bukan anggaran sebenar.',
 pathLabel:'Langkah dicadangkan',providersLabel:'Siapa boleh membantu',gapLabel:'Masalah utama untuk disemak',routeTitle:'Laluan bantuan anda',routeIntro:'Pandangan ringkas daripada keperluan kepada hubungan yang boleh dicuba.',routeDemo:'Laluan contoh',routeRequest:'Permintaan anda',routeSteps:'Langkah dicadangkan',routeContacts:'Hubungan yang boleh dicuba',routeNote:'Ini ialah demonstrasi. Semak organisasi dan nombor hubungan sebelum membuat rujukan.',journeyLabel:'Perjalanan dalam satu gambar',journeyTitle:'Daripada satu sentuhan telefon kepada bantuan di rumah',journeyCaption:'Contoh ringkas untuk warga emas dan keluarga mereka.',
 appTitle:'Aplikasi Silver Kami',appLede:'Simulasi skrin demi skrin tentang cara warga emas menggunakan aplikasi untuk mencari bantuan.',appStat:'10 skrin simulasi interaktif',appBadge:'PROTOTAIP MASA DEPAN',appLaunch:'Mula simulasi',appBack:'Kembali',appNext:'Seterusnya',appDone:'Lihat hasil padanan',appIntroTitle:'Daripada sentuhan telefon kepada bantuan sebenar.',appIntroBody:'Guna butang pada telefon. Ini ialah gambaran awal aplikasi yang sedang disediakan oleh dashboard.',appStoryboardLabel:'Papan cerita',appStoryboardTitle:'Inilah rupa aplikasi pada telefon',appStoryTitle:'Direka untuk warga emas.',appStoryBody:'Butang besar, soalan ringkas, langkah seterusnya yang jelas dan pilihan panggilan terus untuk warga emas atau ahli keluarga.',appStoryPoint1:'Bahasa Melayu dan Inggeris',appStoryPoint2:'Butang sentuhan besar',appStoryPoint3:'Kurang menaip',appStoryPoint4:'Status yang jelas',appWelcomePill:'SELAMAT DATANG',appWelcomeTitle:'Apa yang boleh memudahkan hari ini?',appWelcomeBody:'Pilih satu perkara. Kami akan bantu cari sokongan yang dekat.',appWelcomeCta:'Cari bantuan',appWelcomeFamily:'Saya bantu orang lain',appWelcomeTrust:'Ringkas, peribadi dan mudah digunakan',appStatusContinue:'Teruskan',appReset:'Mula semula',appProfileTitle:'Maklumat diri',appProfileBody:'Maklumat ringkas membantu kami mencari bantuan yang dekat.',appNeedTitle:'Apa yang anda perlukan?',appNeedBody:'Pilih satu atau lebih keperluan.',appMatchTitle:'Padanan bantuan',appMatchBody:'Ini ialah organisasi yang mungkin sesuai berdasarkan maklumat anda.',appProviderTitle:'Butiran penyedia',appProviderBody:'Semak perkhidmatan, status dan cara menghubungi.',appStatusTitle:'Status permohonan',appStatusBody:'Lihat perkembangan rujukan anda dalam satu tempat.',appMockNote:'Ini ialah simulasi reka bentuk, bukan aplikasi sebenar. Data dan nombor telefon di sini ialah contoh.',
@@ -384,7 +384,7 @@ appTitle:'Aplikasi Silver Kami',appLede:'Simulasi skrin demi skrin tentang cara 
 /* plan & budget */
 roadTitle:'Pelan 9 bulan',
 roadLede:'Empat fasa dan satu hasil bagi setiap objektif, dengan RM30,000.',
-roadStat:'selama 9 bulan',
+roadStat:'selama 9 bulan',imgRoadEyebrow:'Daripada pelan kepada amalan',imgRoadTitle:'Jadikan kerja ini mudah dilihat',imgRoadBody:'Peta jalan menghubungkan pelan penyelidikan dengan orang dan sumber yang diperlukan untuk melaksanakannya.',
 ganttEyebrow:'Garis masa',ganttTitle:'Apa berlaku setiap bulan',
 mon1:'Nov',mon2:'Dis',mon5:'Mac',mon7:'Mei',
 objN1:'Objektif 1',objN2:'Objektif 2',objN3:'Objektif 3',objN4:'Objektif 4',objN5:'Objektif 5',
@@ -419,7 +419,7 @@ budgetNote:'Angka daripada bahagian bajet (Bahagian I) borang permohonan yang di
 evTitle:'Dari mana fakta ini datang',
 evLede:'Setiap angka di sini datang daripada permohonan yang disemak dan jawapan kami kepada penilai. Halaman ini menyenaraikan dokumen tersebut dan apa yang kami ubah selepas setiap ulasan.',
 evStat:'ulasan penilai selesai',
-srcEyebrow:'Dokumen',srcTitle:'Empat dokumen di sebalik dashboard ini',
+srcEyebrow:'Dokumen',srcTitle:'Empat dokumen di sebalik dashboard ini',imgEvidenceEyebrow:'Bukti bermula dengan mendengar',imgEvidenceTitle:'Penyelidikan kekal dekat dengan pengalaman hidup',imgEvidenceBody:'Dokumen menunjukkan janji projek. Perbualan dengan komuniti menunjukkan sama ada model ini sesuai dengan kehidupan harian warga emas.',
 srcSub:'Borang permohonan dan jawapan kepada penilai ialah sumber utama.',
 kindForm:'Permohonan',kindReview:'Penilaian',kindConcept:'Idea',kindRoadmap:'Pelan',
 src1d:'Disemak 28 September 2026 · 23 halaman',src2:'Jawapan kepada penilai',src2d:'28 September 2026 · 5 halaman',

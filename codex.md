@@ -160,3 +160,16 @@ The user requested 20 additional 3D animated elderly illustrations for dashboard
 - Welcome, family support, volunteer companion, community, mosque, welfare, health, transport, meals, home care, wellbeing, digital help, accessibility, family network, location matching, evidence, roadmap, and budget scenes.
 - `assets/img/dashboard-image-options.md` maps every filename to a dashboard purpose and alt text.
 - Each asset was verified as a readable 1254 × 1254 WebP file. No current app image was replaced, and the protected Claude folder was not accessed.
+
+### 8. Dashboard image placement
+
+The user asked for the new elderly illustrations to be injected into the dashboard where they fit. Added responsive galleries and one evidence feature card to the root dashboard pages:
+
+- Overview: people and family scenes.
+- How it works: volunteers, community, faith support and place matching.
+- Who can help: welfare, health, transport, meals and home care.
+- Try a case: wellbeing, digital help and accessible information.
+- Plan & budget: roadmap planning and budget review.
+- Sources: an evidence interview feature.
+
+The galleries use the new WebP assets, descriptive alt text, responsive grids, reduced-motion-safe hover treatment, and Bahasa Melayu translations for their section headings and descriptions. CSS cache references were bumped to `20261002c` so the placements load after the earlier dashboard stylesheet.
