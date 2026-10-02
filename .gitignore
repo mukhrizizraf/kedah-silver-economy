@@ -10,6 +10,12 @@ kedah_silver_economy_grant_dashboard.html
 .impeccable/
 skills-lock.json
 
+# Private notes and secrets for Claude Code (never commit)
+CLAUDE.local.md
+
+# Claude's separate version: its own git repo, not part of this one
+claude-code-silver-app-version/
+
 # System files
 desktop.ini
 .DS_Store

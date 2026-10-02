@@ -300,7 +300,7 @@ The site's most important component. A dot, a word, and a soft field, fully roun
 ### Navigation
 - **Two rows.** A brand bar (logo, EN/BM, theme) that scrolls away, and a tab bar that sticks to the top of the screen. The tabs got their own row so every Bahasa Melayu label fits without collapsing to a menu.
 - **Tabs:** a page icon and a label, 600 at 13.5px, 38px tall with a 10px corner. Muted at rest; a tinted field on hover; the current tab takes a paddy-soft field in paddy ink.
-- **The marker:** one 2px gold bar under the current tab, sitting on the bar's bottom edge. It carries a view-transition name, so on page change it glides to the new tab instead of jumping.
+- **The marker:** one 2px gold bar under the current tab, sitting on the bar's bottom edge. It appears with the destination page as navigation completes.
 - **Phones (760px and below):** the tab bar hides, the brand bar sticks, and a menu button opens the right-hand drawer. The drawer repeats the pitch order with each page's icon, number, label and one-line description.
 
 ### Page Icons
@@ -316,7 +316,7 @@ The centre now uses a transparent 3D animated elder avatar (`assets/img/elder-mo
 
 The overview opens with a wider scene before the evidence map: an illustrated elderly Malay Muslim couple on a teal couch in a Kedah kampung home (`assets/img/kampung-elder-couple-socks.png`). The woman wears cream socks. The scene carries a slow camera breath, warm light drift and restrained pointer parallax; the copy and actions remain HTML above the image so the pitch stays readable, bilingual and keyboard reachable. The map follows as the evidence layer rather than competing with the first human moment.
 
-Page changes use a short presentation-deck transition: the outgoing page folds into two colour panels and the next page settles in. This is a continuity cue for the pitch sequence, not a loading screen, and it is removed under reduced motion. On How it works, the three input nodes enter in a stagger and the matching box accepts hover, focus and click to reveal a floating explanation of what it does.
+Page links navigate immediately, and the destination content settles in over 340 ms. This keeps the pitch sequence connected without delaying the click. The entrance is removed under reduced motion. On How it works, the three input nodes enter in a stagger and the matching box accepts hover, focus and click to reveal a floating explanation. A click, Escape, or a click elsewhere can dismiss it.
 
 ### The Coverage Meter
 A 10px gold bar on the dark card, growing to its value over 0.35s by clip-path rather than width, so its round cap survives and nothing reflows. Its scale is ticked 0 to 100 beneath. It always ships beside a "Sample data only" mark, because the number behind it is invented.

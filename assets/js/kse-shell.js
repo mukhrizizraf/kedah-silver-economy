@@ -113,8 +113,7 @@ function langSwitch() {
 }
 function renderChrome() {
   var dark = effectiveTheme() === 'dark';
-  /* The active tab carries the one gold marker. It has a view-transition
-     name, so when the next page loads the marker glides across to its tab. */
+  /* The active tab carries the one gold marker. */
   var links = K.PAGES.map(function (p) {
     var on = p.id === K.page;
     return '<a class="tab" href="' + p.href + '"' + (on ? ' aria-current="page"' : '') + '>' + K.pageIcon(p.id) +
@@ -163,41 +162,6 @@ chrome.addEventListener('click', function (e) {
   else if (t.classList.contains('lang-btn')) K.setLang(t.getAttribute('data-lang'));
 });
 
-/* ---------- Presentation-style navigation ----------
-   Tabs still work as ordinary links when opened with a modifier, in a new
-   tab, or when scripts are unavailable. A plain click gets one short deck
-   transition so moving through the pitch feels intentional rather than like
-   a cold document reload. */
-var pageTransition = doc.createElement('div');
-pageTransition.id = 'pageTransition';
-pageTransition.className = 'page-transition';
-pageTransition.setAttribute('aria-hidden', 'true');
-pageTransition.innerHTML = '<i class="swish swish-a"></i><i class="swish swish-b"></i>' +
-  Array.from({length:18}, function (_, i) { return '<i class="dust dust-' + (i + 1) + '"></i>'; }).join('');
-body.appendChild(pageTransition);
-function transitionTo(href, e) {
-  if (!href || K.reduceMotion || body.classList.contains('page-leaving')) return false;
-  if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return false;
-  var a = e.target && e.target.closest ? e.target.closest('a') : null;
-  if (!a || a.target === '_blank' || a.hasAttribute('download')) return false;
-  var u;
-  try { u = new URL(href, location.href); } catch (err) { return false; }
-  if (u.origin !== location.origin || u.pathname === location.pathname) return false;
-  e.preventDefault();
-  body.classList.add('page-leaving');
-  window.setTimeout(function () { location.href = u.href; }, 160);
-  return true;
-}
-/* Back and Forward can restore this page from the browser cache exactly as
-   it was left, mid-fade. Clear the leaving state so it is visible again. */
-window.addEventListener('pageshow', function (e) {
-  if (e.persisted) body.classList.remove('page-leaving');
-});
-doc.addEventListener('click', function (e) {
-  var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
-  if (!a) return;
-  transitionTo(a.getAttribute('href'), e);
-}, true);
 doc.addEventListener('DOMContentLoaded', function () {
   var overviewDrawers = K.$$('.overview-button-grid .home-drawer');
   overviewDrawers.forEach(function (drawer) {
@@ -286,7 +250,7 @@ doc.addEventListener('DOMContentLoaded', function () {
   }
   if (!K.reduceMotion) {
     body.classList.add('page-enter');
-    window.setTimeout(function () { body.classList.remove('page-enter'); }, 650);
+    window.setTimeout(function () { body.classList.remove('page-enter'); }, 380);
   }
 });
 
