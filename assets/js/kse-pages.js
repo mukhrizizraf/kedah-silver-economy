@@ -174,6 +174,10 @@ K.pageInit.network = function () {
     var t = q.value.trim().toLowerCase();
     return !t || (r.name + ' ' + r.cap + ' ' + r.district).toLowerCase().indexOf(t) >= 0;
   }
+  function statusInfo(s) {
+    var label = K.L(K.status[s]), detail = K.L(K.status[s].key);
+    return '<span class="status-info" tabindex="0" aria-label="' + K.esc(label + ': ' + detail) + '" data-tip="&lt;b&gt;' + K.esc(label) + '&lt;/b&gt;&lt;span&gt;' + K.esc(detail) + '&lt;/span&gt;">i</span>';
+  }
 
   function renderRecords() {
     var rows = [];
@@ -185,7 +189,7 @@ K.pageInit.network = function () {
     $('#records').innerHTML = rows.length ? rows.map(function (idx) {
       var r = K.records[idx], t = K.types[r.type];
       return '<tr id="r' + idx + '"><td class="org">' + esc(r.name) + '</td><td><span class="type"><i style="background:var(--t' + t.c + ')"></i>' + esc(K.L(t.one)) + '</span></td>' +
-        '<td>' + esc(r.district) + '</td><td class="cap">' + esc(r.cap) + '</td><td>' + K.pill(r.status) + '</td></tr>';
+        '<td>' + esc(r.district) + '</td><td class="cap">' + esc(r.cap) + '</td><td class="status-cell">' + K.pill(r.status) + statusInfo(r.status) + '</td></tr>';
     }).join('') : '<tr><td colspan="5" class="empty">' + esc(K.T('Nothing matches these filters. Try a wider filter.', 'Tiada padanan untuk penapis ini. Cuba penapis yang lebih luas.')) + '</td></tr>';
     $('#recordCount').textContent = K.T('Showing ' + rows.length + ' of ' + K.records.length, 'Memaparkan ' + rows.length + ' daripada ' + K.records.length);
     $$('.sort').forEach(function (b) {
@@ -203,10 +207,17 @@ K.pageInit.network = function () {
     $('#statusBar').innerHTML = K.statusOrder.map(function (s) {
       var on = sf.value === s;
       return '<li><button type="button" data-status="' + s + '" aria-pressed="' + on + '">' +
-        K.pill(s, K.counts[s] + ' · ' + K.L(K.status[s])) + '</button></li>';
+        K.pill(s, K.counts[s] + ' · ' + K.L(K.status[s])) + statusInfo(s) + '</button></li>';
     }).join('') + '<li><button type="button" data-status="all" aria-pressed="' + (sf.value === 'all') + '" class="all">' +
       esc(K.T('Show all ' + K.records.length, 'Papar semua ' + K.records.length)) + '</button></li>' +
       '<li><button type="button" data-status="reset" class="reset">' + esc(K.T('Reset', 'Set semula')) + '</button></li>';
+    var resetButton = $('#statusBar [data-status="reset"]');
+    if (resetButton) resetButton.addEventListener('click', function (e) { e.preventDefault(); e.stopPropagation(); resetNetwork(); });
+  }
+  function resetNetwork() {
+    tf.value = 'all'; df.value = 'all'; sf.value = 'all'; q.value = '';
+    sortKey = null; sortDir = 1; renderStatusBar(); renderRecords();
+    var resetButton = $('#statusBar [data-status="reset"]'); if (resetButton) resetButton.focus();
   }
 
   [tf, df, sf].forEach(function (el) { el.addEventListener('change', function () { renderStatusBar(); renderRecords(); }); });
@@ -217,8 +228,8 @@ K.pageInit.network = function () {
   $('#statusBar').addEventListener('click', function (e) {
     var b = e.target.closest('[data-status]'); if (!b) return;
     if (b.getAttribute('data-status') === 'reset') {
-      tf.value = 'all'; df.value = 'all'; sf.value = 'all'; q.value = '';
-      sortKey = null; sortDir = 1; renderStatusBar(); renderRecords(); b.focus(); return;
+      resetNetwork();
+      return;
     }
     sf.value = b.getAttribute('data-status');
     renderStatusBar(); renderRecords();
@@ -234,8 +245,8 @@ K.pageInit.network = function () {
 
   K.onLang.push(function () {
     q.placeholder = K.T('Name or service', 'Nama atau perkhidmatan');
-    $('#statusKeys').innerHTML = K.statusOrder.map(function (s) { return '<li>' + K.pill(s) + '<span>' + esc(K.L(K.status[s].key)) + '</span></li>'; }).join('');
-    $('#dLegend').innerHTML = K.statusOrder.map(function (s) { return K.pill(s); }).join('');
+    $('#statusKeys').innerHTML = K.statusOrder.map(function (s) { return '<li>' + K.pill(s) + statusInfo(s) + '<span>' + esc(K.L(K.status[s].key)) + '</span></li>'; }).join('');
+    $('#dLegend').innerHTML = K.statusOrder.map(function (s) { return '<span class="legend-status">' + K.pill(s) + statusInfo(s) + '</span>'; }).join('');
     renderStatusBar();
     renderRecords();
     if (focusIdx !== null) {
