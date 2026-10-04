@@ -185,7 +185,7 @@ chrome.id = 'kse-chrome';
 body.insertBefore(chrome, body.firstChild);
 
 function langSwitch() {
-  return '<div class="lang" role="group" aria-label="' + K.T('Language', 'Bahasa') + '">' +
+  return '<div class="lang" role="group" aria-label="' + K.T('Language', 'Bahasa') + '"><span class="lang-mark" aria-hidden="true">文</span>' +
     '<button class="lang-btn" data-lang="en" aria-pressed="' + (K.lang === 'en') + '" title="English">EN</button>' +
     '<button class="lang-btn" data-lang="bm" aria-pressed="' + (K.lang === 'bm') + '" title="Bahasa Melayu">BM</button></div>';
 }
@@ -216,6 +216,8 @@ function renderChrome() {
       '<button class="iconbtn" id="drawerClose" aria-label="' + K.T('Close menu', 'Tutup menu') + '">' + K.icon('close') + '</button></div>' +
       dlinks + langSwitch() +
     '</nav>';
+  var activeTab = K.$('.tab[aria-current="page"]');
+  if (activeTab && activeTab.scrollIntoView) activeTab.scrollIntoView({ block: 'nearest', inline: 'nearest' });
 }
 function openDrawer() {
   K.$('#drawer').hidden = false; K.$('#scrim').hidden = false;
