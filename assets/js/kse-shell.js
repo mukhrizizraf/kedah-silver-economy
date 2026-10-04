@@ -217,7 +217,9 @@ function renderChrome() {
       dlinks + langSwitch() +
     '</nav>';
   var activeTab = K.$('.tab[aria-current="page"]');
-  if (activeTab && activeTab.scrollIntoView) activeTab.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+  if (activeTab && activeTab.scrollIntoView) window.requestAnimationFrame(function () {
+    activeTab.scrollIntoView({ block: 'nearest', inline: 'center' });
+  });
 }
 function openDrawer() {
   K.$('#drawer').hidden = false; K.$('#scrim').hidden = false;
