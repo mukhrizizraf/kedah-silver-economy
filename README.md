@@ -16,6 +16,8 @@ It is a static site. There is no build step and no server. Open `index.html` in 
 | 04 | `scenario.html` | Try a case | Pick a person, district, need and income; see the steps, score and main problem |
 | 05 | `roadmap.html` | Plan & budget | What happens each month, the expert review, the budget |
 | 06 | `evidence.html` | Sources | The documents behind the site and the reviewer comments |
+| 07 | `data.html` | Data blueprint | The workbook sheets and fields for the future dashboard |
+| 08 | `app.html` | Our Silver App | A screen-by-screen elderly-first app prototype |
 
 When presenting, the left and right arrow keys move between pages. The EN/BM, light/dark, and colour/font choices are remembered in each browser. The Try a case page now follows the guided one-question-at-a-time flow with an animated worked-example demo, live case summary, explainable plan, matching contacts, map links, sharing, print sheets and follow-up reminders.
 
@@ -37,5 +39,9 @@ assets/js/kse-pages.js         one set-up function per page
 - **Add a page:** copy an inner page, set a new `data-page`, add it to `KSE.PAGES` in `kse-shell.js`, and add a set-up function in `kse-pages.js` if it needs one.
 
 The palette choices live in `assets/css/kse-themes.css`: Padi, Songket, Diraja, Teratai, Kayu Jati, Wau, Malam and Jelas.
+
+The overview includes an interactive support map. Select Transport, Meals, Nursing and care, Help at home, Company or Money and aid to highlight matching organisations. The site shell supports English and Bahasa Melayu, and keeps the active tab visible on narrower screens.
+
+The Codex build uses its own favicon at `assets/art/codex-crest.svg` so it is distinct from the preserved Claude reference.
 
 Fonts load from Google Fonts. Offline, the pages use system fonts instead.

@@ -1,5 +1,15 @@
 # Codex Project Record
 
+## Latest update: 2026-10-05
+
+- Added the interactive overview support map and need filters. The filters show matching organisations for transport, meals, nursing and care, help at home, company, and money and aid.
+- Added the Codex-specific favicon at `assets/art/codex-crest.svg` and wired it into the active HTML pages.
+- Normalised the shared tab icon sizing across the main pages, including the Try a case page, and added a filled Silver App icon.
+- Added a globe language marker for the EN/BM switch. Malay navigation labels remain available without using Chinese characters.
+- Updated narrow desktop/tablet navigation so all eight page tabs fit in one row and the active tab is kept visible.
+- Refreshed stylesheet and shell cache versions after the navigation updates.
+
+
 **Project:** Kedah Silver Economy static research dashboard and future elderly mobile app blueprint  
 **Workspace:** `I:\My Drive\SILVER ECONOMY`  
 **Current working line:** Codex Version 23 (the root workspace)  
