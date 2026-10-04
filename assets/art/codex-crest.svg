@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="t d">
+  <title id="t">Kedah Silver Economy Codex</title>
+  <desc id="d">A green rounded square with a gold connected C mark.</desc>
+  <rect width="64" height="64" rx="16" fill="#0d2d26"/>
+  <path d="M43.5 17.5a20 20 0 1 0 0 29" fill="none" stroke="#e8bd4f" stroke-width="7" stroke-linecap="round"/>
+  <path d="M44 17.5 51 11M44 46.5 51 53" fill="none" stroke="#e8bd4f" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="51" cy="11" r="4" fill="#f7e6a8"/>
+  <circle cx="51" cy="53" r="4" fill="#f7e6a8"/>
+</svg>
