@@ -5,6 +5,17 @@
    visible way back on every step, and nothing to type unless wanted.
    ========================================================================== */
 
+/* The Claude visual layer keeps its own iPad/sidebar shell hidden because the
+   Codex app still uses the shared eight-page top navigation. Keep the Claude
+   typography and surfaces, while restoring that navigation on this page. */
+body[data-page="scenario"]{padding-left:0!important;padding-bottom:0!important}
+body[data-page="scenario"] .topbar,
+body[data-page="scenario"] .tabbar{display:block!important}
+body[data-page="scenario"] .tabs{display:flex!important}
+body[data-page="scenario"] .sidebar,
+body[data-page="scenario"] .navbar,
+body[data-page="scenario"] .ios-tabbar{display:none!important}
+
 /* ---------- Frame ---------- */
 .tc-wrap{padding-top:18px}
 .tc{--tc-r:22px;font-family:var(--sans);color:var(--ink)}

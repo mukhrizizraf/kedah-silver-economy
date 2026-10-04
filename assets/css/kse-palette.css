@@ -76,3 +76,26 @@
 :root[data-look]:not([data-look="padi"]){--band:var(--night);--band-ink:var(--on-night);--band-muted:var(--night-muted);--band-line:var(--night-line);--band-gold:var(--gold);--ui:var(--sans)}
 .btn-quiet{background:color-mix(in srgb,var(--ink) 7%,transparent);color:var(--ink)}
 .btn-quiet:hover{background:color-mix(in srgb,var(--ink) 11%,transparent)}
+
+/* iOS-style cross-document page push for the shared eight-page shell. */
+@view-transition{navigation:auto}
+::view-transition-group(root){animation-duration:.52s;animation-timing-function:cubic-bezier(.32,.72,0,1)}
+::view-transition-image-pair(root){isolation:auto}
+::view-transition-old(root),::view-transition-new(root){mix-blend-mode:normal;animation-duration:.52s;animation-timing-function:cubic-bezier(.32,.72,0,1);animation-fill-mode:both}
+::view-transition-old(root){animation-name:kse-push-out;z-index:0}
+::view-transition-new(root){animation-name:kse-push-in;z-index:1;box-shadow:-24px 0 48px -18px rgba(20,20,18,.28)}
+html[data-dir="back"]::view-transition-old(root){animation-name:kse-pop-out;z-index:1;box-shadow:-24px 0 48px -18px rgba(20,20,18,.28)}
+html[data-dir="back"]::view-transition-new(root){animation-name:kse-pop-in;z-index:0;box-shadow:none}
+@keyframes kse-push-in{from{transform:translateX(100%)}}
+@keyframes kse-push-out{to{transform:translateX(-30%);filter:brightness(.86)}}
+@keyframes kse-pop-in{from{transform:translateX(-30%);filter:brightness(.86)}}
+@keyframes kse-pop-out{to{transform:translateX(100%)}}
+@media (prefers-reduced-motion:reduce){
+  @view-transition{navigation:auto}
+  ::view-transition-old(root),::view-transition-new(root),
+  html[data-dir="back"]::view-transition-old(root),html[data-dir="back"]::view-transition-new{animation:none;box-shadow:none}
+  ::view-transition-old(root){animation:kse-vt-fade-out .2s ease both}
+  ::view-transition-new(root){animation:kse-vt-fade-in .2s ease both}
+}
+@keyframes kse-vt-fade-out{to{opacity:0}}
+@keyframes kse-vt-fade-in{from{opacity:0}}

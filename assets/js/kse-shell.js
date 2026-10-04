@@ -50,6 +50,16 @@ K.page = body.getAttribute('data-page') || 'overview';
 K.pageIndex = 0;
 K.PAGES.forEach(function (p, i) { if (p.id === K.page) K.pageIndex = i; });
 
+/* Remember the page order so the cross-document transition knows whether the
+   next view should push in from the right or pop back from the left. */
+(function () {
+  try {
+    var previous = parseInt(sessionStorage.getItem('kse-idx'), 10);
+    if (!root.hasAttribute('data-dir')) root.setAttribute('data-dir', !isNaN(previous) && K.pageIndex < previous ? 'back' : 'forward');
+    sessionStorage.setItem('kse-idx', String(K.pageIndex));
+  } catch (e) {}
+})();
+
 /* Start the destination motion as soon as the shell runs.  Waiting for
    DOMContentLoaded makes a fast tap feel like it has been ignored, especially
    on pages with images.  The animationend listener removes the hook when the
@@ -399,7 +409,7 @@ doc.addEventListener('keydown', function (e) {
   var t = e.target;
   if (t && t.closest && t.closest('input,select,textarea,[contenteditable],.table-scroll,.gantt-scroll,.drawer')) return;
   var p = K.PAGES[K.pageIndex + (e.key === 'ArrowRight' ? 1 : -1)];
-  if (p) location.href = p.href;
+  if (p) { try { sessionStorage.setItem('kse-idx', String(K.pageIndex)); } catch (err) {} location.href = p.href; }
 });
 
 /* ---------- i18n ---------- */
