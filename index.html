@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Onest:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="assets/css/kse.css?v=20261003d"><link rel="stylesheet" href="assets/css/kse-palette.css?v=20261004d"><link rel="stylesheet" href="assets/css/kse-themes.css?v=20261004d">
+<link rel="stylesheet" href="assets/css/kse.css?v=20261004e"><link rel="stylesheet" href="assets/css/kse-palette.css?v=20261004d"><link rel="stylesheet" href="assets/css/kse-themes.css?v=20261004d">
 <script src="assets/js/kse-data.js?v=20261003d"></script>
 </head>
 <body data-page="overview">
@@ -40,14 +40,17 @@
         <figcaption class="scene-caption"><span data-i18n="sceneCaption">Care starts with a person, a place and a relationship.</span><span class="scene-pulse" aria-hidden="true"></span></figcaption>
       </figure>
     </div>
-    <div class="wrap hero-map">
-      <figure class="cons">
-        <p class="cons-title" data-i18n="consTitle">Who can help one older person</p>
+  </section>
+
+  <section class="wrap map-wrap" aria-labelledby="consTitle">
+      <figure class="cons map-card">
+        <p class="cons-title" id="consTitle" data-i18n="consTitle">Who can help one older person</p>
+        <div class="need-bar" id="needBar"></div>
         <svg id="constellation" viewBox="-300 -206 600 452" role="group"></svg>
+        <div class="need-out" id="needOut" aria-live="polite" hidden></div>
         <div class="cons-legend" id="consLegend"></div>
-        <figcaption data-i18n="consCap">Each dot is one organisation on our list. Dots near the centre are confirmed. Dots further out still need checking or are examples. Click a dot to see its details.</figcaption>
+        <figcaption data-i18n="consCap">Each dot is an organisation on our list. Confirmed ones sit near the centre. The outer rings still need checking or are only examples. Tap a need to see who can help, or click a dot for details.</figcaption>
       </figure>
-    </div>
   </section>
 
   <div class="wrap">
@@ -141,8 +144,8 @@
   </div>
 </main>
 
-<script src="assets/js/kse-viz.js"></script>
-<script src="assets/js/kse-pages.js?v=20261003d"></script>
+<script src="assets/js/kse-viz.js?v=20261004e"></script>
+<script src="assets/js/kse-pages.js?v=20261004e"></script>
 </body>
 </html>
 

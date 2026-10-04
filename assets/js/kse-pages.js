@@ -44,6 +44,7 @@ K.pageInit.overview = function () {
   };
   K.onLang.push(function () {
     K.viz.constellation(svg, $('#consLegend'), first); first = false;
+    K.viz.needPicker(svg, $('#needBar'), $('#needOut'));
     $('#why').innerHTML = K.why.map(function (w) {
       return '<div class="fig"><b>' + esc(K.L(w.big)) + '</b><p>' + esc(K.L(w.t)) + '</p><small>' + esc(K.T('Source: ', 'Sumber: ') + K.L(w.src)) + '</small></div>';
     }).join('');
