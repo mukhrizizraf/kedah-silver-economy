@@ -142,7 +142,7 @@ kbd{font:600 11px var(--sans);padding:1px 6px;border:1px solid var(--line);borde
 .tab .ai{width:28px;height:28px;flex:none;padding:5px;border-radius:9px;background:var(--surface);border:1px solid var(--line);box-shadow:0 3px 0 color-mix(in srgb,var(--line) 80%,transparent),0 6px 10px -8px rgba(15,35,30,.7);transition:transform .22s var(--ease),background-color .2s var(--ease),color .2s var(--ease),box-shadow .22s var(--ease)}
 .tab:hover{color:var(--ink);background:var(--surface-2);transform:translateY(-2px)}
 .tab:hover .ai,.tab:focus-visible .ai{transform:translateY(-2px) rotate(-5deg) scale(1.08);background:var(--gold-soft);color:var(--gold-ink);box-shadow:0 5px 0 color-mix(in srgb,var(--gold) 50%,var(--line)),0 10px 14px -9px rgba(15,35,30,.7)}
-@media (max-width:1320px) and (min-width:761px){.tabs{gap:2px;justify-content:space-between}.tab{gap:5px;height:42px;padding:0 7px 0 6px;font-size:12px}.tab .ai{width:24px;height:24px;padding:4px}}
+@media (max-width:1320px) and (min-width:761px){.tabs{gap:6px;justify-content:space-between}.tab{gap:8px;height:48px;padding:0 10px 0 8px;font-size:13.5px}.tab .ai{width:32px;height:32px;padding:5px}}
 .tab[aria-current="page"]{color:var(--paddy-ink);background:var(--paddy-soft)}
 .tab[aria-current="page"] .ai{background:var(--paddy);border-color:var(--paddy);color:var(--on-paddy);box-shadow:0 3px 0 var(--paddy-ink),0 8px 12px -9px rgba(15,35,30,.75)}
 .tab:focus-visible{outline-offset:-2px}
@@ -153,6 +153,7 @@ kbd{font:600 11px var(--sans);padding:1px 6px;border:1px solid var(--line);borde
    Drawn at rest. Hovering anything that carries one plays that icon's own
    motion; the page head draws its icon in once, on load. */
 .ai{display:block;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
+.ai-app-dot{fill:currentColor;stroke:none}
 .ai-k1,.ai-k2,.ai-k3{fill:currentColor;transform-box:fill-box;transform-origin:center}
 .ai-t{opacity:.5}
 .ai-n{transform-box:view-box;transform-origin:12px 12px}
