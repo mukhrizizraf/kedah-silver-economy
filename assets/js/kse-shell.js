@@ -89,6 +89,7 @@ var ICON = {
   moon:'<path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/>',
   right:'<path d="M5 12h13M13 6l6 6-6 6"/>',
   left:'<path d="M19 12H6M11 6l-6 6 6 6"/>'
+  ,language:'<circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.4 2.4 3.6 5.2 3.6 8.5S14.4 18.1 12 20.5c-2.4-2.4-3.6-5.2-3.6-8.5S9.6 5.9 12 3.5z"/>'
 };
 K.icon = function (n) { return '<svg viewBox="0 0 24 24" aria-hidden="true">' + ICON[n] + '</svg>'; };
 
@@ -185,7 +186,7 @@ chrome.id = 'kse-chrome';
 body.insertBefore(chrome, body.firstChild);
 
 function langSwitch() {
-  return '<div class="lang" role="group" aria-label="' + K.T('Language', 'Bahasa') + '"><span class="lang-mark" aria-hidden="true">文</span>' +
+  return '<div class="lang" role="group" aria-label="' + K.T('Language', 'Bahasa') + '"><span class="lang-mark" aria-hidden="true">' + K.icon('language') + '</span>' +
     '<button class="lang-btn" data-lang="en" aria-pressed="' + (K.lang === 'en') + '" title="English">EN</button>' +
     '<button class="lang-btn" data-lang="bm" aria-pressed="' + (K.lang === 'bm') + '" title="Bahasa Melayu">BM</button></div>';
 }
