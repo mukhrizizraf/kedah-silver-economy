@@ -17,8 +17,8 @@ body[data-page="scenario"] .navbar,
 body[data-page="scenario"] .ios-tabbar{display:none!important}
 
 /* Give the page choices a larger touch target and a clearer icon row. */
-body[data-page="scenario"] .tab{gap:8px;height:48px;padding:0 10px 0 8px;font-size:13.5px}
-body[data-page="scenario"] .tab .ai{width:32px;height:32px;padding:5px}
+body[data-page="scenario"] .tab{gap:5px;height:42px;padding:0 6px 0 5px;font-size:12px}
+body[data-page="scenario"] .tab .ai{width:26px;height:26px;padding:4px}
 body[data-page="scenario"] .tabs{gap:6px;padding-block:8px}
 
 /* ---------- Frame ---------- */
