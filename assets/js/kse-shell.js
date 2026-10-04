@@ -122,6 +122,53 @@ function toggleTheme() {
   var b = K.$('#themeBtn'); if (b) b.focus();
 }
 
+/* Shared colour and type choices, including the animated case demo. */
+var LOOKS = [
+  ['padi', 'Padi', 'Milk and olive', 'Susu dan zaitun', ''],
+  ['songket', 'Songket', 'Cream, red and gold', 'Krim, merah dan emas', 'Young+Serif&family=Lexend:wght@400;500;600;700'],
+  ['diraja', 'Diraja', 'Royal yellow and black', 'Kuning diraja dan hitam', 'Cinzel:wght@500;600&family=Mulish:wght@400;600;700'],
+  ['teratai', 'Teratai', 'Lotus pink and plum', 'Merah jambu teratai', 'Marcellus&family=Nunito+Sans:wght@400;600;700'],
+  ['jati', 'Kayu Jati', 'Teak wood and cream', 'Kayu jati dan krim', 'Bitter:wght@400;500;600&family=Source+Sans+3:wght@400;600;700'],
+  ['wau', 'Wau', 'Kite orange, playful', 'Jingga wau, ceria', 'Baloo+2:wght@500;600;700&family=Nunito:wght@400;600;700'],
+  ['malam', 'Malam', 'Warm night, amber', 'Malam yang hangat', 'Literata:wght@400;600&family=Lexend:wght@400;500;600;700'],
+  ['jelas', 'Jelas', 'Large, high contrast', 'Besar, kontras tinggi', 'Atkinson+Hyperlegible:wght@400;700']
+];
+function lookOf(k) { for (var i = 0; i < LOOKS.length; i++) if (LOOKS[i][0] === k) return LOOKS[i]; return LOOKS[0]; }
+K.look = function () { return lookOf(root.getAttribute('data-look')); };
+K.setLook = function (k) {
+  var l = lookOf(k);
+  if (l[0] === 'padi') root.removeAttribute('data-look'); else root.setAttribute('data-look', l[0]);
+  K.store.set('kse-look', l[0]);
+  if (l[4] && !doc.getElementById('look-font-' + l[0])) {
+    var link = doc.createElement('link'); link.rel = 'stylesheet'; link.id = 'look-font-' + l[0];
+    link.href = 'https://fonts.googleapis.com/css2?family=' + l[4] + '&display=swap'; doc.head.appendChild(link);
+  }
+};
+(function () { var saved = K.store.get('kse-look') || K.store.get('kse-tc-theme'); if (saved && saved !== 'padi') K.setLook(saved); })();
+function lookMenu() {
+  var cur = K.look()[0];
+  return '<div class="look"><button class="look-btn" id="lookBtn" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="lookMenu" aria-label="' +
+    K.esc(K.T('Colours and fonts: ', 'Warna dan fon: ') + lookOf(cur)[1]) + '"><span class="look-dot look-' + cur + '" aria-hidden="true"></span></button>' +
+    '<div class="look-menu" id="lookMenu" role="menu" aria-label="' + K.esc(K.T('Colours and fonts', 'Warna dan fon')) + '" hidden><h2>' + K.T('Colours and fonts', 'Warna dan fon') + '</h2><ul class="look-list" role="none">' +
+    LOOKS.map(function (l, i) { return '<li role="none"><button type="button" class="look-opt" role="menuitemradio" aria-checked="' + (l[0] === cur) + '" data-look="' + l[0] + '" style="--i:' + i + '"><span class="look-dot look-' + l[0] + '" aria-hidden="true"></span><span><b>' + l[1] + '</b><small>' + K.esc(K.T(l[2], l[3])) + '</small></span></button></li>'; }).join('') + '</ul></div></div>';
+}
+function openLook(open) {
+  var m = K.$('#lookMenu'), b = K.$('#lookBtn'); if (!m || !b) return;
+  m.hidden = !open; b.setAttribute('aria-expanded', String(open));
+  if (open) { var c = m.querySelector('[aria-checked="true"]') || m.querySelector('.look-opt'); if (c) c.focus(); }
+}
+doc.addEventListener('click', function (e) { var m = K.$('#lookMenu'); if (m && !m.hidden && !e.target.closest('.look')) openLook(false); });
+doc.addEventListener('keydown', function (e) {
+  var m = K.$('#lookMenu'); if (!m || m.hidden) return;
+  if (e.key === 'Escape') { openLook(false); K.$('#lookBtn').focus(); }
+  else if (e.key === 'ArrowDown' || e.key === 'ArrowUp' || e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+    var opts = [].slice.call(m.querySelectorAll('.look-opt')), i = opts.indexOf(doc.activeElement);
+    if (i < 0) return; e.preventDefault(); e.stopPropagation();
+    var d = e.key === 'ArrowDown' ? 2 : e.key === 'ArrowUp' ? -2 : e.key === 'ArrowRight' ? 1 : -1;
+    opts[(i + d + opts.length) % opts.length].focus();
+  }
+}, true);
+
 /* ---------- Chrome: top bar + drawer ---------- */
 var chrome = doc.createElement('div');
 chrome.id = 'kse-chrome';
@@ -147,7 +194,7 @@ function renderChrome() {
     '<a class="skip" href="#main">' + K.T('Skip to content', 'Langkau ke kandungan') + '</a>' +
     '<header class="topbar"><div class="wrap topbar-row">' +
       '<a class="brand" href="index.html">' + K.mark + '<span><b>Kedah Silver Economy</b><small>' + K.T('UUM Scale-Up Research Grant 2026', 'Geran Penyelidikan Scale-Up UUM 2026') + '</small></span></a>' +
-      '<div class="tools">' + langSwitch() +
+      '<div class="tools">' + langSwitch() + lookMenu() +
         '<button class="iconbtn" id="themeBtn" aria-label="' + (dark ? K.T('Switch to light theme', 'Tukar ke tema cerah') : K.T('Switch to dark theme', 'Tukar ke tema gelap')) + '">' + K.icon(dark ? 'sun' : 'moon') + '</button>' +
         '<button class="iconbtn menubtn" id="menuBtn" aria-expanded="false" aria-controls="drawer" aria-label="' + K.T('Open page menu', 'Buka menu halaman') + '">' + K.icon('menu') + '</button>' +
       '</div>' +
@@ -180,6 +227,8 @@ chrome.addEventListener('click', function (e) {
   if (t.id === 'menuBtn') openDrawer();
   else if (t.id === 'drawerClose' || t.id === 'scrim') closeDrawer();
   else if (t.id === 'themeBtn') toggleTheme();
+  else if (t.id === 'lookBtn') openLook(K.$('#lookMenu').hidden);
+  else if (t.classList.contains('look-opt')) { K.setLook(t.getAttribute('data-look')); renderChrome(); var lb = K.$('#lookBtn'); if (lb) lb.focus(); }
   else if (t.classList.contains('lang-btn')) K.setLang(t.getAttribute('data-lang'));
 });
 

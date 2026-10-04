@@ -17,7 +17,7 @@ It is a static site. There is no build step and no server. Open `index.html` in 
 | 05 | `roadmap.html` | Plan & budget | What happens each month, the expert review, the budget |
 | 06 | `evidence.html` | Sources | The documents behind the site and the reviewer comments |
 
-When presenting, the left and right arrow keys move between pages. The EN/BM and light/dark choices are remembered in each browser.
+When presenting, the left and right arrow keys move between pages. The EN/BM, light/dark, and colour/font choices are remembered in each browser. The Try a case page now follows the guided one-question-at-a-time flow with an animated worked-example demo, live case summary, explainable plan, matching contacts, map links, sharing, print sheets and follow-up reminders.
 
 ## Files
 
@@ -35,5 +35,7 @@ assets/js/kse-pages.js         one set-up function per page
 - **Organisations, budget, reviewer comments, "Try a case" logic:** edit `assets/js/kse-data.js`.
 - **Page text:** edit the English text in the page's HTML. If the element has `data-i18n="key"`, update the BM text for that key in `KSE.bm` in `kse-data.js`.
 - **Add a page:** copy an inner page, set a new `data-page`, add it to `KSE.PAGES` in `kse-shell.js`, and add a set-up function in `kse-pages.js` if it needs one.
+
+The palette choices live in `assets/css/kse-themes.css`: Padi, Songket, Diraja, Teratai, Kayu Jati, Wau, Malam and Jelas.
 
 Fonts load from Google Fonts. Offline, the pages use system fonts instead.
