@@ -191,3 +191,16 @@ The user asked for page changes to feel immediate and smooth, with no lag. Updat
 - `DESIGN.md` records the timing and first-paint behavior as part of the navigation motion rules.
 
 The protected `claude-code-silver-app-version` folder was not accessed or changed.
+
+### 11. Try a case assistance-profile upgrade
+
+On 2026-10-04 the root Codex Try a case flow was extended while keeping Tab 4 and its five-step intake:
+
+- Added `assets/js/kse-assist-engine.js`, a DOM-free assistance catalogue and explainable sample matcher. It covers mobility equipment, medical and respiratory equipment, hospital beds and home safety, personal care and continence supplies, nursing and daily care, transport, financial and welfare help, food, social support, and housing.
+- Step 5 now supports multiple item-level needs such as manual or electric wheelchairs, oxygen cylinders and concentrators, hospital beds, pressure mattresses, hoists, adult diapers, underpads, catheter and wound supplies, home nursing, caregiver help, dialysis transport and financial pathways.
+- Each selected need stores its assistance mode (borrow, rent, donated, buy, fund, recurring supply, service or referral), duration and the case urgency. The existing five broad need values remain as a compatibility projection for the original sample score.
+- Added a single integrated Assistance Plan beneath the route view. Each line shows the requested item, mode, duration, possible provider pathway, evidence reasons, and confirmation requirements. Multiple needs can be grouped into one complex case requiring a coordinator.
+- Provider capability is still explicitly sample data. Organisation status and capability evidence are shown separately; the plan does not claim entitlement, diagnosis, availability or guaranteed assistance.
+- Added a family ability-to-pay question and expanded the reproducible case ID input to include item-level needs.
+
+Validation: `node --check` passes for the new assistance engine and the updated case files; `git diff --check` reports no whitespace errors; a headless Chrome DOM render shows the new Step 5 catalogue and Assistance Plan markup; a Node fixture resolves a four-need hospital discharge case deterministically.

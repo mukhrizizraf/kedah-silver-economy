@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Try a Case · Kedah Silver Economy</title>
-<meta name="description" content="Pick a person, district, need and income to see the suggested steps, the score and the main problem.">
+<meta name="description" content="Describe one older person's situation in Kedah and build one explainable assistance plan across equipment, care, transport, welfare and community support.">
 <script>try{var t=localStorage.getItem('kse-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Onest:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="assets/css/kse.css?v=20261003d">
-<script src="assets/js/kse-data.js?v=20261003d"></script>
+<link rel="stylesheet" href="assets/css/kse.css?v=20261004a">
+<script src="assets/js/kse-data.js?v=20261004a"></script>
 </head>
 <body data-page="scenario">
 <script src="assets/js/kse-shell.js?v=20261002b"></script>
@@ -20,10 +20,10 @@
     <div class="wrap pagehead-grid">
       <div>
         <p class="step" data-step></p>
-        <h1 data-i18n="labTitle">Pick a person and a need. See what help they get.</h1>
-        <p class="lede" data-i18n="labSub">Change the options below. The steps, the score and the main problem change straight away.</p>
+        <h1 data-i18n="labTitle">Describe one person. Get one assistance plan.</h1>
+        <p class="lede" data-i18n="labSub">Answer simple questions about an older person in Kedah. Every answer joins one case and becomes a possible plan.</p>
       </div>
-      <div class="headstat"><b data-count="558">558</b><span data-i18n="labStat">cases you can try</span></div>
+      <div class="headstat"><b data-count="60">60</b><span data-i18n="labStat">assistance pathways in the catalogue</span></div>
     </div>
   </section>
 
@@ -69,12 +69,16 @@
           <div class="choice-grid compact" data-choice-group="income"><button type="button" data-value="0">No regular income</button><button type="button" data-value="800">Below RM1,000</button><button type="button" data-value="1500">RM1,000–RM1,999</button><button type="button" data-value="2500">RM2,000–RM2,999</button><button type="button" data-value="3500">RM3,000–RM4,999</button><button type="button" data-value="5000">RM5,000 and above</button><button type="button" data-value="unknown">Prefer not to say</button></div>
           <h3>Do you receive regular financial support?</h3><div class="choice-grid compact multi-choice" data-multi-group="financialSupport"><button type="button" data-value="pension">Pension</button><button type="button" data-value="welfare">Welfare assistance</button><button type="button" data-value="family">Children / family</button><button type="button" data-value="zakat">Zakat / Baitulmal</button><button type="button" data-value="none">No regular support</button></div>
           <h3>Where do you live now?</h3><div class="choice-grid compact" data-choice-group="living"><button type="button" data-value="alone">Own home, alone</button><button type="button" data-value="spouse">With spouse</button><button type="button" data-value="family">With children / family</button><button type="button" data-value="care">Residential care</button></div>
+          <h3>Can the family pay for some help?</h3><div class="choice-grid compact" data-choice-group="pay"><button type="button" data-value="none">Cannot pay</button><button type="button" data-value="little">Can pay a little</button><button type="button" data-value="yes">Can pay</button><button type="button" data-value="unsure">Not sure</button></div>
         </section>
         <section class="intake-step" data-step="5">
-          <p class="label label-paddy">What you need</p><h2>What kind of help are you looking for?</h2><p class="intake-help">Select one or more. You can change this later.</p>
-          <div class="choice-grid compact multi-choice" data-multi-group="needs"><button type="button" data-value="companion">Someone to accompany me</button><button type="button" data-value="transport">Transport</button><button type="button" data-value="homecare">Help at home</button><button type="button" data-value="food">Food / daily necessities</button><button type="button" data-value="welfare">Financial / welfare help</button></div>
-          <h3>How soon do you need help?</h3><div class="choice-grid compact" data-choice-group="urgency"><button type="button" data-value="info">Just looking for information</button><button type="button" data-value="weeks">Within the next few weeks</button><button type="button" data-value="soon">I need help soon</button><button type="button" data-value="urgent">I need help urgently</button></div>
-          <label class="intake-note">Anything else you want us to know? <textarea id="wizardNote" rows="2" placeholder="Optional"></textarea></label>
+          <p class="label label-paddy">What you need</p><h2 data-i18n="assistProfileTitle">Build one assistance profile</h2><p class="intake-help" data-i18n="assistProfileHelp">Choose every area that applies. Then choose the specific item or service. Several needs stay together as one case.</p>
+          <div class="assist-intake-note"><b data-i18n="assistWhyTitle">Why this matters</b><span data-i18n="assistWhyBody">A person may need a wheelchair, adult diapers, transport and a caregiver at the same time. The plan keeps these needs together.</span></div>
+          <h3 data-i18n="assistAreasTitle">1. Which kinds of help are needed?</h3><div id="assistAreas" class="choice-grid compact assist-area-grid" role="group" aria-label="Assistance areas"></div>
+          <div id="assistItems" class="assist-items"></div>
+          <div id="assistNeedDetails" class="assist-need-details"></div>
+          <h3>How soon is help needed?</h3><div class="choice-grid compact" data-choice-group="urgency"><button type="button" data-value="info">Information only</button><button type="button" data-value="plan">I can plan ahead</button><button type="button" data-value="weeks">Within 1–2 weeks</button><button type="button" data-value="days">Within 1–3 days</button><button type="button" data-value="today">Today</button></div>
+          <label class="intake-note">Anything else you want us to know? <textarea id="wizardNote" rows="2" maxlength="500" placeholder="Optional. Do not include an IC number or private medical record."></textarea></label>
         </section>
         <div class="intake-actions"><button type="button" class="btn btn-quiet" id="intakeBack">Back</button><button type="button" class="btn btn-paddy" id="intakeNext">Next</button></div>
       </div>
@@ -139,6 +143,13 @@
         <p class="route-note" data-i18n="routeNote">This is a demonstration. Check an organisation and its contact details before making a referral.</p>
       </section>
 
+      <section class="assistance-plan" id="assistancePlan" aria-labelledby="assistancePlanTitle" hidden>
+        <div class="assistance-plan-head"><div><p class="label label-paddy" data-i18n="assistPlanLabel">Integrated assistance plan</p><h2 id="assistancePlanTitle" data-i18n="assistPlanTitle">One case, several possible pathways</h2><p id="assistancePlanIntro" data-i18n="assistPlanIntro">Each line keeps the requested item, assistance mode, location and evidence together.</p></div><div class="assistance-plan-count" id="assistancePlanCount"></div></div>
+        <div class="assistance-plan-flags" id="assistancePlanFlags"></div>
+        <ol class="assistance-lines" id="assistanceLines"></ol>
+        <p class="assistance-disclaimer">This is a sample matching model. Provider capability, eligibility, availability, clinical suitability and cost require confirmation before referral. It does not diagnose, guarantee assistance or decide legal entitlement.</p>
+      </section>
+
       <div class="lab">
         <div class="cov">
           <div class="cov-top"><p class="label" data-i18n="coverageLabel">How well needs are covered</p><span class="demo-tag" data-i18n="demoTag">Sample data only</span></div>
@@ -187,10 +198,7 @@
 <script src="assets/vendor/lottie_light.min.js"></script>
 <script src="assets/js/kse-route-lottie.js"></script>
 <script src="assets/js/kse-case-engine.js?v=20261002a"></script>
-<script src="assets/js/kse-pages.js?v=20261003d"></script>
+<script src="assets/js/kse-assist-engine.js?v=20261004a"></script>
+<script src="assets/js/kse-pages.js?v=20261004a"></script>
 </body>
 </html>
-
-
-
-

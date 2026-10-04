@@ -264,6 +264,7 @@ K.pageInit.network = function () {
 K.pageInit.scenario = function () {
   var S = K.scenario, ageBand = $('#ageBand'), gender = $('#gender'), persona = $('#persona'), district = $('#district'), mukim = $('#mukim'), living = $('#living'), need = $('#need'), income = $('#income');
   var caseEngine = K.caseEngine;
+  var assist = K.assistance;
   var shown = null, raf = 0, routeAnimation = null;
   var DISTRICTS = Object.keys(S.districtAdj);
 
@@ -272,8 +273,8 @@ K.pageInit.scenario = function () {
     var list = S.mukimByDistrict[district.value] || [];
     mukim.innerHTML = list.map(function (x) { return '<option>' + esc(x) + '</option>'; }).join('');
   }
-  var wizard = $('#intakeWizard'), wizardStep = 1, wizardState = { ageBand:'60-64', gender:'woman', district:district.value, mukim:'', persona:'independent', support:['alone'], financialSupport:[], income:'3500', living:'alone', needs:['companion'], urgency:'info', note:'' };
-  var caseMeta = { support:['alone'], financialSupport:[], urgency:'info', note:'' };
+  var wizard = $('#intakeWizard'), wizardStep = 1, wizardState = { ageBand:'60-64', gender:'woman', district:district.value, mukim:'', persona:'independent', support:['alone'], financialSupport:[], income:'3500', living:'alone', pay:'unsure', needs:['companion'], assistanceAreas:[], assistanceNeeds:[], urgency:'info', note:'' };
+  var caseMeta = { support:['alone'], financialSupport:[], urgency:'info', note:'', pay:'unsure', assistanceNeeds:[] };
   function wizardOptions() {
     var wd = $('#wizardDistrict'), wm = $('#wizardMukim');
     if (!wd || !wm) return;
@@ -282,10 +283,43 @@ K.pageInit.scenario = function () {
     if (wizardState.mukim && (S.mukimByDistrict[wd.value] || []).indexOf(wizardState.mukim) >= 0) wm.value = wizardState.mukim;
     wizardState.mukim = wm.value;
   }
+  function assistLabel(v) { return K.L(v); }
+  function assistBroadNeeds() {
+    var out = [];
+    wizardState.assistanceNeeds.forEach(function (n) {
+      var a = assist.items[n.item] && assist.items[n.item].area;
+      var map = { mobility:'transport', medical:'homecare', bedhome:'homecare', personal:'homecare', care:'homecare', transport:'transport', money:'welfare', food:'food', social:'companion', housing:'homecare' };
+      if (map[a] && out.indexOf(map[a]) < 0) out.push(map[a]);
+    });
+    return out.length ? out : ['companion'];
+  }
+  function renderAssistControls() {
+    var areas = $('#assistAreas'), items = $('#assistItems'), details = $('#assistNeedDetails');
+    if (!areas || !items || !details || !assist) return;
+    areas.innerHTML = Object.keys(assist.areas).map(function (key) {
+      var a = assist.areas[key], selected = wizardState.assistanceAreas.indexOf(key) >= 0;
+      var hasSuggestion = wizardState.assistanceNeeds.some(function (n) { return assist.items[n.item] && assist.items[n.item].area === key; });
+      return '<button type="button" class="' + (selected ? 'is-selected ' : '') + (hasSuggestion ? 'is-suggested' : '') + '" data-assist-area="' + key + '" aria-pressed="' + selected + '">' + esc(assistLabel(a.l)) + '</button>';
+    }).join('');
+    items.innerHTML = wizardState.assistanceAreas.map(function (key) {
+      var a = assist.areas[key];
+      return '<div class="assist-area-block"><h4>' + esc(assistLabel(a.l)) + '</h4><div class="assist-item-grid">' + Object.keys(a.items).map(function (itemKey) {
+        var selected = wizardState.assistanceNeeds.some(function (n) { return n.item === itemKey; });
+        return '<button type="button" class="' + (selected ? 'is-selected' : '') + '" data-assist-item="' + itemKey + '" aria-pressed="' + selected + '">' + esc(assistLabel(a.items[itemKey][0])) + '</button>';
+      }).join('') + '</div></div>';
+    }).join('');
+    details.innerHTML = wizardState.assistanceNeeds.map(function (n) {
+      var it = assist.items[n.item];
+      return '<article class="assist-need-card"><header><div><h4>' + esc(assistLabel(it.l)) + '</h4><small>' + esc(assistLabel(assist.areas[it.area].l)) + '</small></div><button type="button" class="btn btn-quiet" data-assist-remove="' + n.item + '">Remove</button></header>' +
+        '<div class="assist-chip-label">How should this help come?</div><div class="assist-chips">' + it.modes.map(function (m) { return '<button type="button" class="' + (n.mode === m ? 'is-selected' : '') + '" data-assist-mode="' + n.item + '|' + m + '" aria-pressed="' + (n.mode === m) + '">' + esc(assistLabel(assist.modes[m])) + '</button>'; }).join('') + '</div>' +
+        '<div class="assist-chip-label">For how long?</div><div class="assist-chips">' + Object.keys(assist.durations).map(function (d) { return '<button type="button" class="' + (n.duration === d ? 'is-selected' : '') + '" data-assist-duration="' + n.item + '|' + d + '" aria-pressed="' + (n.duration === d) + '">' + esc(assistLabel(assist.durations[d])) + '</button>'; }).join('') + '</div></article>';
+    }).join('');
+  }
   function setWizardChoices() {
     if (!wizard) return;
     K.$$('[data-choice-group]').forEach(function (group) { var key = group.getAttribute('data-choice-group'); group.querySelectorAll('button').forEach(function (b) { var selected = String(wizardState[key]) === b.getAttribute('data-value'); b.classList.toggle('is-selected', selected); b.setAttribute('aria-pressed', selected ? 'true' : 'false'); }); });
     K.$$('[data-multi-group]').forEach(function (group) { var key = group.getAttribute('data-multi-group'); group.querySelectorAll('button').forEach(function (b) { var selected = (wizardState[key] || []).indexOf(b.getAttribute('data-value')) >= 0; b.classList.toggle('is-selected', selected); b.setAttribute('aria-pressed', selected ? 'true' : 'false'); }); });
+    renderAssistControls();
   }
   function showWizardStep() {
     if (!wizard) return;
@@ -302,8 +336,8 @@ K.pageInit.scenario = function () {
   }
   function finishWizard() {
     ageBand.value = wizardState.ageBand; gender.value = wizardState.gender; district.value = wizardState.district; updateMukim(); if (wizardState.mukim) mukim.value = wizardState.mukim;
-    caseMeta = { support: wizardState.support.slice(), financialSupport: wizardState.financialSupport.slice(), urgency: wizardState.urgency, note: wizardState.note };
-    persona.value = wizardState.persona; living.value = wizardState.living; income.value = wizardState.income; setNeeds(wizardState.needs); update(false); wizard.classList.add('is-complete');
+    caseMeta = { support: wizardState.support.slice(), financialSupport: wizardState.financialSupport.slice(), urgency: wizardState.urgency, note: wizardState.note, pay: wizardState.pay, assistanceNeeds: wizardState.assistanceNeeds.map(function (n) { return { item:n.item, mode:n.mode, duration:n.duration }; }) };
+    persona.value = wizardState.persona; living.value = wizardState.living; income.value = wizardState.income; setNeeds(assistBroadNeeds()); update(false); renderAssistancePlan(); wizard.classList.add('is-complete');
     var score = document.querySelector('.lab'); if (score) score.scrollIntoView({behavior:K.reduceMotion?'auto':'smooth',block:'start'});
   }
   if (wizard) {
@@ -313,15 +347,25 @@ K.pageInit.scenario = function () {
       if (choice) { wizardState[choice.parentNode.getAttribute('data-choice-group')] = choice.getAttribute('data-value'); setWizardChoices(); return; }
       var multi = e.target.closest('[data-multi-group] button');
       if (multi) { var key = multi.parentNode.getAttribute('data-multi-group'), v = multi.getAttribute('data-value'), a = wizardState[key] || []; wizardState[key] = a.indexOf(v) >= 0 ? a.filter(function (x) { return x !== v; }) : a.concat(v); if (!wizardState[key].length) wizardState[key] = [v]; setWizardChoices(); }
+      var areaButton = e.target.closest('[data-assist-area]');
+      if (areaButton) { var areaKey = areaButton.getAttribute('data-assist-area'), areaIndex = wizardState.assistanceAreas.indexOf(areaKey); if (areaIndex >= 0) { wizardState.assistanceAreas.splice(areaIndex, 1); wizardState.assistanceNeeds = wizardState.assistanceNeeds.filter(function (n) { return assist.items[n.item].area !== areaKey; }); } else wizardState.assistanceAreas.push(areaKey); renderAssistControls(); return; }
+      var itemButton = e.target.closest('[data-assist-item]');
+      if (itemButton) { var itemKey = itemButton.getAttribute('data-assist-item'), existing = wizardState.assistanceNeeds.find(function (n) { return n.item === itemKey; }); if (existing) wizardState.assistanceNeeds = wizardState.assistanceNeeds.filter(function (n) { return n.item !== itemKey; }); else { var item = assist.items[itemKey]; wizardState.assistanceNeeds.push({ item:itemKey, mode:item.modes[0], duration:item.duration }); } renderAssistControls(); return; }
+      var removeButton = e.target.closest('[data-assist-remove]');
+      if (removeButton) { wizardState.assistanceNeeds = wizardState.assistanceNeeds.filter(function (n) { return n.item !== removeButton.getAttribute('data-assist-remove'); }); renderAssistControls(); return; }
+      var modeButton = e.target.closest('[data-assist-mode]');
+      if (modeButton) { var modeParts = modeButton.getAttribute('data-assist-mode').split('|'); wizardState.assistanceNeeds.forEach(function (n) { if (n.item === modeParts[0]) n.mode = modeParts[1]; }); renderAssistControls(); return; }
+      var durationButton = e.target.closest('[data-assist-duration]');
+      if (durationButton) { var durationParts = durationButton.getAttribute('data-assist-duration').split('|'); wizardState.assistanceNeeds.forEach(function (n) { if (n.item === durationParts[0]) n.duration = durationParts[1]; }); renderAssistControls(); return; }
     });
     $('#wizardDistrict').addEventListener('change', function () { wizardState.district = this.value; wizardState.mukim = ''; wizardOptions(); });
     $('#wizardMukim').addEventListener('change', function () { wizardState.mukim = this.value; });
     $('#wizardNote').addEventListener('input', function () { wizardState.note = this.value.slice(0, 500); });
     $('#intakeBack').addEventListener('click', function () { if (wizardStep > 1) { wizardStep--; showWizardStep(); } });
-    $('#intakeNext').addEventListener('click', function () { if (wizardStep < 5) { wizardStep++; showWizardStep(); } else finishWizard(); });
+    $('#intakeNext').addEventListener('click', function () { if (wizardStep < 5) { wizardStep++; showWizardStep(); } else { if (!wizardState.assistanceNeeds.length) { var firstArea = Object.keys(assist.areas)[0]; wizardState.assistanceAreas = [firstArea]; renderAssistControls(); return; } finishWizard(); } });
     showWizardStep();
   }
-  $$('.case-mode').forEach(function (b) { b.setAttribute('aria-pressed', b.classList.contains('is-on') ? 'true' : 'false'); b.addEventListener('click', function () { var guided = b.getAttribute('data-mode') === 'guided'; $$('.case-mode').forEach(function (x) { x.classList.toggle('is-on', x === b); x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); }); if (wizard) wizard.hidden = !guided; $$('.quick-only').forEach(function (x) { x.hidden = guided; }); if (!guided) caseMeta = { support:['alone'], financialSupport:[], urgency:'info', note:'' }; update(false); }); });
+  $$('.case-mode').forEach(function (b) { b.setAttribute('aria-pressed', b.classList.contains('is-on') ? 'true' : 'false'); b.addEventListener('click', function () { var guided = b.getAttribute('data-mode') === 'guided'; $$('.case-mode').forEach(function (x) { x.classList.toggle('is-on', x === b); x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); }); if (wizard) wizard.hidden = !guided; $$('.quick-only').forEach(function (x) { x.hidden = guided; }); if (!guided) { caseMeta = { support:['alone'], financialSupport:[], urgency:'info', note:'', pay:'unsure', assistanceNeeds:[] }; var plan = $('#assistancePlan'); if (plan) plan.hidden = true; } update(false); }); });
 
   function setCoverage(v, instant) {
     var el = $('#coverage');
@@ -375,7 +419,7 @@ K.pageInit.scenario = function () {
       ageBand: ageBand.value, gender: gender.value, persona: pk, district: dk,
       mukim: mukim.value, living: living.value, needs: nks, income: income.value,
       support: caseMeta.support, financialSupport: caseMeta.financialSupport,
-      urgency: caseMeta.urgency, note: caseMeta.note
+      urgency: caseMeta.urgency, note: caseMeta.note, assistanceNeeds: caseMeta.assistanceNeeds
     });
     var s = model.score, inc = model.input.income, coverage = s.v;
     K.caseSnapshot = model;
@@ -448,6 +492,22 @@ K.pageInit.scenario = function () {
     renderRoute(path, nodes, nks);
     renderCompare(pk, nks, income.value, dk);
     renderPresets(nks);
+    if (caseMeta.assistanceNeeds && caseMeta.assistanceNeeds.length) renderAssistancePlan();
+  }
+
+  function renderAssistancePlan() {
+    var root = $('#assistancePlan');
+    if (!root || !assist || !caseMeta.assistanceNeeds || !caseMeta.assistanceNeeds.length) return;
+    var plan = assist.plan({ assistanceNeeds: caseMeta.assistanceNeeds, urgency: caseMeta.urgency, district: district.value, income: income.value, pay: caseMeta.pay || 'unsure' });
+    root.hidden = false;
+    $('#assistancePlanCount').textContent = K.T(plan.covered + ' of ' + plan.total + ' needs have a possible pathway', plan.covered + ' daripada ' + plan.total + ' keperluan ada laluan yang mungkin');
+    $('#assistancePlanIntro').textContent = K.T('The case keeps ' + plan.total + ' needs together across ' + plan.areas.length + ' areas. Each pathway is explainable and must still be checked.', 'Kes ini menggabungkan ' + plan.total + ' keperluan dalam ' + plan.areas.length + ' bidang. Setiap laluan boleh diterangkan dan masih perlu disemak.');
+    $('#assistancePlanFlags').innerHTML = (plan.needsCoordinator ? '<span>' + esc(K.T('Complex case: one coordinator should hold the referrals.', 'Kes kompleks: seorang penyelaras patut mengurus rujukan.')) + '</span>' : '') + (caseMeta.urgency === 'today' ? '<span>' + esc(K.T('Urgent request: confirm safety and use emergency services if life is at risk.', 'Permintaan segera: pastikan keselamatan dan gunakan perkhidmatan kecemasan jika nyawa terancam.')) + '</span>' : '');
+    $('#assistanceLines').innerHTML = plan.lines.map(function (line) {
+      var it = line.item, n = line.need, meta = '<span>' + esc(K.L(assist.modes[n.mode])) + '</span><span>' + esc(K.L(assist.durations[n.duration])) + '</span><span>' + esc(K.L(assist.urgency[caseMeta.urgency] || assist.urgency.info)) + '</span>';
+      var match = line.best ? '<div class="assistance-match"><strong>' + esc(K.T('Possible pathway: ', 'Laluan yang mungkin: ') + line.best.record.name) + '</strong><small>' + esc(K.T('Provider record: ' + line.best.record.status + '. Confirm this item, this assistance mode and current availability.', 'Rekod penyedia: ' + line.best.record.status + '. Sahkan item ini, cara bantuan dan ketersediaan semasa.')) + '</small><ul>' + line.best.reasons.slice(0,4).map(function (r) { var labels = { offers:K.T('Item listed', 'Item disenaraikan'), mode:K.T('Mode fits', 'Cara bantuan sepadan'), sameDistrict:K.T('Same district', 'Daerah sama'), statewide:K.T('Statewide pathway', 'Laluan seluruh negeri'), fast:K.T('Faster response sample', 'Contoh tindak balas cepat'), incomePathway:K.T('Income pathway', 'Laluan ikut pendapatan'), free:K.T('No charge listed', 'Tiada bayaran disenaraikan'), recordConfirmed:K.T('Record confirmed', 'Rekod disahkan') }; return '<li>' + esc(labels[r] || r) + '</li>'; }).join('') + '</ul></div>' : '<div class="assistance-gap">' + esc(K.T('No capability record matches this item yet. Keep it as a mapped gap for Phase 1 field verification.', 'Belum ada rekod keupayaan yang sepadan dengan item ini. Simpan sebagai jurang untuk pengesahan lapangan Fasa 1.')) + '</div>';
+      return '<li class="assistance-line"><div class="assistance-line-head"><div><h3>' + esc(K.L(it.l)) + '</h3><div class="assistance-line-meta">' + meta + '</div></div></div>' + match + '</li>';
+    }).join('');
   }
 
   /* The same person and the same need, priced in every district. This is the
@@ -477,6 +537,7 @@ K.pageInit.scenario = function () {
       'Rules ' + model.version,
       'Profile: ' + model.input.ageBand + ' · ' + model.input.gender + ' · ' + model.input.district + ' · ' + model.input.mukim + ' · ' + model.input.living,
       'Needs: ' + model.input.needs.map(labelNeed).join(', '),
+      model.input.assistanceNeeds && model.input.assistanceNeeds.length ? 'Specific assistance: ' + model.input.assistanceNeeds.map(function (n) { var it = assist && assist.items[n.item]; return it ? K.L(it.l) + ' (' + K.L(assist.modes[n.mode]) + ', ' + K.L(assist.durations[n.duration]) + ')' : n.item; }).join(', ') : '',
       'Score: ' + model.score.v + '/96',
       'Suggested steps: ' + model.path.map(function (key) { return K.L(S.steps[key]); }).join(' → '),
       'Possible contacts: ' + contacts.join(', ')
@@ -533,7 +594,7 @@ K.pageInit.scenario = function () {
   });
   var firstRun = true;
   updateMukim();
-  K.onLang.push(function () { update(firstRun); firstRun = false; });
+  K.onLang.push(function () { renderAssistControls(); update(firstRun); firstRun = false; });
 };
 
 /* ---------- 08 Our Silver App ---------- */

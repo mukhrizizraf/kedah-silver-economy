@@ -7,7 +7,7 @@
 'use strict';
 
 var S = K.scenario;
-var VERSION = '2026.10.02';
+var VERSION = '2026.10.04';
 var DISTRICTS = Object.keys(S.districtAdj);
 var NEEDS = Object.keys(S.needs);
 
@@ -31,6 +31,12 @@ function normalize(input) {
   var district = has(S.districtAdj, input.district) ? input.district : DISTRICTS[0];
   var needs = uniqueKnown(input.needs, NEEDS);
   if (!needs.length) needs = ['companion'];
+  var assistanceNeeds = [];
+  (Array.isArray(input.assistanceNeeds) ? input.assistanceNeeds : []).forEach(function (n) {
+    if (!n || !n.item || assistanceNeeds.some(function (x) { return x.item === n.item; })) return;
+    assistanceNeeds.push({ item: String(n.item), mode: String(n.mode || 'unsure'), duration: String(n.duration || 'unsure') });
+  });
+  assistanceNeeds.sort(function (a, b) { return a.item.localeCompare(b.item); });
   return {
     ageBand: input.ageBand || '60-64',
     gender: input.gender || 'prefer-not',
@@ -42,6 +48,7 @@ function normalize(input) {
     income: income,
     incomeKnown: income !== null,
     urgency: input.urgency || 'info',
+    assistanceNeeds: assistanceNeeds,
     support: uniqueKnown(input.support, ['alone','spouse','children','family','neighbours','none']),
     financialSupport: uniqueKnown(input.financialSupport, ['pension','welfare','family','zakat','none']),
     note: typeof input.note === 'string' ? input.note.trim().slice(0, 500) : ''
@@ -96,7 +103,7 @@ function caseId(state) {
   var key = JSON.stringify({
     ageBand: state.ageBand, gender: state.gender, persona: state.persona,
     district: state.district, mukim: state.mukim, living: state.living,
-    needs: state.needs, income: state.income, urgency: state.urgency,
+    needs: state.needs, assistanceNeeds: state.assistanceNeeds, income: state.income, urgency: state.urgency,
     support: state.support, financialSupport: state.financialSupport
   });
   return 'KSE-' + VERSION.replace(/\./g, '') + '-' + hash(key);
