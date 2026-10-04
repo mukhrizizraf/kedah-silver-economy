@@ -16,6 +16,11 @@ body[data-page="scenario"] .sidebar,
 body[data-page="scenario"] .navbar,
 body[data-page="scenario"] .ios-tabbar{display:none!important}
 
+/* Give the page choices a larger touch target and a clearer icon row. */
+body[data-page="scenario"] .tab{gap:10px;height:52px;padding:0 16px 0 12px;font-size:15px}
+body[data-page="scenario"] .tab .ai{width:34px;height:34px;padding:6px}
+body[data-page="scenario"] .tabs{gap:6px;padding-block:8px}
+
 /* ---------- Frame ---------- */
 .tc-wrap{padding-top:18px}
 .tc{--tc-r:22px;font-family:var(--sans);color:var(--ink)}
