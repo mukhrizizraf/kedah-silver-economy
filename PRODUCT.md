@@ -46,6 +46,7 @@ It runs from GitHub Pages and from `file://`, so it works from a USB stick or a 
 - **No build step, on purpose.** Classic `<script src>` tags, no ES modules, no `fetch()`, so it runs from `file://`. Fonts come from Google Fonts and fall back to system fonts offline. This is a deliberate constraint, not tech debt.
 - The organisation list is a 30-record **sample**, not a survey. Only 5 are Confirmed.
 - The "Try a case" coverage score is invented sample logic to show how matching would work. It is not an estimate and must never read as one.
+- **Two-sided, as in the i-CareElder framework** (Claude version, October 2026): older people are not only receivers. Try a case first asks whether the person wants to get help or to give (sedekah, waqf, sponsoring another older person, things, or time). Giving never asks the amount, sends money only through official routes (the masjid itself, LZNK, MAIK; waqf only through MAIK) and never holds money. Volunteers go to the JKM volunteer scheme, PAWE centres and NGOs in their district.
 - Hard-coded figures exist in the HTML (the Overview KPI strip, each page's headstat, the Gantt column spans) and do not update when data changes.
 
 **Terminology.** Three record states, used site-wide, each always shown with a text label:
