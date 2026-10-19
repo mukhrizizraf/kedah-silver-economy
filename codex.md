@@ -1,5 +1,9 @@
 # Codex Project Record
 
+## Cross-version note (2026-10-19, from Claude)
+
+- The UUM IP application (18 Oct 2026) names the dashboard "i-CareElder: Integrated Islamic Elderly Care Dashboard". The ICC copy and the Claude version were renamed and pushed. This main version was not changed; whether to rename it is in `OPEN_ITEMS.md`.
+
 ## Latest update: 2026-10-05
 
 - Added the interactive overview support map and need filters. The filters show matching organisations for transport, meals, nursing and care, help at home, company, and money and aid.

@@ -6,6 +6,17 @@ It is a static site. There is no build step and no server. Open `index.html` in 
 
 <https://mukhrizizraf.github.io/kedah-silver-economy/>
 
+## Name: i-CareElder (19 Oct 2026)
+
+The UUM IP (copyright) application of 18 Oct 2026 names the dashboard
+**i-CareElder: Integrated Islamic Elderly Care Dashboard** (software / system, TRL 3,
+owned by Universiti Utara Malaysia). Two copies already use that name:
+
+- the ICC copyright copy (four pages, no picture files): <https://mukhrizizraf.github.io/silver-economy-icc-uum-version-/>
+- the Claude version (eight pages): <https://mukhrizizraf.github.io/kedah-silver-economy_claude-version/>
+
+This main version still shows "Kedah Silver Economy" until it is renamed too.
+
 ## Pages
 
 | No. | File | Page | What it shows |
